@@ -6,7 +6,7 @@ import org.cytoscape.application.swing.AbstractCyAction;
 import org.cytoscape.application.swing.CySwingApplication;
 
 /**
- *  Creates a new menu item under Apps menu section.
+ *  
  *  @author SrikanthB
  */
  
