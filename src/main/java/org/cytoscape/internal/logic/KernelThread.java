@@ -44,7 +44,7 @@ public class KernelThread extends Thread {
     public void run() {
         
         double t;
-        t = 0.01;
+        t = 0.1;
         
         List<CyNode> nodeList = currentnetwork.getNodeList();
         int totalnodecount = nodeList.size();
