@@ -6,10 +6,10 @@ import org.cytoscape.application.swing.AbstractCyAction;
 import org.cytoscape.application.swing.CySwingApplication;
 
 /**
- *  
  *  @author SrikanthB
+ * 
+ *  A new menu item named "TieDIE" is created under Apps section of Cytoscape 
  */
- 
 public class TieDieMenuAction extends AbstractCyAction{
     
     public CyApplicationManager cyApplicationManager;
@@ -27,7 +27,6 @@ public class TieDieMenuAction extends AbstractCyAction{
     public void actionPerformed(ActionEvent e) {
         TieDieCore tiediecore = new TieDieCore(cyactivator);
     }
-    
     
     
 }
