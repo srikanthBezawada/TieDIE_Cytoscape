@@ -47,8 +47,8 @@ public class TieDieLogicThread extends Thread {
         Matrix upstreamheatVectorDiffused = new Matrix(1, totalnodecount);
         Matrix downstreamheatVectorDiffused = new Matrix(1, totalnodecount);
         
-        int counter = 1;
-        int flag = 1;
+        int counter = 0;
+        int flag = 0;
         String columnName;
         int upstreamheat, downstreamheat;
         
@@ -58,14 +58,14 @@ public class TieDieLogicThread extends Thread {
             columnName = "upstreamheat";
             if(row.get(columnName,Integer.class)!=null){
                 upstreamheat = row.get(columnName,Integer.class);
-                upstreamheatVector.set(1,counter,upstreamheat);
+                upstreamheatVector.set(0,counter,upstreamheat);
             }
             counter++;
             
             columnName = "downstreamheat";
              if(row.get(columnName,Integer.class)!=null){
                 downstreamheat = row.get(columnName,Integer.class);
-                downstreamheatVector.set(1,flag,downstreamheat);
+                downstreamheatVector.set(0,flag,downstreamheat);
             }
              flag++;
         }
