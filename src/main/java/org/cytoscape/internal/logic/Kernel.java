@@ -103,6 +103,12 @@ public class Kernel {
     
     
     
+    public static Matrix diffuse(Matrix inputVector, double[][] diffusionKernel){
+        Matrix diffusedVector;
+        Matrix dKernelMatrix = new Matrix(diffusionKernel);
+        diffusedVector = inputVector.times(dKernelMatrix);
+        return diffusedVector;
+    }
     
  
 }
