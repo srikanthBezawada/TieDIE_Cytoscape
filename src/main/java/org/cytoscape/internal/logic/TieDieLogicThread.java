@@ -1,10 +1,13 @@
 package org.cytoscape.tiedie.internal.logic;
 
+import Jama.Matrix;
 import java.util.List;
 import org.cytoscape.model.CyNetwork;
 import org.cytoscape.model.CyNode;
+import org.cytoscape.model.CyRow;
 import org.cytoscape.model.CyTable;
 import org.cytoscape.view.model.CyNetworkView;
+
 
 /**
  * @author SrikanthB
@@ -19,12 +22,13 @@ public class TieDieLogicThread extends Thread {
     
     public CyNetwork currentnetwork;
     public CyNetworkView currentnetworkview;
-
+    
     public TieDieLogicThread(CyNetwork currentnetwork, CyNetworkView currentnetworkview) {
         this.currentnetwork = currentnetwork;
         this.currentnetworkview = currentnetworkview;
     }
 
+    @Override
     public void run(){
         
         List<CyNode> nodeList = currentnetwork.getNodeList();
@@ -37,10 +41,40 @@ public class TieDieLogicThread extends Thread {
         double[][] laplacianMatrixOfNetwork = Kernel.createLapMatrix(adjacencyMatrixOfNetwork, degreeMatrixOfNetwork, totalnodecount);
         double[][] diffusionKernel = Kernel.createRequiredExponential(laplacianMatrixOfNetwork);
         
-    
-    
-    
-    
+        
+        Matrix upstreamheatVector = new Matrix(1, totalnodecount);
+        Matrix downstreamheatVector = new Matrix(1, totalnodecount);
+        Matrix upstreamheatVectorDiffused = new Matrix(1, totalnodecount);
+        Matrix downstreamheatVectorDiffused = new Matrix(1, totalnodecount);
+        
+        int counter = 1;
+        int flag = 1;
+        String columnName;
+        int upstreamheat, downstreamheat;
+        
+        for(CyNode root : nodeList){
+           
+            CyRow row = nodeTable.getRow(root.getSUID());
+            columnName = "upstreamheat";
+            if(row.get(columnName,Integer.class)!=null){
+                upstreamheat = row.get(columnName,Integer.class);
+                upstreamheatVector.set(1,counter,upstreamheat);
+            }
+            counter++;
+            
+            columnName = "downstreamheat";
+             if(row.get(columnName,Integer.class)!=null){
+                downstreamheat = row.get(columnName,Integer.class);
+                downstreamheatVector.set(1,flag,downstreamheat);
+            }
+             flag++;
+        }
+        
+        upstreamheatVectorDiffused = Kernel.diffuse(upstreamheatVector, diffusionKernel);
+        downstreamheatVectorDiffused = Kernel.diffuse(downstreamheatVector, diffusionKernel); 
+       
+       
+        
     }
     
      
