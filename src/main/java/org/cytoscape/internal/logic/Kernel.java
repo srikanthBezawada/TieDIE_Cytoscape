@@ -103,11 +103,14 @@ public class Kernel {
     
     
     
-    public static Matrix diffuse(Matrix inputVector, double[][] diffusionKernel){
-        Matrix diffusedVector;
+    public static HeatVector diffuse(HeatVector inputVector, double[][] diffusionKernel){
+        Matrix diffusedVectorMatrix, inputRowVectorMatrix; 
+        
         Matrix dKernelMatrix = new Matrix(diffusionKernel);
-        diffusedVector = inputVector.times(dKernelMatrix);
-        return diffusedVector;
+        inputRowVectorMatrix = inputVector.heatVectorOfScores;
+        diffusedVectorMatrix = inputRowVectorMatrix.times(dKernelMatrix);
+        HeatVector diffusedOutputRowVector = new HeatVector(diffusedVectorMatrix);
+        return diffusedOutputRowVector;
     }
     
  
