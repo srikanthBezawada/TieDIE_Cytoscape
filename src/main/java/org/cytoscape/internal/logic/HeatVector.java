@@ -28,15 +28,16 @@ public class HeatVector {
     public HeatVector extractHeatVector(String columnName, List<CyNode> nodeList,CyTable nodeTable){
         int counter=0;
         double heatscore;
-          for(CyNode root : nodeList){
+        
+        for(CyNode root : nodeList){
             CyRow row = nodeTable.getRow(root.getSUID());
             if(row.get(columnName,Double.class)!=null){
                 heatscore = row.get(columnName,Double.class);
                 heatVectorOfScores.set(0,counter,heatscore);
             }
-            
             counter++;
-          }   
+        }   
+        
         HeatVector inputRowVector = new HeatVector(heatVectorOfScores);
         return inputRowVector;
     }
