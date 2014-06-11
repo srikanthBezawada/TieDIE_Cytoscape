@@ -25,7 +25,7 @@ public class TieDieUtil {
     
     
     public static List<CyNode> filterLinkers(HeatVector upstreamheatVector, HeatVector downstreamheatVector, int linker_cutoff){
-        List<CyNode> filteredNodeList;
+        List<CyNode> filteredNodeList = null;
     
     
         return filteredNodeList;
