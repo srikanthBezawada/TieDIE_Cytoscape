@@ -12,9 +12,11 @@ import org.cytoscape.view.model.CyNetworkViewManager;
 import org.osgi.framework.BundleContext;
 
 /**
- *
  * @author SrikanthB
+ * 
+ * CyActivator is the entry point of execution
  */
+
 
 public class CyActivator extends AbstractCyActivator {
 
