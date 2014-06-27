@@ -1,7 +1,7 @@
-For users interested in TieDIE app. for Cytoscape
+## For users interested in TieDIE app. for Cytoscape
 *Stay tuned*
 
-For developers interested in TieDIE app. for Cytoscape
+## For developers interested in TieDIE app. for Cytoscape
 
 1. Install Netbeans from   https://netbeans.org/downloads/  JavaSE 90MB one will do.
 2. Once installed ,Go to  File-> Open Project and this dialog appears like here. http://s29.postimg.org/dqseabrhj/Capture.png
