@@ -49,9 +49,15 @@ public class TieDieLogicThread extends Thread {
         HeatVector downstreamheatVectorDiffused = new HeatVector(totalnodecount);
         downstreamheatVectorDiffused = Kernel.diffuse(downstreamheatVector, diffusionKernel); 
         
-        int sizeFactor = 1;
-        int linker_cutoff = TieDieUtil.findLinkerCutoff(upstreamheatVector, downstreamheatVector, upstreamheatVectorDiffused,downstreamheatVectorDiffused, sizeFactor);
-        List<CyNode> filteredNodeList = TieDieUtil.filterLinkers(upstreamheatVector, downstreamheatVector, sizeFactor);
+        double sizeFactor = 1;
+        double linker_cutoff = TieDieUtil.findLinkerCutoff(nodeList, upstreamheatVector.nodeHeatList, downstreamheatVector.nodeHeatList, upstreamheatVectorDiffused,downstreamheatVectorDiffused, sizeFactor);// nodeList is the extra parameter to existing tiedie
+        List<CyNode> filteredNodeList = TieDieUtil.filterLinkers(upstreamheatVectorDiffused, downstreamheatVectorDiffused, linker_cutoff);
+        
+        
+        
+        
+        
+        
     } 
     
      

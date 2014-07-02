@@ -2,7 +2,9 @@
 package org.cytoscape.tiedie.internal.logic;
 
 import Jama.Matrix;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import org.cytoscape.model.CyEdge;
 import org.cytoscape.model.CyNetwork;
 import org.cytoscape.model.CyNode;
@@ -104,14 +106,29 @@ public class Kernel {
     
     
     public static HeatVector diffuse(HeatVector inputVector, double[][] diffusionKernel){
-        Matrix diffusedVectorMatrix, inputRowVectorMatrix; 
-        
+        Matrix diffusedVectorMatrix; 
+        HeatVector diffusedOutputRowVector;
+                 
         Matrix dKernelMatrix = new Matrix(diffusionKernel);
-        inputRowVectorMatrix = inputVector.heatVectorOfScores;
-        diffusedVectorMatrix = inputRowVectorMatrix.times(dKernelMatrix);
-        HeatVector diffusedOutputRowVector = new HeatVector(diffusedVectorMatrix);
+        diffusedVectorMatrix = inputVector.heatVectorOfScores.times(dKernelMatrix);
+        diffusedOutputRowVector= new HeatVector(diffusedVectorMatrix);
         return diffusedOutputRowVector;
     }
+    
+    public static Map getnodeDiffusedScoreMap(HeatVector diffusedOutputRowVector, List<CyNode> nodeList){
+        
+        Map nodeDiffusedScoreMap; 
+        nodeDiffusedScoreMap = new HashMap<Double, CyNode>();
+        int count=0;
+        for(CyNode root : nodeList){
+            nodeDiffusedScoreMap.put(diffusedOutputRowVector.heatVectorOfScores.get(0,count), root);
+            count++;
+        }
+    
+        return nodeDiffusedScoreMap;
+    }
+    
+   
     
  
 }
