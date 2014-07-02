@@ -31,7 +31,8 @@ public class CyActivator extends AbstractCyActivator {
 
     @Override
     public void start(BundleContext context) throws Exception {
-        String version = new String(" 1.0");
+        // Execution of the app. starts here
+        String version = new String(" 1.0"); // version to display after deployment
         System.out.println("TieDIE app. is loading");
         this.networkViewManager = getService(context, CyNetworkViewManager.class);
         this.networkViewFactory = getService(context, CyNetworkViewFactory.class);
