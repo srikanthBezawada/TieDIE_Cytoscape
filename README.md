@@ -50,12 +50,10 @@ TieDIE_Cytoscape
 
 
 ## About this project
-<<<<<<< HEAD
-TieDIE  algorithm finds "subnetworks" connecting genomic perturbations to transcriptional changes in large gene interaction networks. This algorithm is useful in optimizing cancer treatment by viewing cancer from a gene network perspective thus enhancing our understanding of disease initiation, progression and therapy. This project deploys TieDIE algorithm into cytoscape as an app. 
 
 =======
 TieDIE  algorithm [t1] finds "subnetworks" connecting genomic perturbations to transcriptional changes in large gene interaction networks. This algorithm is useful in optimizing cancer treatment by viewing cancer from a gene network perspective thus enhancing our understanding of disease initiation, progression and therapy. This project deploys TieDIE algorithm into cytoscape as an app. 
->>>>>>> b608a8edfef4dc379a4a35a4bcb86588c97edac3
+
 This is a GSOC 2014 project developed by Srikanth.B under the supervision of Evan Paull. 
 
 https://www.google-melange.com/gsoc/project/details/google/gsoc2014/srikanthh/5733935958982656
