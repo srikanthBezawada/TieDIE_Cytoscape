@@ -3,6 +3,10 @@ package org.cytoscape.tiedie.internal;
 import java.awt.Component;
 import java.util.Collection;
 import javax.swing.Icon;
+import javax.swing.BorderFactory;
+import javax.swing.border.Border;
+import javax.swing.JCheckBox;
+
 import org.cytoscape.application.CyApplicationManager;
 import org.cytoscape.application.swing.CySwingApplication;
 import org.cytoscape.application.swing.CytoPanelComponent;
@@ -14,14 +18,12 @@ import org.cytoscape.tiedie.internal.logic.TieDieLogicThread;
 import org.cytoscape.view.model.CyNetworkView;
 
 
-import javax.swing.BorderFactory;
-import javax.swing.border.Border;
 
-import javax.swing.JCheckBox;
 /**
  *
  * @author SrikanthB
  * Creates new form TieDieStartMenu
+ * Start button activates TieDieLogicThread.java which keeps the ball rolling
  */
 
 public class TieDieStartMenu extends javax.swing.JPanel implements CytoPanelComponent {
