@@ -38,11 +38,13 @@ public class TieDieStartMenu extends javax.swing.JPanel implements CytoPanelComp
     
    
     public TieDieStartMenu(CyActivator cyactivator,TieDieCore tiediecore) {
-        initComponents();
         this.cyactivator = cyactivator;
         this.tiediecore = tiediecore;
         cyApplicationManager = tiediecore.getCyApplicationManager();
+        this.currentnetwork = cyApplicationManager.getCurrentNetwork();
         cyDesktopService = tiediecore.getCyDesktopService();
+        initComponents();
+       
     }
     
     public Icon getIcon() {
@@ -137,7 +139,7 @@ public class TieDieStartMenu extends javax.swing.JPanel implements CytoPanelComp
                                 .addComponent(helpButton, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(exitButton))
-                            .addComponent(statusLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(statusLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(48, Short.MAX_VALUE))
         );
         mainPanelLayout.setVerticalGroup(
@@ -146,10 +148,10 @@ public class TieDieStartMenu extends javax.swing.JPanel implements CytoPanelComp
                 .addComponent(headingLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                 .addComponent(otherPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
-                .addComponent(startButton, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10)
-                .addComponent(statusLabel)
+                .addGap(18, 18, 18)
+                .addComponent(startButton, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(statusLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(helpButton)
@@ -167,7 +169,7 @@ public class TieDieStartMenu extends javax.swing.JPanel implements CytoPanelComp
 
         for(CyColumn presentColumn : columnCollection){
             presentColumnName = presentColumn.getName();
-            JCheckBox check = new JCheckBox("columnName");
+            JCheckBox check = new JCheckBox(presentColumnName);
             otherPanel.add(check);
         }
 
