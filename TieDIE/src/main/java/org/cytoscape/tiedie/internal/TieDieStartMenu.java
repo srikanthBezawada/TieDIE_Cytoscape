@@ -42,6 +42,7 @@ public class TieDieStartMenu extends javax.swing.JPanel implements CytoPanelComp
         this.tiediecore = tiediecore;
         cyApplicationManager = tiediecore.getCyApplicationManager();
         this.currentnetwork = cyApplicationManager.getCurrentNetwork();
+        this.currentnetworkview = cyApplicationManager.getCurrentNetworkView();
         cyDesktopService = tiediecore.getCyDesktopService();
         initComponents();
        
@@ -208,9 +209,7 @@ public class TieDieStartMenu extends javax.swing.JPanel implements CytoPanelComp
     
     private void startButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startButtonActionPerformed
         statusLabel.setText("Started executing TieDIE");
-     
-        currentnetworkview = cyApplicationManager.getCurrentNetworkView();
-        currentnetwork = currentnetworkview.getModel();
+        
         logicThread = new TieDieLogicThread(currentnetwork, currentnetworkview);
         logicThread.start();
         
