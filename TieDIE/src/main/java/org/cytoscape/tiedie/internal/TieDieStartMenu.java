@@ -28,13 +28,14 @@ import org.cytoscape.view.model.CyNetworkView;
 
 public class TieDieStartMenu extends javax.swing.JPanel implements CytoPanelComponent {
     
+    private TieDieCore tiediecore;
+    public TieDieLogicThread logicThread;
     CyApplicationManager cyApplicationManager;
     CySwingApplication cyDesktopService;
     CyNetwork currentnetwork;
     CyNetworkView currentnetworkview;
-    private TieDieCore tiediecore;
     public CyActivator cyactivator;
-    public TieDieLogicThread logicThread;
+    
     
    
     public TieDieStartMenu(CyActivator cyactivator,TieDieCore tiediecore) {
