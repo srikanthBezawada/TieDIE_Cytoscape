@@ -119,22 +119,20 @@ public class Kernel {
         return diffusedOutputRowVector;
     }
     
-    public static Map getnodeDiffusedScoreMap(HeatVector diffusedOutputRowVector, List<CyNode> nodeList){
+    public static HashMap<CyNode,Double> getnodeDiffusedScoreMap(HeatVector diffusedOutputRowVector, List<CyNode> nodeList){
         
-        Map nodeDiffusedScoreMap; 
-        nodeDiffusedScoreMap = new HashMap<Double, CyNode>();
+        HashMap<CyNode,Double> nodeDiffusedScoreMap; 
+        nodeDiffusedScoreMap = new HashMap<CyNode,Double>();
         int count=0;
         for(CyNode root : nodeList){
-            nodeDiffusedScoreMap.put(diffusedOutputRowVector.heatVectorOfScores.get(0,count), root);
+            nodeDiffusedScoreMap.put(root, diffusedOutputRowVector.heatVectorOfScores.get(0,count));
             count++;
         }
-    
+   
         return nodeDiffusedScoreMap;
     }
     
    
-    
- 
 }
 
     

@@ -14,9 +14,6 @@ import org.cytoscape.model.CyNode;
 
 public class TieDieUtil {
 
-   
-  
-    
     public TieDieUtil(){
     
     }
@@ -42,12 +39,15 @@ public class TieDieUtil {
         double linker_cutoff=0;
         double target_size;
         double EPSILON = 0.0001;
+        
         target_size = (sizeFactor)*(upstreamnodeheatList.size());
-        
-        Map nodeDiffusedScoreMap;
+        HashMap<CyNode, Double> nodeDiffusedScoreMap;
         nodeDiffusedScoreMap = Kernel.getnodeDiffusedScoreMap(upstreamheatVectorDiffused, nodeList);
-        
-        
+        // sort the above map indecreasing order based on heat values
+        //     iterate over the sorted map
+        //     {
+        //
+        //     }
         
         
         

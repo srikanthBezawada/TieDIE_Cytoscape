@@ -19,7 +19,7 @@ public class HeatVector {
     Matrix heatVectorOfScores;
     int numOfColumns;
     List<CyNode> nodeHeatList;
-    Map<Double, CyNode> nodeScoreMap;
+    HashMap<CyNode, Double> nodeScoreMap;
 
     public HeatVector(int numOfColumns) {
         this.numOfColumns = numOfColumns;
@@ -34,7 +34,7 @@ public class HeatVector {
     public HeatVector extractHeatVector(String columnName, List<CyNode> nodeList, CyTable nodeTable) {
         int counter = 0;
         double heatscore;
-        nodeScoreMap = new HashMap<Double, CyNode>();
+        nodeScoreMap = new HashMap<CyNode, Double>();
 
         for (CyNode root : nodeList) {
             CyRow row = nodeTable.getRow(root.getSUID());
@@ -42,7 +42,7 @@ public class HeatVector {
                 heatscore = row.get(columnName, Double.class);
                 heatVectorOfScores.set(0, counter, heatscore);
                 nodeHeatList.add(root); // nodeHeatList has all nodes corresponding to that heat column
-                nodeScoreMap.put(heatscore, root);
+                nodeScoreMap.put(root, heatscore);
             }
 
             counter++;
