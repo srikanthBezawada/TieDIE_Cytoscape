@@ -19,7 +19,7 @@ public class HeatVector {
     Matrix heatVectorOfScores;
     int numOfColumns;
     List<CyNode> nodeHeatList;
-    HashMap<CyNode, Double> nodeScoreMap;
+    Map nodeScoreMap;
 
     public HeatVector(int numOfColumns) {
         this.numOfColumns = numOfColumns;

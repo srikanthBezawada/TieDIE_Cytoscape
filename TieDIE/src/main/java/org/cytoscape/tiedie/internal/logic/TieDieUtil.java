@@ -41,9 +41,11 @@ public class TieDieUtil {
         double EPSILON = 0.0001;
         
         target_size = (sizeFactor)*(upstreamnodeheatList.size());
-        HashMap<CyNode, Double> nodeDiffusedScoreMap;
+        Map nodeDiffusedScoreMap, nodeDiffusedScoreMapSorted;
         nodeDiffusedScoreMap = Kernel.getnodeDiffusedScoreMap(upstreamheatVectorDiffused, nodeList);
-        // sort the above map indecreasing order based on heat values
+        
+        nodeDiffusedScoreMapSorted = MapUtil.sortByValue(nodeDiffusedScoreMap);
+    
         //     iterate over the sorted map
         //     {
         //

@@ -119,9 +119,9 @@ public class Kernel {
         return diffusedOutputRowVector;
     }
     
-    public static HashMap<CyNode,Double> getnodeDiffusedScoreMap(HeatVector diffusedOutputRowVector, List<CyNode> nodeList){
+    public static Map getnodeDiffusedScoreMap(HeatVector diffusedOutputRowVector, List<CyNode> nodeList){
         
-        HashMap<CyNode,Double> nodeDiffusedScoreMap; 
+        Map nodeDiffusedScoreMap; 
         nodeDiffusedScoreMap = new HashMap<CyNode,Double>();
         int count=0;
         for(CyNode root : nodeList){
