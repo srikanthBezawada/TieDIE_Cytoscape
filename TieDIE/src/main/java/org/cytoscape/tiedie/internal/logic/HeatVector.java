@@ -3,9 +3,10 @@ package org.cytoscape.tiedie.internal.logic;
 import Jama.Matrix;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
+import java.util.LinkedHashSet;
 import java.util.Set;
+import java.util.List;
 
 import org.cytoscape.model.CyNode;
 import org.cytoscape.model.CyRow;
@@ -36,13 +37,14 @@ public class HeatVector {
         int counter = 0;
         double heatscore;
         nodeScoreMap = new HashMap<CyNode, Double>();
-
+        nodeHeatSet = new LinkedHashSet<CyNode>();
+        
         for (CyNode root : nodeList) {
             CyRow row = nodeTable.getRow(root.getSUID());
             if (row.get(columnName, Double.class) != null) {
                 heatscore = row.get(columnName, Double.class);
                 heatVectorOfScores.set(0, counter, heatscore);
-                nodeHeatSet.add(root); // nodeHeatList has all nodes corresponding to that heat column
+                nodeHeatSet.add(root); // nodeHeatSet has all nodes corresponding to that heat column
                 nodeScoreMap.put(root, heatscore);
             }
 
