@@ -3,6 +3,7 @@ package org.cytoscape.tiedie.internal.logic;
 import Jama.Matrix;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -36,7 +37,7 @@ public class HeatVector {
     public HeatVector extractHeatVector(String columnName, List<CyNode> nodeList, CyTable nodeTable) {
         int counter = 0;
         double heatscore;
-        nodeScoreMap = new HashMap<CyNode, Double>();
+        nodeScoreMap = new LinkedHashMap<CyNode, Double>();
         nodeHeatSet = new LinkedHashSet<CyNode>();
         
         for (CyNode root : nodeList) {

@@ -7,6 +7,7 @@ import org.jblas.DoubleMatrix;
 import org.jblas.MatrixFunctions;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -122,7 +123,7 @@ public class Kernel {
     public static Map getnodeDiffusedScoreMap(HeatVector diffusedOutputRowVector, List<CyNode> nodeList){
         
         Map nodeDiffusedScoreMap; 
-        nodeDiffusedScoreMap = new HashMap<CyNode,Double>();
+        nodeDiffusedScoreMap = new LinkedHashMap<CyNode,Double>();
         int count=0;
         for(CyNode root : nodeList){
             nodeDiffusedScoreMap.put(root, diffusedOutputRowVector.heatVectorOfScores.get(0,count));
