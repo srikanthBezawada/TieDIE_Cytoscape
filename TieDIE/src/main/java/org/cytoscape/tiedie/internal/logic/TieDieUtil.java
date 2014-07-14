@@ -1,8 +1,11 @@
 package org.cytoscape.tiedie.internal.logic;
 
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 
 import org.cytoscape.model.CyNode;
@@ -44,24 +47,21 @@ public class TieDieUtil {
         target_size = (sizeFactor)*(upstreamnodeheatSet.size());
         Map nodeDiffusedScoreMap, nodeDiffusedScoreMapSorted;
         Set diffusedNodeSet;
-        nodeDiffusedScoreMap = Kernel.getnodeDiffusedScoreMap(upstreamheatVectorDiffused, nodeList);
         
+        nodeDiffusedScoreMap = Kernel.getnodeDiffusedScoreMap(upstreamheatVectorDiffused, nodeList);
         nodeDiffusedScoreMapSorted = MapUtil.sortByValue(nodeDiffusedScoreMap);
         
-        /*
-        Iterate over the sorted map(cuurentnode, currentvalue)
-        {
-            cutoff = currentvalue+Epsilon;
-            add the 1st element of the map to the set DiffusedNodeSet; 
-            if(size(diffusedNodeSet)-size(NodeSet)) > target_size
+        Set<Map.Entry<CyNode, Double>> entrySet = nodeDiffusedScoreMapSorted.entrySet();
+        Set<CyNode> diffused_node_set = new HashSet<CyNode>();
+       
+        for (Entry entry : entrySet) {
+            linker_cutoff = (Double)entry.getValue()+EPSILON ;
+            diffused_node_set.add((CyNode)entry.getKey());
+            if((upstreamnodeheatSet.size())-(diffused_node_set.size()) > target_size)
             break;
-            
-        }
-        return cutoff;
-        */
-        
-        
+        } 
         return linker_cutoff;
+        
     }
     
     
