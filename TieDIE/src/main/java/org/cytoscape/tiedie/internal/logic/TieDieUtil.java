@@ -17,29 +17,29 @@ import static org.cytoscape.tiedie.internal.logic.Kernel.getnodeDiffusedScoreMap
  * @author SrikanthB
  */
 
-
+// Check that variables are not declared inside loop & check all maps,sets declarations
 public class TieDieUtil {
     
-    public static double findLinkerCutoff(List<CyNode> nodeList, Set<CyNode> upstreamnodeheatSet, Set<CyNode> downstreamnodeheatSet,HeatVector upstreamheatVectorDiffused,HeatVector downstreamheatVectorDiffused, double sizeFactor){
+    public static double findLinkerCutoff(List<CyNode> nodeList, Set<CyNode> upstreamnodeheatSet, Set<CyNode> downstreamnodeSet,HeatVector upstreamheatVectorDiffused,HeatVector downstreamheatVectorDiffused, double sizeFactor){
         double linker_cutoff;
-        if(downstreamnodeheatSet == null){
+        if(downstreamnodeSet == null){
             linker_cutoff = findLinkerCutoffSingle(nodeList, upstreamnodeheatSet, upstreamheatVectorDiffused, sizeFactor);
         }
            
         else {
-            linker_cutoff = findLinkerCutoffMulti(nodeList, upstreamnodeheatSet, downstreamnodeheatSet, upstreamheatVectorDiffused, downstreamheatVectorDiffused, sizeFactor);
+            linker_cutoff = findLinkerCutoffMulti(nodeList, upstreamnodeheatSet, downstreamnodeSet, upstreamheatVectorDiffused, downstreamheatVectorDiffused, sizeFactor);
         }
          
         return linker_cutoff;
     }
     
     
-    public static double findLinkerCutoffSingle(List<CyNode> nodeList, Set<CyNode> upstreamnodeheatSet, HeatVector upstreamheatVectorDiffused, double sizeFactor) {
+    public static double findLinkerCutoffSingle(List<CyNode> nodeList, Set<CyNode> upstreamnodeSet, HeatVector upstreamheatVectorDiffused, double sizeFactor) {
         double linker_cutoff=0;
         double target_size;
         double EPSILON = 0.0001;
         
-        target_size = (sizeFactor)*(upstreamnodeheatSet.size());
+        target_size = (sizeFactor)*(upstreamnodeSet.size());
         Map nodeDiffusedScoreMap, nodeDiffusedScoreMapSorted;
         Set<CyNode> diffused_node_set;
         
@@ -53,7 +53,7 @@ public class TieDieUtil {
             Entry<CyNode, Double> entry = iterator.next();
             linker_cutoff = entry.getValue()+EPSILON ;
             diffused_node_set.add(entry.getKey());
-            if((upstreamnodeheatSet.size())-(diffused_node_set.size()) > target_size)
+            if((upstreamnodeSet.size())-(diffused_node_set.size()) > target_size)
             break;
         }
         
@@ -76,12 +76,12 @@ public class TieDieUtil {
     
     
     
-    public static double findLinkerCutoffMulti(List<CyNode> nodeList, Set<CyNode> upstreamnodeheatSet, Set<CyNode> downstreamnodeheatSet, HeatVector upstreamheatVectorDiffused, HeatVector downstreamheatVectorDiffused, double sizeFactor) {
+    public static double findLinkerCutoffMulti(List<CyNode> nodeList, Set<CyNode> upstreamnodeSet, Set<CyNode> downstreamnodeSet, HeatVector upstreamheatVectorDiffused, HeatVector downstreamheatVectorDiffused, double sizeFactor) {
         double linker_cutoff=0;
         double EPSILON = 0.0001;
+        double h, size_frac;
         
-        Set<CyNode> upstreamdiffused_node_set , downstreamdiffused_node_set;
-        Map linkers_NodeScoreMap, filtered_linkersNodeScoreMap;
+        Map linkers_NodeScoreMapSorted,linkers_NodeScoreMap, filtered_linkersNodeScoreMap;
         Map upstreamnodeDiffusedScoreMap,downstreamnodeDiffusedScoreMap;
         Map upstreamnodeDiffusedScoreMapSorted, downstreamnodeDiffusedScoreMapSorted;
         
@@ -92,6 +92,18 @@ public class TieDieUtil {
         
         linkers_NodeScoreMap = findLinkersMap(nodeList, upstreamheatVectorDiffused, downstreamheatVectorDiffused);
         filtered_linkersNodeScoreMap = findFilteredLinkersMap(linkers_NodeScoreMap, 1);
+        
+        linkers_NodeScoreMapSorted = MapUtil.sortByValue(linkers_NodeScoreMap);
+        Iterator<Map.Entry<CyNode, Double>> iterator = linkers_NodeScoreMapSorted.entrySet().iterator() ;
+        
+  
+        while(iterator.hasNext()){
+            Entry<CyNode, Double> entry = iterator.next();
+            h = entry.getValue();
+            linker_cutoff = h-EPSILON;
+            //size_frac = scoreLinkers(upstreamnodeDiffusedScoreMap, upstreamnodeDiffusedScoreMapSorted,downstreamnodeDiffusedScoreMap, downstreamnodeDiffusedScoreMapSorted ,upstreamnodeSet,downstreamnodeSet , linker_cutoff , sizeFactor);
+        }
+        
         
         return linker_cutoff;
     }
@@ -126,13 +138,13 @@ public class TieDieUtil {
     }
     
    
-    public static Map findFilteredLinkersMap(Map LinkersNodeScoreMap, double linker_cutoff){
+    public static Map findFilteredLinkersMap(Map LinkersNodeScoreMap, double cutoff){// see why not linker_
         Map filtered_linkersNodeScoreMap = new HashMap<CyNode, Double>();
         Iterator<Map.Entry<CyNode, Double>> iterator = LinkersNodeScoreMap.entrySet().iterator() ;
         
         while(iterator.hasNext()){
             Entry<CyNode, Double> entry = iterator.next();
-            if(entry.getValue()> linker_cutoff)
+            if(entry.getValue()> cutoff)
             {
                 filtered_linkersNodeScoreMap.put(entry.getKey(), entry.getValue());
             }
@@ -140,5 +152,21 @@ public class TieDieUtil {
         return filtered_linkersNodeScoreMap;
     }
    
+    
+    
+    public static double scoreLinkers(){
+        return 0;
+    
+    
+    
+    }
+    
+    
+    
+    
+    
+    
+    
+    
     
 }
