@@ -10,6 +10,8 @@ import java.util.Set;
 
 import org.cytoscape.model.CyNode;
 
+import static org.cytoscape.tiedie.internal.logic.Kernel.getnodeDiffusedScoreMap;
+
 /**
  *
  * @author SrikanthB
@@ -17,6 +19,8 @@ import org.cytoscape.model.CyNode;
 
 
 public class TieDieUtil {
+
+   
 
     public TieDieUtil(){
     
@@ -46,13 +50,13 @@ public class TieDieUtil {
         
         target_size = (sizeFactor)*(upstreamnodeheatSet.size());
         Map nodeDiffusedScoreMap, nodeDiffusedScoreMapSorted;
-        Set diffusedNodeSet;
+        Set<CyNode> diffused_node_set;
         
         nodeDiffusedScoreMap = Kernel.getnodeDiffusedScoreMap(upstreamheatVectorDiffused, nodeList);
         nodeDiffusedScoreMapSorted = MapUtil.sortByValue(nodeDiffusedScoreMap);
         
         Iterator<Map.Entry<CyNode, Double>> iterator = nodeDiffusedScoreMapSorted.entrySet().iterator() ;
-        Set<CyNode> diffused_node_set = new HashSet<CyNode>();
+        diffused_node_set = new HashSet<CyNode>();
 
         while(iterator.hasNext()){
             Entry<CyNode, Double> entry = iterator.next();
@@ -83,10 +87,19 @@ public class TieDieUtil {
     
     public static double findLinkerCutoffMulti(List<CyNode> nodeList, Set<CyNode> upstreamnodeheatSet, Set<CyNode> downstreamnodeheatSet, HeatVector upstreamheatVectorDiffused, HeatVector downstreamheatVectorDiffused, double sizeFactor) {
         double linker_cutoff=0;
+        double EPSILON = 0.0001;
         
+        Set<CyNode> upstreamdiffused_node_set , downstreamdiffused_node_set, filteredNodeSet;// get this filtered node set
+        Map filteredNodeScoreMap;
+        Map upstreamnodeDiffusedScoreMap,downstreamnodeDiffusedScoreMap;
+        Map upstreamnodeDiffusedScoreMapSorted, downstreamnodeDiffusedScoreMapSorted;
         
+        upstreamnodeDiffusedScoreMap = Kernel.getnodeDiffusedScoreMap(upstreamheatVectorDiffused, nodeList);
+        downstreamnodeDiffusedScoreMap = Kernel.getnodeDiffusedScoreMap(downstreamheatVectorDiffused, nodeList);
+        upstreamnodeDiffusedScoreMapSorted = MapUtil.sortByValue(upstreamnodeDiffusedScoreMap);
+        downstreamnodeDiffusedScoreMapSorted = MapUtil.sortByValue(downstreamnodeDiffusedScoreMap);
         
-        
+        filteredNodeScoreMap = findLinkersMap(nodeList, upstreamheatVectorDiffused, downstreamheatVectorDiffused ,1);
         
         
         return linker_cutoff;
@@ -95,18 +108,46 @@ public class TieDieUtil {
     
     
    
-    public static List<CyNode> filterLinkers(HeatVector upstreamheatVectorDiffused, HeatVector downstreamheatVectorDiffused, double linker_cutoff){
-        List<CyNode> filteredNodeList = null;
-    
-    
-        return filteredNodeList;
+    public static Map findLinkersMap(List<CyNode> nodeList, HeatVector upstreamheatVectorDiffused, HeatVector downstreamheatVectorDiffused, double linker_cutoff){
+        // This is the z function according to literature
+        Map filteredNodeScoreMap;
+        double min_heat,x,y;
+        
+        if(downstreamheatVectorDiffused == null){
+            filteredNodeScoreMap = getnodeDiffusedScoreMap(upstreamheatVectorDiffused, nodeList);
+            return filteredNodeScoreMap;
+        }
+        filteredNodeScoreMap = new HashMap<CyNode,Double>();
+        for(CyNode root : upstreamheatVectorDiffused.nodeHeatSet)
+        {
+            if(downstreamheatVectorDiffused.nodeHeatSet.contains(root)==false)
+            continue;
+            x = (Double)getnodeDiffusedScoreMap(upstreamheatVectorDiffused, nodeList).get(root);
+            y = (Double)getnodeDiffusedScoreMap(downstreamheatVectorDiffused, nodeList).get(root);
+            min_heat = Math.min(x,y);
+            filteredNodeScoreMap.put(root,min_heat);
+         
+        
+        }
+        return filteredNodeScoreMap;
     }
     
+   
+    public static Map findFilteredLinkersMap(){
+        return null;
     
+    }
     
     
    
     
     
-      
+    
+    
+    
+    
+    
+    
+    
+    
 }
