@@ -19,12 +19,6 @@ import static org.cytoscape.tiedie.internal.logic.Kernel.getnodeDiffusedScoreMap
 
 
 public class TieDieUtil {
-
-   
-
-    public TieDieUtil(){
-    
-    }
     
     public static double findLinkerCutoff(List<CyNode> nodeList, Set<CyNode> upstreamnodeheatSet, Set<CyNode> downstreamnodeheatSet,HeatVector upstreamheatVectorDiffused,HeatVector downstreamheatVectorDiffused, double sizeFactor){
         double linker_cutoff;
@@ -40,9 +34,6 @@ public class TieDieUtil {
     }
     
     
-    
-    
-    
     public static double findLinkerCutoffSingle(List<CyNode> nodeList, Set<CyNode> upstreamnodeheatSet, HeatVector upstreamheatVectorDiffused, double sizeFactor) {
         double linker_cutoff=0;
         double target_size;
@@ -55,9 +46,9 @@ public class TieDieUtil {
         nodeDiffusedScoreMap = Kernel.getnodeDiffusedScoreMap(upstreamheatVectorDiffused, nodeList);
         nodeDiffusedScoreMapSorted = MapUtil.sortByValue(nodeDiffusedScoreMap);
         
-        Iterator<Map.Entry<CyNode, Double>> iterator = nodeDiffusedScoreMapSorted.entrySet().iterator() ;
         diffused_node_set = new HashSet<CyNode>();
-
+        Iterator<Map.Entry<CyNode, Double>> iterator = nodeDiffusedScoreMapSorted.entrySet().iterator() ;
+        
         while(iterator.hasNext()){
             Entry<CyNode, Double> entry = iterator.next();
             linker_cutoff = entry.getValue()+EPSILON ;
@@ -89,8 +80,8 @@ public class TieDieUtil {
         double linker_cutoff=0;
         double EPSILON = 0.0001;
         
-        Set<CyNode> upstreamdiffused_node_set , downstreamdiffused_node_set, filteredNodeSet;// get this filtered node set
-        Map filteredNodeScoreMap;
+        Set<CyNode> upstreamdiffused_node_set , downstreamdiffused_node_set;
+        Map linkers_NodeScoreMap, filtered_linkersNodeScoreMap;
         Map upstreamnodeDiffusedScoreMap,downstreamnodeDiffusedScoreMap;
         Map upstreamnodeDiffusedScoreMapSorted, downstreamnodeDiffusedScoreMapSorted;
         
@@ -99,25 +90,29 @@ public class TieDieUtil {
         upstreamnodeDiffusedScoreMapSorted = MapUtil.sortByValue(upstreamnodeDiffusedScoreMap);
         downstreamnodeDiffusedScoreMapSorted = MapUtil.sortByValue(downstreamnodeDiffusedScoreMap);
         
-        filteredNodeScoreMap = findLinkersMap(nodeList, upstreamheatVectorDiffused, downstreamheatVectorDiffused ,1);
-        
+        linkers_NodeScoreMap = findLinkersMap(nodeList, upstreamheatVectorDiffused, downstreamheatVectorDiffused);
+        filtered_linkersNodeScoreMap = findFilteredLinkersMap(linkers_NodeScoreMap, 1);
         
         return linker_cutoff;
     }
-
-    
-    
+       
+    /**
+         "Z function" is used to combine score vectors for two input sets according to literature
+         "filterLinkers" is the "Z function" of TieDIE python implementation & is done in 2 functions here
+            1. findLinkerMap returns all linker nodes,scores
+            2. findFilteredMap returns all linker nodes whose scores > cutoff
+    */
    
-    public static Map findLinkersMap(List<CyNode> nodeList, HeatVector upstreamheatVectorDiffused, HeatVector downstreamheatVectorDiffused, double linker_cutoff){
-        // This is the z function according to literature
-        Map filteredNodeScoreMap;
+    public static Map findLinkersMap(List<CyNode> nodeList, HeatVector upstreamheatVectorDiffused, HeatVector downstreamheatVectorDiffused){
+       
+        Map LinkersNodeScoreMap;
         double min_heat,x,y;
         
         if(downstreamheatVectorDiffused == null){
-            filteredNodeScoreMap = getnodeDiffusedScoreMap(upstreamheatVectorDiffused, nodeList);
-            return filteredNodeScoreMap;
+            LinkersNodeScoreMap = getnodeDiffusedScoreMap(upstreamheatVectorDiffused, nodeList);
+            return LinkersNodeScoreMap;
         }
-        filteredNodeScoreMap = new HashMap<CyNode,Double>();
+        LinkersNodeScoreMap = new HashMap<CyNode,Double>();
         for(CyNode root : upstreamheatVectorDiffused.nodeHeatSet)
         {
             if(downstreamheatVectorDiffused.nodeHeatSet.contains(root)==false)
@@ -125,29 +120,25 @@ public class TieDieUtil {
             x = (Double)getnodeDiffusedScoreMap(upstreamheatVectorDiffused, nodeList).get(root);
             y = (Double)getnodeDiffusedScoreMap(downstreamheatVectorDiffused, nodeList).get(root);
             min_heat = Math.min(x,y);
-            filteredNodeScoreMap.put(root,min_heat);
-         
-        
+            LinkersNodeScoreMap.put(root,min_heat);
         }
-        return filteredNodeScoreMap;
+        return LinkersNodeScoreMap;
     }
     
    
-    public static Map findFilteredLinkersMap(){
-        return null;
-    
+    public static Map findFilteredLinkersMap(Map LinkersNodeScoreMap, double linker_cutoff){
+        Map filtered_linkersNodeScoreMap = new HashMap<CyNode, Double>();
+        Iterator<Map.Entry<CyNode, Double>> iterator = LinkersNodeScoreMap.entrySet().iterator() ;
+        
+        while(iterator.hasNext()){
+            Entry<CyNode, Double> entry = iterator.next();
+            if(entry.getValue()> linker_cutoff)
+            {
+                filtered_linkersNodeScoreMap.put(entry.getKey(), entry.getValue());
+            }
+        }
+        return filtered_linkersNodeScoreMap;
     }
-    
-    
    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
 }
