@@ -51,9 +51,23 @@ public class TieDieUtil {
         nodeDiffusedScoreMap = Kernel.getnodeDiffusedScoreMap(upstreamheatVectorDiffused, nodeList);
         nodeDiffusedScoreMapSorted = MapUtil.sortByValue(nodeDiffusedScoreMap);
         
+        Iterator<Map.Entry<CyNode, Double>> iterator = nodeDiffusedScoreMapSorted.entrySet().iterator() ;
+        Set<CyNode> diffused_node_set = new HashSet<CyNode>();
+
+        while(iterator.hasNext()){
+            Entry<CyNode, Double> entry = iterator.next();
+            linker_cutoff = entry.getValue()+EPSILON ;
+            diffused_node_set.add(entry.getKey());
+            if((upstreamnodeheatSet.size())-(diffused_node_set.size()) > target_size)
+            break;
+        }
+        
+        return linker_cutoff;
+        
+        /**
         Set<Map.Entry<CyNode, Double>> entrySet = nodeDiffusedScoreMapSorted.entrySet();
         Set<CyNode> diffused_node_set = new HashSet<CyNode>();
-       
+             
         for (Entry entry : entrySet) {
             linker_cutoff = (Double)entry.getValue()+EPSILON ;
             diffused_node_set.add((CyNode)entry.getKey());
@@ -61,6 +75,7 @@ public class TieDieUtil {
             break;
         } 
         return linker_cutoff;
+        */
         
     }
     
