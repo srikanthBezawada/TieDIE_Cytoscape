@@ -41,6 +41,7 @@ public class Kernel {
     public static double[][] createAdjMatrix(CyNetwork currentnetwork, List<CyNode> nodeList, CyTable edgeTable, int totalnodecount) {
         //make an adjacencymatrix for the current network
         double[][] adjacencyMatrixOfNetwork = new double[totalnodecount][totalnodecount];
+        String natureOfInteraction;
         int k = 0;
         for (CyNode root : nodeList) {
             List<CyNode> neighbors = currentnetwork.getNeighborList(root, CyEdge.Type.OUTGOING);
@@ -49,7 +50,19 @@ public class Kernel {
                 if (edges.size() > 0) {
                     CyRow row = edgeTable.getRow(edges.get(0).getSUID());
                     try {
-                        adjacencyMatrixOfNetwork[k][nodeList.indexOf(neighbor)] = Double.parseDouble(row.get(CyEdge.INTERACTION, String.class));
+                        natureOfInteraction = row.get(CyEdge.INTERACTION, String.class);
+                        //  "a = post-transcriptional, t = transcriptional; '>' = activating, '|' = inactivating"
+                        if("-a>".equals(natureOfInteraction) || "-t>".equals(natureOfInteraction)){
+                            adjacencyMatrixOfNetwork[k][nodeList.indexOf(neighbor)] = 1;
+                        }
+                        else if("-a|".equals(natureOfInteraction) || "-t|".equals(natureOfInteraction)){
+                            adjacencyMatrixOfNetwork[k][nodeList.indexOf(neighbor)] = -1;
+                        }
+                        else
+                        {
+                            adjacencyMatrixOfNetwork[k][nodeList.indexOf(neighbor)] = 0;
+                        }
+                         
                     } catch (Exception ex) {
                     }
                 }
