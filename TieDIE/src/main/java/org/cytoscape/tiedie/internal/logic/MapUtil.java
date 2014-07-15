@@ -9,6 +9,7 @@ import java.util.*;
 
 public class MapUtil
 {
+    // This method sorts input map based on "values" of map
     public static <K, V extends Comparable<? super V>> Map<K, V> 
         sortByValue( Map<K, V> map )
     {
