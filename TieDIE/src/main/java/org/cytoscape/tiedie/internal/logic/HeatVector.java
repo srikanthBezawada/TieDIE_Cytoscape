@@ -30,8 +30,8 @@ public class HeatVector {
     
     Matrix heatVectorOfScores;
     int numOfColumns;
-    Set<CyNode> nodeHeatSet;
-    Map nodeScoreMap;
+    public Set<CyNode> nodeHeatSet;
+    public Map nodeScoreMap;
     
     // HeatValue and Score are the same 
     
