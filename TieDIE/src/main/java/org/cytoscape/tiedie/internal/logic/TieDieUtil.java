@@ -15,6 +15,7 @@ import static org.cytoscape.tiedie.internal.logic.Kernel.getnodeDiffusedScoreMap
 /**
  *
  * @author SrikanthB
+ * "TieDieUtil.java"  will have all utility functions used by "TieDieLogicThread.java"
  */
 
 // Check that variables are not declared inside loop & check all maps,sets declarations

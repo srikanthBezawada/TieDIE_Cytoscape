@@ -10,10 +10,9 @@ import org.cytoscape.view.model.CyNetworkView;
 
 /**
  * @author SrikanthB
- * 
- * 
- * 
- * 
+  
+   TieDieLogicThread.java  keeps the ball rolling according to our execution flow and 
+  this will be called from start button of GUI. 
  */
 
 
