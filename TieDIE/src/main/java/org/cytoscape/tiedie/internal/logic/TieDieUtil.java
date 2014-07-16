@@ -3,6 +3,7 @@ package org.cytoscape.tiedie.internal.logic;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -42,11 +43,12 @@ public class TieDieUtil {
           double linker_cutoff=0;
           double targetSize;
           double EPSILON = 0.0001;
-          Map nodeDiffusedScoreMapSorted;
+          LinkedHashMap nodeDiffusedScoreMapSorted;
           Set<CyNode> diffusedSet;
       
           targetSize = (sizeFactor)*(upstreamnodeSet.size());
-          nodeDiffusedScoreMapSorted = MapUtil.sortByValue(upnodeScoreMapDiffused);
+          // nodeDiffusedScoreMapSorted = MapUtil.sortByValue(upnodeScoreMapDiffused);
+          nodeDiffusedScoreMapSorted = new LinkedHashMap(MapUtil.sortByValue(upnodeScoreMapDiffused));
           diffusedSet = new HashSet<CyNode>();
           
           Iterator<Map.Entry<CyNode, Double>> iterator = nodeDiffusedScoreMapSorted.entrySet().iterator() ;
