@@ -91,19 +91,58 @@ public class TieDieUtil {
        
        
        public static double scoreLinkers(Map upScoreMapDiffused,Map upScoreMapDiffusedSorted,Map downScoreMapDiffused,Map downScoreMapDiffusedSorted,Set<CyNode >upstreamnodeSet,Set<CyNode> downstreamnodeSet,double linker_cutoff, double  sizeFactor){
-          
+           Set<CyNode> f1 = null, f2 = null, union = null, intersection = null, connecting = null, initialUnion = null;
+           double size_frac;
            
+           for(CyNode root: upstreamnodeSet){
+               initialUnion.add(root);
+           }
+           for(CyNode root: downstreamnodeSet){
+               initialUnion.add(root);
+           }
            
+           Iterator<Map.Entry<CyNode, Double>> iterator1 = upScoreMapDiffusedSorted.entrySet().iterator() ;
+           while(iterator1.hasNext()){
+               Entry<CyNode, Double> entry = iterator1.next();  
+               if(entry.getValue() < linker_cutoff)
+               break;
+               f1.add(entry.getKey());  
+           }
            
-           return 0;      
+           Iterator<Map.Entry<CyNode, Double>> iterator2 = downScoreMapDiffusedSorted.entrySet().iterator() ;
+           while(iterator2.hasNext()){
+               Entry<CyNode, Double> entry = iterator2.next();  
+               if(entry.getValue() < linker_cutoff)
+               break;
+               f2.add(entry.getKey());  
+           }
+           
+           for(CyNode root: f1){
+               if(f2.contains(root)==true){
+                   intersection.add(root);
+               }
+               union.add(root);
+           }
+           for(CyNode root: f2){
+               union.add(root);
+           }
+           for(CyNode root: intersection){
+               connecting.add(root);
+           }
+           
+           // Connecting nodes are present in intersection and not in f1 and not in f2
+           for(CyNode root: intersection){
+               if(f1.contains(root)||f2.contains(root)){
+                   connecting.remove(root);
+               }
+           }
+           
+           size_frac = (connecting.size())/(float)(initialUnion.size())/(float)linker_cutoff;
+           
+           return size_frac;      
        }
        
-       
-       
-       
-       
-       
-       
+      
        /*
           "Z function" is used to combine score vectors for two input sets according to literature
           "filterLinkers" is the "Z function" of TieDIE python implementation & is done in 2 functions here
