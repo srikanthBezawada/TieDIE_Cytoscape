@@ -88,10 +88,5 @@ public class HeatVector {
 
         return this;
     }
-
-   
-
-    
-     
     
 }

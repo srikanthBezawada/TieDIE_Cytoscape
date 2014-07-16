@@ -170,13 +170,13 @@ public class Kernel {
     
     
     
-    public static HeatVector diffuse(HeatVector inputVector, double[][] diffusionKernel){
+    public static DiffusedHeatVector diffuse(HeatVector inputVector, double[][] diffusionKernel){
         Matrix diffusedVectorMatrix; 
-        HeatVector diffusedOutputRowVector;
+        DiffusedHeatVector diffusedOutputRowVector;
                  
         Matrix dKernelMatrix = new Matrix(diffusionKernel);
         diffusedVectorMatrix = inputVector.heatVectorOfScores.times(dKernelMatrix);
-        diffusedOutputRowVector= new HeatVector(diffusedVectorMatrix);
+        diffusedOutputRowVector= new DiffusedHeatVector(diffusedVectorMatrix);
         return diffusedOutputRowVector;
     }
     

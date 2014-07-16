@@ -65,10 +65,10 @@ public class TieDieLogicThread extends Thread {
         downstreamheatVector = downstreamheatVector.extractHeatVector("downstreamheat",nodeList,nodeTable);
         
         // Get the diffused heat vectors which spread all over the network
-        HeatVector upstreamheatVectorDiffused = new HeatVector(totalnodecount);
-        upstreamheatVectorDiffused =  Kernel.diffuse(upstreamheatVector, diffusionKernel);
-        HeatVector downstreamheatVectorDiffused = new HeatVector(totalnodecount);
-        downstreamheatVectorDiffused = Kernel.diffuse(downstreamheatVector, diffusionKernel); 
+        DiffusedHeatVector upstreamheatVectorDiffused = new DiffusedHeatVector(totalnodecount);
+        upstreamheatVectorDiffused =  upstreamheatVectorDiffused.extractDiffusedHeatVector(upstreamheatVector, diffusionKernel);
+        DiffusedHeatVector downstreamheatVectorDiffused = new DiffusedHeatVector(totalnodecount);
+        downstreamheatVectorDiffused = downstreamheatVectorDiffused.extractDiffusedHeatVector(downstreamheatVector, diffusionKernel);
         
         // Extract the maps with only inital sets and their diffused values
         Map upnodeScoreMapDiffused = getDiffusedMap("upstreamheat",nodeList, nodeTable, upstreamheatVector.nodeHeatSet, upstreamheatVectorDiffused);
@@ -83,7 +83,7 @@ public class TieDieLogicThread extends Thread {
         
     } 
     
-    public Map getDiffusedMap(String columnName, List<CyNode> nodeList, CyTable nodeTable, Set<CyNode> nodeHeatSet , HeatVector diffusedVector ){
+    public Map getDiffusedMap(String columnName, List<CyNode> nodeList, CyTable nodeTable, Set<CyNode> nodeHeatSet , DiffusedHeatVector diffusedVector ){
         Map sameSetScoreDiffused = new HashMap<CyNode, Double>();
         int count = 0;
         double diffusedScore;
