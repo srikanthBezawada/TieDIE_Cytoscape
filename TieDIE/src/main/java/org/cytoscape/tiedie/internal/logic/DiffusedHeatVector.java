@@ -7,8 +7,8 @@ import Jama.Matrix;
  * @author SrikanthB
  */
 public class DiffusedHeatVector {
-    Matrix heatVectorOfScores;
-    int numOfColumns;
+    private Matrix heatVectorOfScores;
+    private int numOfColumns;
     
     public DiffusedHeatVector(int numOfColumns) {
         this.numOfColumns = numOfColumns;
@@ -20,14 +20,12 @@ public class DiffusedHeatVector {
         this.numOfColumns = rowVector.getColumnDimension();
     }
     
-    public DiffusedHeatVector extractDiffusedHeatVector(HeatVector inputVector, Kernel heatDiffusionKernel){
-        return heatDiffusionKernel.diffuse(inputVector);
+    public Matrix getVectorOfScores(){
+        return heatVectorOfScores;
     }
     
-    
-    
-    
-    
-    
+    public DiffusedHeatVector extractDiffusedHeatVector(HeatVector inputVector, Kernel heatDiffusionKernel){
+        return heatDiffusionKernel.diffuse(inputVector);
+    }    
     
 }

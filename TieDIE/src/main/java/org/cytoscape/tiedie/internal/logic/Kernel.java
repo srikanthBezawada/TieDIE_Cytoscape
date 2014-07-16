@@ -199,7 +199,7 @@ public class Kernel {
         DiffusedHeatVector diffusedOutputRowVector;
                  
         Matrix dKernelMatrix = new Matrix(diffusionKernelOfNetwork);
-        diffusedVectorMatrix = inputVector.heatVectorOfScores.times(dKernelMatrix);
+        diffusedVectorMatrix = inputVector.getheatVectorOfScores().times(dKernelMatrix);
         diffusedOutputRowVector= new DiffusedHeatVector(diffusedVectorMatrix);
         return diffusedOutputRowVector;
     }
