@@ -204,6 +204,7 @@ public class Kernel {
         return diffusedOutputRowVector;
     }
     
+    /* Check abbout this method
     public static Map getnodeDiffusedScoreMap(HeatVector diffusedOutputRowVector, List<CyNode> nodeList){
         
         Map nodeDiffusedScoreMap; 
@@ -217,7 +218,7 @@ public class Kernel {
         return nodeDiffusedScoreMap;
     }
     
-   
+   */
 }
 
     
