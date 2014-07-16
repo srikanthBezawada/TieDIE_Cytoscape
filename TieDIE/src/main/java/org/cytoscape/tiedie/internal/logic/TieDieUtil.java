@@ -19,7 +19,6 @@ import org.cytoscape.model.CyNode;
  */
 
 // Check that variables are not declared inside loop & check all maps,sets declarations
-// Check that reverse sorted
 // Check whenever map is returned
 public class TieDieUtil {
     
@@ -43,12 +42,11 @@ public class TieDieUtil {
           double linker_cutoff=0;
           double targetSize;
           double EPSILON = 0.0001;
-          LinkedHashMap nodeDiffusedScoreMapSorted;
+          Map nodeDiffusedScoreMapSorted;
           Set<CyNode> diffusedSet;
       
           targetSize = (sizeFactor)*(upstreamnodeSet.size());
-          // nodeDiffusedScoreMapSorted = MapUtil.sortByValue(upnodeScoreMapDiffused);
-          nodeDiffusedScoreMapSorted = new LinkedHashMap(MapUtil.sortByValue(upnodeScoreMapDiffused));
+          nodeDiffusedScoreMapSorted = MapUtil.sortByValue(upnodeScoreMapDiffused);
           diffusedSet = new HashSet<CyNode>();
           
           Iterator<Map.Entry<CyNode, Double>> iterator = nodeDiffusedScoreMapSorted.entrySet().iterator() ;
@@ -86,9 +84,12 @@ public class TieDieUtil {
                h = entry.getValue();
                linker_cutoff = h-EPSILON;
                size_frac = scoreLinkers(upScoreMapDiffused,upScoreMapDiffusedSorted,downScoreMapDiffused,downScoreMapDiffusedSorted,upstreamnodeSet,downstreamnodeSet, linker_cutoff , sizeFactor);
+               if(size_frac > 1){
+                   return linker_cutoff;
+               }
            }
-           
            return linker_cutoff;
+           
        }
        
        
