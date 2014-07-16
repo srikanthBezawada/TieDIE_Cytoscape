@@ -20,8 +20,8 @@ public class DiffusedHeatVector {
         this.numOfColumns = rowVector.getColumnDimension();
     }
     
-    public DiffusedHeatVector extractDiffusedHeatVector(HeatVector inputVector, double[][] diffusionKernel){
-        return Kernel.diffuse(inputVector, diffusionKernel);
+    public DiffusedHeatVector extractDiffusedHeatVector(HeatVector inputVector, Kernel heatDiffusionKernel){
+        return heatDiffusionKernel.diffuse(inputVector);
     }
     
     

@@ -50,10 +50,8 @@ public class TieDieLogicThread extends Thread {
         Laplacian matrix L = D-A
         Required exponentiation  e^(-t*L)   where t is time of diffusion
         */
-        double[][] adjacencyMatrixOfNetwork = Kernel.createAdjMatrix(currentnetwork, nodeList, edgeTable, totalnodecount);
-        double[][] degreeMatrixOfNetwork = Kernel.createDegMatrix(currentnetwork, nodeList, totalnodecount);
-        double[][] laplacianMatrixOfNetwork = Kernel.createLapMatrix(adjacencyMatrixOfNetwork, degreeMatrixOfNetwork, totalnodecount);
-        double[][] diffusionKernel = Kernel.createRequiredExponential(laplacianMatrixOfNetwork);
+        Kernel heatDiffusionKernel = new Kernel(currentnetwork);
+        double[][] diffusionKernel = heatDiffusionKernel.createRequiredExponential();
         
         /*
         Create upstreamheatVector, downstreamheatVector for 2-way diffusion
@@ -66,9 +64,9 @@ public class TieDieLogicThread extends Thread {
         
         // Get the diffused heat vectors which spread all over the network
         DiffusedHeatVector upstreamheatVectorDiffused = new DiffusedHeatVector(totalnodecount);
-        upstreamheatVectorDiffused =  upstreamheatVectorDiffused.extractDiffusedHeatVector(upstreamheatVector, diffusionKernel);
+        upstreamheatVectorDiffused =  upstreamheatVectorDiffused.extractDiffusedHeatVector(upstreamheatVector, heatDiffusionKernel);
         DiffusedHeatVector downstreamheatVectorDiffused = new DiffusedHeatVector(totalnodecount);
-        downstreamheatVectorDiffused = downstreamheatVectorDiffused.extractDiffusedHeatVector(downstreamheatVector, diffusionKernel);
+        downstreamheatVectorDiffused = downstreamheatVectorDiffused.extractDiffusedHeatVector(downstreamheatVector, heatDiffusionKernel);
         
         // Extract the maps with only inital sets and their diffused values
         Map upnodeScoreMapDiffused = getDiffusedMap("upstreamheat",nodeList, nodeTable, upstreamheatVector.nodeHeatSet, upstreamheatVectorDiffused);
