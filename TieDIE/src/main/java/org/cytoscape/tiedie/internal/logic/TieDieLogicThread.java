@@ -25,31 +25,27 @@ public class TieDieLogicThread extends Thread {
     /*
         About instance variables :
     
-        current network is current selected network by user.
-        currentnetworkview is current network view of corresponding network
     */
+    double sizeFactor, linker_cutoff;
+    
     public CyNetwork currentnetwork;
     public CyNetworkView currentnetworkview;
+    public int totalnodecount;
+    List<CyNode> nodeList;
+    CyTable nodeTable, edgeTable;
      
     public TieDieLogicThread(CyNetwork currentnetwork, CyNetworkView currentnetworkview) {
         this.currentnetwork = currentnetwork;
         this.currentnetworkview = currentnetworkview;
+        this.nodeList = currentnetwork.getNodeList(); 
+        this.totalnodecount = nodeList.size();
+        this.edgeTable = currentnetwork.getDefaultEdgeTable();
+        this.nodeTable = currentnetwork.getDefaultNodeTable();
     }
 
     @Override
     public void run(){
-        
-        double sizeFactor, linker_cutoff;
-        List<CyNode> nodeList = currentnetwork.getNodeList(); // get list of all nodes using currentnetwork
-        int totalnodecount = nodeList.size();
-        CyTable edgeTable = currentnetwork.getDefaultEdgeTable(); // get corresponding nodetable
-        CyTable nodeTable = currentnetwork.getDefaultNodeTable(); // get corresponding edgetable
-        
-        /*
-        Get adjacency matrix A , Degree matrix D
-        Laplacian matrix L = D-A
-        Required exponentiation  e^(-t*L)   where t is time of diffusion
-        */
+      
         Kernel heatDiffusionKernel = new Kernel(currentnetwork);
         double[][] diffusionKernel = heatDiffusionKernel.createRequiredExponential();
         
@@ -57,6 +53,7 @@ public class TieDieLogicThread extends Thread {
         Create upstreamheatVector, downstreamheatVector for 2-way diffusion
         "Extract them using extractHeatVector"
         */
+        
         HeatVector upstreamheatVector = new HeatVector(totalnodecount);
         upstreamheatVector = upstreamheatVector.extractHeatVector("upstreamheat",nodeList,nodeTable);
         HeatVector downstreamheatVector = new HeatVector(totalnodecount);
@@ -69,8 +66,8 @@ public class TieDieLogicThread extends Thread {
         downstreamheatVectorDiffused = downstreamheatVectorDiffused.extractDiffusedHeatVector(downstreamheatVector, heatDiffusionKernel);
         
         // Extract the maps with only inital sets and their diffused values
-        Map upnodeScoreMapDiffused = getDiffusedMap("upstreamheat",nodeList, nodeTable, upstreamheatVector.nodeHeatSet, upstreamheatVectorDiffused);
-        Map downnodeScoreMapDiffused = getDiffusedMap("downstreamheat",nodeList, nodeTable, downstreamheatVector.nodeHeatSet, downstreamheatVectorDiffused);
+        Map upnodeScoreMapDiffused = getDiffusedMap("upstreamheat", upstreamheatVector.nodeHeatSet, upstreamheatVectorDiffused);
+        Map downnodeScoreMapDiffused = getDiffusedMap("downstreamheat", downstreamheatVector.nodeHeatSet, downstreamheatVectorDiffused);
         
         sizeFactor = 1;
         linker_cutoff = TieDieUtil.findLinkerCutoff(nodeList,upstreamheatVector.getnodeHeatSet(), downstreamheatVector.getnodeHeatSet(), upnodeScoreMapDiffused, downnodeScoreMapDiffused, sizeFactor);
@@ -81,7 +78,7 @@ public class TieDieLogicThread extends Thread {
         
     } 
     
-    public Map getDiffusedMap(String columnName, List<CyNode> nodeList, CyTable nodeTable, Set<CyNode> nodeHeatSet , DiffusedHeatVector diffusedVector ){
+    public Map getDiffusedMap(String columnName, Set<CyNode> nodeHeatSet ,DiffusedHeatVector diffusedVector ){
         Map sameSetScoreDiffused = new HashMap<CyNode, Double>();
         int count = 0;
         double diffusedScore;

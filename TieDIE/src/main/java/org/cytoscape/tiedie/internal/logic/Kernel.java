@@ -6,10 +6,7 @@ import Jama.Matrix;
 import org.jblas.DoubleMatrix;
 import org.jblas.MatrixFunctions;
 
-import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.cytoscape.model.CyEdge;
 import org.cytoscape.model.CyNetwork;
@@ -173,13 +170,18 @@ public class Kernel {
 
     
     public double[][] createRequiredExponential(){
+        
         double[][] minusOftL;
         DoubleMatrix diffusionKernelMatrix;
         
         adjacencyMatrixOfNetwork = createAdjMatrix();
         degreeMatrixOfNetwork = createDegMatrix();
         laplacianMatrixOfNetwork = createLapMatrix();
-        
+        /*
+          Get adjacency matrix A , Degree matrix D
+          Laplacian matrix L = D-A
+          Required exponentiation  e^(-t*L)   where t is time of diffusion
+        */
         Matrix C = new Matrix(laplacianMatrixOfNetwork);
         C = C.timesEquals(-t);  //  (-t)*L
         minusOftL = C.getArrayCopy();
@@ -192,8 +194,6 @@ public class Kernel {
     
     }
     
-    
-    
     public DiffusedHeatVector diffuse(HeatVector inputVector){
         Matrix diffusedVectorMatrix; 
         DiffusedHeatVector diffusedOutputRowVector;
@@ -203,22 +203,7 @@ public class Kernel {
         diffusedOutputRowVector= new DiffusedHeatVector(diffusedVectorMatrix);
         return diffusedOutputRowVector;
     }
-    
-    /* Check abbout this method
-    public static Map getnodeDiffusedScoreMap(HeatVector diffusedOutputRowVector, List<CyNode> nodeList){
-        
-        Map nodeDiffusedScoreMap; 
-        nodeDiffusedScoreMap = new LinkedHashMap<CyNode,Double>();
-        int count=0;
-        for(CyNode root : nodeList){
-            nodeDiffusedScoreMap.put(root, diffusedOutputRowVector.heatVectorOfScores.get(0,count));
-            count++;
-        }
-   
-        return nodeDiffusedScoreMap;
-    }
-    
-   */
+       
 }
 
     
