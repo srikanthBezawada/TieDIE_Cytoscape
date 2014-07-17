@@ -9,7 +9,7 @@ TieDIE_Cytoscape
 
 
 ## For developers interested in TieDIE app. for Cytoscape (How to set up Netbeans IDE)
-1. Install Netbeans from here [1] Java SE 90 MB one should do.
+1. Install Netbeans [from here] (https://netbeans.org/downloads/)
 2. Once installed ,Go to  File-> Open Project and this dialog appears like here [2]. 
 3. You just have to select our TieDIE maven project which should be already downloaded on your computer in advance from here [3].
 4. Cytoscape javadocs are available here [4].
