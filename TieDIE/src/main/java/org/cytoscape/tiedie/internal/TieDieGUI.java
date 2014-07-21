@@ -28,7 +28,7 @@ import org.cytoscape.view.model.CyNetworkView;
  * Start button activates TieDieLogicThread.java which keeps the ball rolling
  */
 
-public class TieDieStartMenu extends javax.swing.JPanel implements CytoPanelComponent {
+public class TieDieGUI extends javax.swing.JPanel implements CytoPanelComponent {
     
     private TieDieCore tiediecore;
     public TieDieLogicThread logicThread;
@@ -40,7 +40,7 @@ public class TieDieStartMenu extends javax.swing.JPanel implements CytoPanelComp
     
     
    
-    public TieDieStartMenu(CyActivator cyactivator,TieDieCore tiediecore) {
+    public TieDieGUI(CyActivator cyactivator,TieDieCore tiediecore) {
         this.cyactivator = cyactivator;
         this.tiediecore = tiediecore;
         cyApplicationManager = tiediecore.getCyApplicationManager();
