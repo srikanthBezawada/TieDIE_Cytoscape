@@ -198,7 +198,7 @@ public class Kernel {
         Matrix diffusedVectorMatrix; 
         DiffusedHeatVector diffusedOutputRowVector;
         
-        diffusionKernelOfNetwork = this.createRequiredExponential();
+        diffusionKernelOfNetwork = createRequiredExponential();
         Matrix dKernelMatrix = new Matrix(diffusionKernelOfNetwork);
         diffusedVectorMatrix = inputVector.getheatVectorOfScores().times(dKernelMatrix);
         diffusedOutputRowVector= new DiffusedHeatVector(diffusedVectorMatrix);
