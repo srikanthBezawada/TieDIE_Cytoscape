@@ -8,6 +8,7 @@ import javax.swing.Icon;
 import javax.swing.BorderFactory;
 import javax.swing.border.Border;
 import javax.swing.JCheckBox;
+import javax.swing.JRadioButton;
 
 import org.cytoscape.application.CyApplicationManager;
 import org.cytoscape.application.swing.CySwingApplication;
@@ -81,9 +82,10 @@ public class TieDieGUI extends javax.swing.JPanel implements CytoPanelComponent 
         startButton = new javax.swing.JButton();
         helpButton = new javax.swing.JButton();
         exitButton = new javax.swing.JButton();
-        otherPanel = new javax.swing.JPanel();
+        otherPanel1 = new javax.swing.JPanel();
         headingLabel = new javax.swing.JLabel();
         statusLabel = new javax.swing.JLabel();
+        otherPanel2 = new javax.swing.JPanel();
 
         startButton.setText("START executing TieDIE algorithm");
         startButton.addActionListener(new java.awt.event.ActionListener() {
@@ -106,15 +108,15 @@ public class TieDieGUI extends javax.swing.JPanel implements CytoPanelComponent 
             }
         });
 
-        javax.swing.GroupLayout otherPanelLayout = new javax.swing.GroupLayout(otherPanel);
-        otherPanel.setLayout(otherPanelLayout);
-        otherPanelLayout.setHorizontalGroup(
-            otherPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout otherPanel1Layout = new javax.swing.GroupLayout(otherPanel1);
+        otherPanel1.setLayout(otherPanel1Layout);
+        otherPanel1Layout.setHorizontalGroup(
+            otherPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 0, Short.MAX_VALUE)
         );
-        otherPanelLayout.setVerticalGroup(
-            otherPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 182, Short.MAX_VALUE)
+        otherPanel1Layout.setVerticalGroup(
+            otherPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 147, Short.MAX_VALUE)
         );
 
         headingLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -124,10 +126,25 @@ public class TieDieGUI extends javax.swing.JPanel implements CytoPanelComponent 
         statusLabel.setFont(new java.awt.Font("Tahoma", 2, 10)); // NOI18N
         statusLabel.setText("TieDIE status");
 
+        javax.swing.GroupLayout otherPanel2Layout = new javax.swing.GroupLayout(otherPanel2);
+        otherPanel2.setLayout(otherPanel2Layout);
+        otherPanel2Layout.setHorizontalGroup(
+            otherPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 207, Short.MAX_VALUE)
+        );
+        otherPanel2Layout.setVerticalGroup(
+            otherPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 67, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
         mainPanel.setLayout(mainPanelLayout);
         mainPanelLayout.setHorizontalGroup(
             mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(mainPanelLayout.createSequentialGroup()
+                .addGap(86, 86, 86)
+                .addComponent(headingLabel)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(mainPanelLayout.createSequentialGroup()
                 .addGap(35, 35, 35)
                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -137,35 +154,36 @@ public class TieDieGUI extends javax.swing.JPanel implements CytoPanelComponent 
                             .addGroup(mainPanelLayout.createSequentialGroup()
                                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addComponent(startButton, javax.swing.GroupLayout.DEFAULT_SIZE, 207, Short.MAX_VALUE)
-                                    .addComponent(otherPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(otherPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)))
                         .addContainerGap())
                     .addGroup(mainPanelLayout.createSequentialGroup()
                         .addComponent(helpButton, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(exitButton)
-                        .addGap(44, 44, 44))))
-            .addGroup(mainPanelLayout.createSequentialGroup()
-                .addGap(86, 86, 86)
-                .addComponent(headingLabel)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(44, 44, 44))
+                    .addGroup(mainPanelLayout.createSequentialGroup()
+                        .addComponent(otherPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         mainPanelLayout.setVerticalGroup(
             mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(headingLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(otherPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(headingLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(otherPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(startButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31)
-                .addComponent(statusLabel)
+                .addComponent(otherPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(startButton, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(statusLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(helpButton)
-                    .addComponent(exitButton))
-                .addGap(59, 59, 59))
+                    .addComponent(exitButton)
+                    .addComponent(helpButton))
+                .addGap(43, 43, 43))
         );
 
         // Customized code from here
@@ -175,27 +193,34 @@ public class TieDieGUI extends javax.swing.JPanel implements CytoPanelComponent 
 
         String presentColumnName;
         Border border = BorderFactory.createTitledBorder("Select columns for diffusion");
-        otherPanel.setBorder(border);
+        otherPanel1.setBorder(border);
 
         List<JCheckBox> checkboxes = new ArrayList<JCheckBox>();
         for(CyColumn presentColumn : columnCollection){
             presentColumnName = presentColumn.getName();
             JCheckBox check = new JCheckBox(presentColumnName);
             checkboxes.add(check);
-            otherPanel.add(check);
+            otherPanel1.add(check);
         }
         */
 
-        Border border = BorderFactory.createTitledBorder("Select columns for diffusion");
-        otherPanel.setBorder(border);
+        Border border1 = BorderFactory.createTitledBorder("Select columns for diffusion");
+        otherPanel1.setBorder(border1);
         JCheckBox upstreamBox = new JCheckBox("upstreamheat");
         JCheckBox downstreamBox = new JCheckBox("downstreamheat");
 
         upstreamBox.setSelected(true);
         downstreamBox.setSelected(true);
-        otherPanel.add(upstreamBox);
-        otherPanel.add(downstreamBox);
+        otherPanel1.add(upstreamBox);
+        otherPanel1.add(downstreamBox);
         // Customized code ends here
+        Border border2 = BorderFactory.createTitledBorder("Select way of diffusion");
+        otherPanel2.setBorder(border2);
+        JRadioButton kernelButton = new JRadioButton("HeatKernel",true);
+        JRadioButton pagerankButton = new JRadioButton("PageRank", false);
+
+        otherPanel2.add(kernelButton);
+        otherPanel2.add(pagerankButton);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -253,7 +278,8 @@ public class TieDieGUI extends javax.swing.JPanel implements CytoPanelComponent 
     private javax.swing.JLabel headingLabel;
     private javax.swing.JButton helpButton;
     private javax.swing.JPanel mainPanel;
-    private javax.swing.JPanel otherPanel;
+    private javax.swing.JPanel otherPanel1;
+    private javax.swing.JPanel otherPanel2;
     private javax.swing.JButton startButton;
     private javax.swing.JLabel statusLabel;
     // End of variables declaration//GEN-END:variables
