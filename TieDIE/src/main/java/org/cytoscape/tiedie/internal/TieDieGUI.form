@@ -86,10 +86,10 @@
                   <Component id="startButton" min="-2" pref="46" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="statusLabel" min="-2" pref="16" max="-2" attributes="0"/>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="exitButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="helpButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="helpButton" min="-2" pref="30" max="-2" attributes="0"/>
+                      <Component id="exitButton" alignment="0" min="-2" pref="28" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
               </Group>
@@ -123,7 +123,7 @@
         </Component>
         <Container class="javax.swing.JPanel" name="otherPanel1">
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_allCodePost" type="java.lang.String" value="// Customized code from here&#xa;/*&#xa;CyTable nodeTable = currentnetwork.getDefaultNodeTable();&#xa;Collection&lt;CyColumn&gt; columnCollection = nodeTable.getColumns();&#xa;&#xa;String presentColumnName;&#xa;Border border = BorderFactory.createTitledBorder(&quot;Select columns for diffusion&quot;);&#xa;otherPanel1.setBorder(border);&#xa;&#xa;List&lt;JCheckBox&gt; checkboxes = new ArrayList&lt;JCheckBox&gt;();&#xa;for(CyColumn presentColumn : columnCollection){&#xa;    presentColumnName = presentColumn.getName();&#xa;    JCheckBox check = new JCheckBox(presentColumnName);&#xa;    checkboxes.add(check);&#xa;    otherPanel1.add(check);&#xa;}&#xa;*/&#xa;&#xa;Border border1 = BorderFactory.createTitledBorder(&quot;Select columns for diffusion&quot;);&#xa;otherPanel1.setBorder(border1);&#xa;JCheckBox upstreamBox = new JCheckBox(&quot;upstreamheat&quot;);&#xa;JCheckBox downstreamBox = new JCheckBox(&quot;downstreamheat&quot;);&#xa;&#xa;upstreamBox.setSelected(true);&#xa;downstreamBox.setSelected(true);&#xa;otherPanel1.add(upstreamBox);&#xa;otherPanel1.add(downstreamBox);&#xa;// Customized code ends here"/>
+            <AuxValue name="JavaCodeGenerator_allCodePost" type="java.lang.String" value="// Customized code from here&#xa;/*&#xa;CyTable nodeTable = currentnetwork.getDefaultNodeTable();&#xa;Collection&lt;CyColumn&gt; columnCollection = nodeTable.getColumns();&#xa;&#xa;String presentColumnName;&#xa;Border border = BorderFactory.createTitledBorder(&quot;Select columns for diffusion&quot;);&#xa;otherPanel1.setBorder(border);&#xa;&#xa;List&lt;JCheckBox&gt; checkboxes = new ArrayList&lt;JCheckBox&gt;();&#xa;for(CyColumn presentColumn : columnCollection){&#xa;    presentColumnName = presentColumn.getName();&#xa;    JCheckBox check = new JCheckBox(presentColumnName);&#xa;    checkboxes.add(check);&#xa;    otherPanel1.add(check);&#xa;}&#xa;*/&#xa;&#xa;Border border1 = BorderFactory.createTitledBorder(&quot;Select columns for diffusion&quot;);&#xa;otherPanel1.setBorder(border1);&#xa;JCheckBox upstreamBox = new JCheckBox(&quot;upstreamheat&quot;,true);&#xa;JCheckBox downstreamBox = new JCheckBox(&quot;downstreamheat&quot;,true);&#xa;&#xa;otherPanel1.add(upstreamBox);&#xa;otherPanel1.add(downstreamBox);&#xa;// Customized code ends here"/>
           </AuxValues>
 
           <Layout>

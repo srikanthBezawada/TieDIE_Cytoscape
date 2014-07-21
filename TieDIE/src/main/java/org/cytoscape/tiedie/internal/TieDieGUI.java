@@ -179,10 +179,10 @@ public class TieDieGUI extends javax.swing.JPanel implements CytoPanelComponent 
                 .addComponent(startButton, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(statusLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(exitButton)
-                    .addComponent(helpButton))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(helpButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(exitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(43, 43, 43))
         );
 
@@ -206,11 +206,9 @@ public class TieDieGUI extends javax.swing.JPanel implements CytoPanelComponent 
 
         Border border1 = BorderFactory.createTitledBorder("Select columns for diffusion");
         otherPanel1.setBorder(border1);
-        JCheckBox upstreamBox = new JCheckBox("upstreamheat");
-        JCheckBox downstreamBox = new JCheckBox("downstreamheat");
+        JCheckBox upstreamBox = new JCheckBox("upstreamheat",true);
+        JCheckBox downstreamBox = new JCheckBox("downstreamheat",true);
 
-        upstreamBox.setSelected(true);
-        downstreamBox.setSelected(true);
         otherPanel1.add(upstreamBox);
         otherPanel1.add(downstreamBox);
         // Customized code ends here
