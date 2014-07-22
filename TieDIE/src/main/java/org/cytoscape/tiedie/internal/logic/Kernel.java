@@ -162,7 +162,7 @@ public class Kernel {
 
         Matrix D = new Matrix(degreeMatrixOfNetwork);
         Matrix A = new Matrix(adjacencyMatrixOfNetwork);
-        Matrix L = D.minus(A);
+        L = D.minus(A);
         
         return L;
     }

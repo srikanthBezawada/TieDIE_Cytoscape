@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="org.cytoscape.tiedie.internal.logic.KernelTest" time="2.939" tests="8" errors="3" skipped="0" failures="3">
+<testsuite name="org.cytoscape.tiedie.internal.logic.KernelTest" time="1.119" tests="8" errors="3" skipped="0" failures="3">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="C:\Program Files (x86)\Java\jdk1.7.0_45\jre\bin"/>
@@ -60,7 +60,7 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="pentium_pro+mmx pentium_pro pentium+mmx pentium i486 i386 i86"/>
   </properties>
-  <testcase name="testGetadjacencyMatrixOfNetwork" classname="org.cytoscape.tiedie.internal.logic.KernelTest" time="0.202">
+  <testcase name="testGetadjacencyMatrixOfNetwork" classname="org.cytoscape.tiedie.internal.logic.KernelTest" time="0.2">
     <failure message="arrays first differed at element [0][1]; expected:&lt;1.0&gt; but was:&lt;0.0&gt;" type="org.junit.internal.ArrayComparisonFailure"><![CDATA[org.junit.internal.ArrayComparisonFailure: arrays first differed at element [0][1]; expected:<1.0> but was:<0.0>
 	at org.junit.internal.ComparisonCriteria.arrayEquals(ComparisonCriteria.java:50)
 	at org.junit.internal.ComparisonCriteria.arrayEquals(ComparisonCriteria.java:41)
@@ -113,7 +113,7 @@ createAdjMatrix
 ]]></system-out>
   </testcase>
   <testcase name="testGetTime" classname="org.cytoscape.tiedie.internal.logic.KernelTest" time="0.005"/>
-  <testcase name="testGetdiffusionKernelOfNetwork" classname="org.cytoscape.tiedie.internal.logic.KernelTest" time="2.226">
+  <testcase name="testGetdiffusionKernelOfNetwork" classname="org.cytoscape.tiedie.internal.logic.KernelTest" time="0.874">
     <failure message="The test case is a prototype." type="java.lang.AssertionError">java.lang.AssertionError: The test case is a prototype.
 	at org.junit.Assert.fail(Assert.java:88)
 	at org.cytoscape.tiedie.internal.logic.KernelTest.testGetdiffusionKernelOfNetwork(KernelTest.java:91)
@@ -135,7 +135,7 @@ createAdjMatrix
 getdiffusionKernelOfNetwork
 ]]></system-out>
   </testcase>
-  <testcase name="testCreateRequiredExponential" classname="org.cytoscape.tiedie.internal.logic.KernelTest" time="0.013">
+  <testcase name="testCreateRequiredExponential" classname="org.cytoscape.tiedie.internal.logic.KernelTest" time="0.02">
     <error type="java.lang.NullPointerException:">java.lang.NullPointerException: null
 	at org.cytoscape.tiedie.internal.logic.KernelTest.testCreateRequiredExponential(KernelTest.java:138)
 </error>
@@ -179,7 +179,7 @@ createRequiredExponential
 createLapMatrix
 ]]></system-out>
   </testcase>
-  <testcase name="testDiffuse" classname="org.cytoscape.tiedie.internal.logic.KernelTest" time="0.005">
+  <testcase name="testDiffuse" classname="org.cytoscape.tiedie.internal.logic.KernelTest" time="0.007">
     <error type="java.lang.NullPointerException:">java.lang.NullPointerException: null
 	at org.cytoscape.tiedie.internal.logic.KernelTest.testDiffuse(KernelTest.java:153)
 </error>
@@ -200,5 +200,5 @@ createLapMatrix
 diffuse
 ]]></system-out>
   </testcase>
-  <testcase name="testCreateDegMatrix" classname="org.cytoscape.tiedie.internal.logic.KernelTest" time="0.479"/>
+  <testcase name="testCreateDegMatrix" classname="org.cytoscape.tiedie.internal.logic.KernelTest" time="0.004"/>
 </testsuite>
