@@ -5,6 +5,7 @@ import org.cytoscape.model.CyEdge;
 
 import org.cytoscape.model.CyNetwork;
 import org.cytoscape.model.CyNode;
+import org.cytoscape.model.NetworkTestSupport;
 
 import org.junit.After;
 import org.junit.AfterClass;
