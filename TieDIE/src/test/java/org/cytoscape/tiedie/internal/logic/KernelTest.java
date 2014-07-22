@@ -151,16 +151,18 @@ public class KernelTest {
     /**
      * Test of diffuse method, of class Kernel.
      */
-    @Ignore
-    public void DISABLED_testDiffuse() {
+    @Test
+    public void testDiffuse() {//33.53776945690825,56.46223054309174
         System.out.println("diffuse");
-        HeatVector inputVector = new HeatVector(2);
+        double [][] vector = {{31,59}};
+        HeatVector inputVector = new HeatVector(new Matrix(vector));
         Kernel instance = new Kernel(testNetwork);
-        DiffusedHeatVector expResult = null;
+        double[][] expResult = {{33.537769,56.462231}};
         DiffusedHeatVector result = instance.diffuse(inputVector);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        double r[][] = result.getVectorOfScores().getArray();
+        double rounded[][] = {{(double) Math.round(r[0][0] * 1000000) / 1000000,(double) Math.round(r[0][1] * 1000000) / 1000000}};
+        
+        assertArrayEquals(expResult, rounded);
     }
     
 }
