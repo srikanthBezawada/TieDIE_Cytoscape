@@ -59,14 +59,13 @@ public class Kernel {
     }
     
     public double[][] getadjacencyMatrixOfNetwork(){
-        createAdjMatrix();
-        return adjacencyMatrixOfNetwork;
+        return createAdjMatrix();
     }
     
     public double[][] getdiffusionKernelOfNetwork(){
-        createRequiredExponential();
-        return diffusionKernelOfNetwork;
+        return createRequiredExponential();
     }
+
     /*
      About methods :
     

@@ -1,8 +1,8 @@
 -------------------------------------------------------------------------------
 Test set: org.cytoscape.tiedie.internal.logic.KernelTest
 -------------------------------------------------------------------------------
-Tests run: 8, Failures: 4, Errors: 2, Skipped: 0, Time elapsed: 0.711 sec <<< FAILURE! - in org.cytoscape.tiedie.internal.logic.KernelTest
-testGetadjacencyMatrixOfNetwork(org.cytoscape.tiedie.internal.logic.KernelTest)  Time elapsed: 0.186 sec  <<< FAILURE!
+Tests run: 8, Failures: 4, Errors: 2, Skipped: 0, Time elapsed: 0.709 sec <<< FAILURE! - in org.cytoscape.tiedie.internal.logic.KernelTest
+testGetadjacencyMatrixOfNetwork(org.cytoscape.tiedie.internal.logic.KernelTest)  Time elapsed: 0.194 sec  <<< FAILURE!
 org.junit.internal.ArrayComparisonFailure: arrays first differed at element [0][1]; expected:<0.0> but was:<1.0>
 	at org.junit.internal.ComparisonCriteria.arrayEquals(ComparisonCriteria.java:50)
 	at org.junit.internal.ComparisonCriteria.arrayEquals(ComparisonCriteria.java:41)
@@ -20,16 +20,21 @@ org.junit.internal.ArrayComparisonFailure: arrays first differed at element [0][
 	at org.junit.Assert.assertArrayEquals(Assert.java:280)
 	at org.cytoscape.tiedie.internal.logic.KernelTest.testCreateAdjMatrix(KernelTest.java:105)
 
-testGetdiffusionKernelOfNetwork(org.cytoscape.tiedie.internal.logic.KernelTest)  Time elapsed: 0.464 sec  <<< FAILURE!
-java.lang.AssertionError: The test case is a prototype.
+testGetdiffusionKernelOfNetwork(org.cytoscape.tiedie.internal.logic.KernelTest)  Time elapsed: 0.46 sec  <<< FAILURE!
+java.lang.AssertionError: expected array was null
 	at org.junit.Assert.fail(Assert.java:88)
-	at org.cytoscape.tiedie.internal.logic.KernelTest.testGetdiffusionKernelOfNetwork(KernelTest.java:93)
+	at org.junit.internal.ComparisonCriteria.assertArraysAreSameLength(ComparisonCriteria.java:63)
+	at org.junit.internal.ComparisonCriteria.arrayEquals(ComparisonCriteria.java:32)
+	at org.junit.Assert.internalArrayEquals(Assert.java:473)
+	at org.junit.Assert.assertArrayEquals(Assert.java:265)
+	at org.junit.Assert.assertArrayEquals(Assert.java:280)
+	at org.cytoscape.tiedie.internal.logic.KernelTest.testGetdiffusionKernelOfNetwork(KernelTest.java:91)
 
-testCreateRequiredExponential(org.cytoscape.tiedie.internal.logic.KernelTest)  Time elapsed: 0.004 sec  <<< ERROR!
+testCreateRequiredExponential(org.cytoscape.tiedie.internal.logic.KernelTest)  Time elapsed: 0.002 sec  <<< ERROR!
 java.lang.NullPointerException: null
 	at org.cytoscape.tiedie.internal.logic.KernelTest.testCreateRequiredExponential(KernelTest.java:143)
 
-testCreateLapMatrix(org.cytoscape.tiedie.internal.logic.KernelTest)  Time elapsed: 0.003 sec  <<< FAILURE!
+testCreateLapMatrix(org.cytoscape.tiedie.internal.logic.KernelTest)  Time elapsed: 0.002 sec  <<< FAILURE!
 org.junit.internal.ArrayComparisonFailure: arrays first differed at element [0][1]; expected:<0.0> but was:<-1.0>
 	at org.junit.internal.ComparisonCriteria.arrayEquals(ComparisonCriteria.java:50)
 	at org.junit.internal.ComparisonCriteria.arrayEquals(ComparisonCriteria.java:41)

@@ -60,7 +60,7 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="pentium_pro+mmx pentium_pro pentium+mmx pentium i486 i386 i86"/>
   </properties>
-  <testcase name="testGetadjacencyMatrixOfNetwork" classname="org.cytoscape.tiedie.internal.logic.KernelTest" time="0.186">
+  <testcase name="testGetadjacencyMatrixOfNetwork" classname="org.cytoscape.tiedie.internal.logic.KernelTest" time="0.194">
     <failure message="arrays first differed at element [0][1]; expected:&lt;0.0&gt; but was:&lt;1.0&gt;" type="org.junit.internal.ArrayComparisonFailure"><![CDATA[org.junit.internal.ArrayComparisonFailure: arrays first differed at element [0][1]; expected:<0.0> but was:<1.0>
 	at org.junit.internal.ComparisonCriteria.arrayEquals(ComparisonCriteria.java:50)
 	at org.junit.internal.ComparisonCriteria.arrayEquals(ComparisonCriteria.java:41)
@@ -113,10 +113,15 @@ createAdjMatrix
 ]]></system-out>
   </testcase>
   <testcase name="testGetTime" classname="org.cytoscape.tiedie.internal.logic.KernelTest" time="0.005"/>
-  <testcase name="testGetdiffusionKernelOfNetwork" classname="org.cytoscape.tiedie.internal.logic.KernelTest" time="0.464">
-    <failure message="The test case is a prototype." type="java.lang.AssertionError">java.lang.AssertionError: The test case is a prototype.
+  <testcase name="testGetdiffusionKernelOfNetwork" classname="org.cytoscape.tiedie.internal.logic.KernelTest" time="0.46">
+    <failure message="expected array was null" type="java.lang.AssertionError">java.lang.AssertionError: expected array was null
 	at org.junit.Assert.fail(Assert.java:88)
-	at org.cytoscape.tiedie.internal.logic.KernelTest.testGetdiffusionKernelOfNetwork(KernelTest.java:93)
+	at org.junit.internal.ComparisonCriteria.assertArraysAreSameLength(ComparisonCriteria.java:63)
+	at org.junit.internal.ComparisonCriteria.arrayEquals(ComparisonCriteria.java:32)
+	at org.junit.Assert.internalArrayEquals(Assert.java:473)
+	at org.junit.Assert.assertArrayEquals(Assert.java:265)
+	at org.junit.Assert.assertArrayEquals(Assert.java:280)
+	at org.cytoscape.tiedie.internal.logic.KernelTest.testGetdiffusionKernelOfNetwork(KernelTest.java:91)
 </failure>
     <system-out><![CDATA[[org.cytoscape.model.internal.SharedTableFacade] :   - looking for local tables: 
 [org.cytoscape.model.internal.SharedTableFacade] : adding real column: 'shared name' to table: 89 shared edge
@@ -135,7 +140,7 @@ createAdjMatrix
 getdiffusionKernelOfNetwork
 ]]></system-out>
   </testcase>
-  <testcase name="testCreateRequiredExponential" classname="org.cytoscape.tiedie.internal.logic.KernelTest" time="0.004">
+  <testcase name="testCreateRequiredExponential" classname="org.cytoscape.tiedie.internal.logic.KernelTest" time="0.002">
     <error type="java.lang.NullPointerException:">java.lang.NullPointerException: null
 	at org.cytoscape.tiedie.internal.logic.KernelTest.testCreateRequiredExponential(KernelTest.java:143)
 </error>
@@ -156,7 +161,7 @@ getdiffusionKernelOfNetwork
 createRequiredExponential
 ]]></system-out>
   </testcase>
-  <testcase name="testCreateLapMatrix" classname="org.cytoscape.tiedie.internal.logic.KernelTest" time="0.003">
+  <testcase name="testCreateLapMatrix" classname="org.cytoscape.tiedie.internal.logic.KernelTest" time="0.002">
     <failure message="arrays first differed at element [0][1]; expected:&lt;0.0&gt; but was:&lt;-1.0&gt;" type="org.junit.internal.ArrayComparisonFailure"><![CDATA[org.junit.internal.ArrayComparisonFailure: arrays first differed at element [0][1]; expected:<0.0> but was:<-1.0>
 	at org.junit.internal.ComparisonCriteria.arrayEquals(ComparisonCriteria.java:50)
 	at org.junit.internal.ComparisonCriteria.arrayEquals(ComparisonCriteria.java:41)
@@ -203,5 +208,5 @@ createLapMatrix
 diffuse
 ]]></system-out>
   </testcase>
-  <testcase name="testCreateDegMatrix" classname="org.cytoscape.tiedie.internal.logic.KernelTest" time="0.003"/>
+  <testcase name="testCreateDegMatrix" classname="org.cytoscape.tiedie.internal.logic.KernelTest" time="0.002"/>
 </testsuite>
