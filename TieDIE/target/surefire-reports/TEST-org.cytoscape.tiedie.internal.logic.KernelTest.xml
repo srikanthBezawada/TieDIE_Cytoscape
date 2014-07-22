@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="org.cytoscape.tiedie.internal.logic.KernelTest" time="1.119" tests="8" errors="3" skipped="0" failures="3">
+<testsuite name="org.cytoscape.tiedie.internal.logic.KernelTest" time="0.684" tests="8" errors="2" skipped="0" failures="4">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="C:\Program Files (x86)\Java\jdk1.7.0_45\jre\bin"/>
@@ -61,13 +61,13 @@
     <property name="sun.cpu.isalist" value="pentium_pro+mmx pentium_pro pentium+mmx pentium i486 i386 i86"/>
   </properties>
   <testcase name="testGetadjacencyMatrixOfNetwork" classname="org.cytoscape.tiedie.internal.logic.KernelTest" time="0.2">
-    <failure message="arrays first differed at element [0][1]; expected:&lt;1.0&gt; but was:&lt;0.0&gt;" type="org.junit.internal.ArrayComparisonFailure"><![CDATA[org.junit.internal.ArrayComparisonFailure: arrays first differed at element [0][1]; expected:<1.0> but was:<0.0>
+    <failure message="arrays first differed at element [1][0]; expected:&lt;1.0&gt; but was:&lt;0.0&gt;" type="org.junit.internal.ArrayComparisonFailure"><![CDATA[org.junit.internal.ArrayComparisonFailure: arrays first differed at element [1][0]; expected:<1.0> but was:<0.0>
 	at org.junit.internal.ComparisonCriteria.arrayEquals(ComparisonCriteria.java:50)
 	at org.junit.internal.ComparisonCriteria.arrayEquals(ComparisonCriteria.java:41)
 	at org.junit.Assert.internalArrayEquals(Assert.java:473)
 	at org.junit.Assert.assertArrayEquals(Assert.java:265)
 	at org.junit.Assert.assertArrayEquals(Assert.java:280)
-	at org.cytoscape.tiedie.internal.logic.KernelTest.testGetadjacencyMatrixOfNetwork(KernelTest.java:77)
+	at org.cytoscape.tiedie.internal.logic.KernelTest.testGetadjacencyMatrixOfNetwork(KernelTest.java:79)
 ]]></failure>
     <system-out><![CDATA[[org.cytoscape.model.internal.SharedTableFacade] :   - looking for local tables: 
 [org.cytoscape.model.internal.SharedTableFacade] : adding real column: 'shared name' to table: 2 shared edge
@@ -86,14 +86,14 @@
 getadjacencyMatrixOfNetwork
 ]]></system-out>
   </testcase>
-  <testcase name="testCreateAdjMatrix" classname="org.cytoscape.tiedie.internal.logic.KernelTest" time="0.003">
-    <failure message="arrays first differed at element [0][1]; expected:&lt;1.0&gt; but was:&lt;0.0&gt;" type="org.junit.internal.ArrayComparisonFailure"><![CDATA[org.junit.internal.ArrayComparisonFailure: arrays first differed at element [0][1]; expected:<1.0> but was:<0.0>
+  <testcase name="testCreateAdjMatrix" classname="org.cytoscape.tiedie.internal.logic.KernelTest" time="0.004">
+    <failure message="arrays first differed at element [1][0]; expected:&lt;1.0&gt; but was:&lt;0.0&gt;" type="org.junit.internal.ArrayComparisonFailure"><![CDATA[org.junit.internal.ArrayComparisonFailure: arrays first differed at element [1][0]; expected:<1.0> but was:<0.0>
 	at org.junit.internal.ComparisonCriteria.arrayEquals(ComparisonCriteria.java:50)
 	at org.junit.internal.ComparisonCriteria.arrayEquals(ComparisonCriteria.java:41)
 	at org.junit.Assert.internalArrayEquals(Assert.java:473)
 	at org.junit.Assert.assertArrayEquals(Assert.java:265)
 	at org.junit.Assert.assertArrayEquals(Assert.java:280)
-	at org.cytoscape.tiedie.internal.logic.KernelTest.testCreateAdjMatrix(KernelTest.java:103)
+	at org.cytoscape.tiedie.internal.logic.KernelTest.testCreateAdjMatrix(KernelTest.java:105)
 ]]></failure>
     <system-out><![CDATA[[org.cytoscape.model.internal.SharedTableFacade] :   - looking for local tables: 
 [org.cytoscape.model.internal.SharedTableFacade] : adding real column: 'shared name' to table: 31 shared edge
@@ -113,10 +113,10 @@ createAdjMatrix
 ]]></system-out>
   </testcase>
   <testcase name="testGetTime" classname="org.cytoscape.tiedie.internal.logic.KernelTest" time="0.005"/>
-  <testcase name="testGetdiffusionKernelOfNetwork" classname="org.cytoscape.tiedie.internal.logic.KernelTest" time="0.874">
+  <testcase name="testGetdiffusionKernelOfNetwork" classname="org.cytoscape.tiedie.internal.logic.KernelTest" time="0.461">
     <failure message="The test case is a prototype." type="java.lang.AssertionError">java.lang.AssertionError: The test case is a prototype.
 	at org.junit.Assert.fail(Assert.java:88)
-	at org.cytoscape.tiedie.internal.logic.KernelTest.testGetdiffusionKernelOfNetwork(KernelTest.java:91)
+	at org.cytoscape.tiedie.internal.logic.KernelTest.testGetdiffusionKernelOfNetwork(KernelTest.java:93)
 </failure>
     <system-out><![CDATA[[org.cytoscape.model.internal.SharedTableFacade] :   - looking for local tables: 
 [org.cytoscape.model.internal.SharedTableFacade] : adding real column: 'shared name' to table: 89 shared edge
@@ -135,9 +135,9 @@ createAdjMatrix
 getdiffusionKernelOfNetwork
 ]]></system-out>
   </testcase>
-  <testcase name="testCreateRequiredExponential" classname="org.cytoscape.tiedie.internal.logic.KernelTest" time="0.02">
+  <testcase name="testCreateRequiredExponential" classname="org.cytoscape.tiedie.internal.logic.KernelTest" time="0.003">
     <error type="java.lang.NullPointerException:">java.lang.NullPointerException: null
-	at org.cytoscape.tiedie.internal.logic.KernelTest.testCreateRequiredExponential(KernelTest.java:138)
+	at org.cytoscape.tiedie.internal.logic.KernelTest.testCreateRequiredExponential(KernelTest.java:143)
 </error>
     <system-out><![CDATA[[org.cytoscape.model.internal.SharedTableFacade] :   - looking for local tables: 
 [org.cytoscape.model.internal.SharedTableFacade] : adding real column: 'shared name' to table: 118 shared edge
@@ -156,12 +156,15 @@ getdiffusionKernelOfNetwork
 createRequiredExponential
 ]]></system-out>
   </testcase>
-  <testcase name="testCreateLapMatrix" classname="org.cytoscape.tiedie.internal.logic.KernelTest" time="0.006">
-    <error type="java.lang.NullPointerException:"><![CDATA[java.lang.NullPointerException: null
-	at Jama.Matrix.<init>(Matrix.java:112)
-	at org.cytoscape.tiedie.internal.logic.Kernel.createLapMatrix(Kernel.java:163)
-	at org.cytoscape.tiedie.internal.logic.KernelTest.testCreateLapMatrix(KernelTest.java:127)
-]]></error>
+  <testcase name="testCreateLapMatrix" classname="org.cytoscape.tiedie.internal.logic.KernelTest" time="0.003">
+    <failure message="arrays first differed at element [1][0]; expected:&lt;-1.0&gt; but was:&lt;0.0&gt;" type="org.junit.internal.ArrayComparisonFailure"><![CDATA[org.junit.internal.ArrayComparisonFailure: arrays first differed at element [1][0]; expected:<-1.0> but was:<0.0>
+	at org.junit.internal.ComparisonCriteria.arrayEquals(ComparisonCriteria.java:50)
+	at org.junit.internal.ComparisonCriteria.arrayEquals(ComparisonCriteria.java:41)
+	at org.junit.Assert.internalArrayEquals(Assert.java:473)
+	at org.junit.Assert.assertArrayEquals(Assert.java:265)
+	at org.junit.Assert.assertArrayEquals(Assert.java:280)
+	at org.cytoscape.tiedie.internal.logic.KernelTest.testCreateLapMatrix(KernelTest.java:132)
+]]></failure>
     <system-out><![CDATA[[org.cytoscape.model.internal.SharedTableFacade] :   - looking for local tables: 
 [org.cytoscape.model.internal.SharedTableFacade] : adding real column: 'shared name' to table: 147 shared edge
 [org.cytoscape.model.internal.SharedTableFacade] :   - looking for local tables: 
@@ -179,9 +182,9 @@ createRequiredExponential
 createLapMatrix
 ]]></system-out>
   </testcase>
-  <testcase name="testDiffuse" classname="org.cytoscape.tiedie.internal.logic.KernelTest" time="0.007">
+  <testcase name="testDiffuse" classname="org.cytoscape.tiedie.internal.logic.KernelTest" time="0.005">
     <error type="java.lang.NullPointerException:">java.lang.NullPointerException: null
-	at org.cytoscape.tiedie.internal.logic.KernelTest.testDiffuse(KernelTest.java:153)
+	at org.cytoscape.tiedie.internal.logic.KernelTest.testDiffuse(KernelTest.java:158)
 </error>
     <system-out><![CDATA[[org.cytoscape.model.internal.SharedTableFacade] :   - looking for local tables: 
 [org.cytoscape.model.internal.SharedTableFacade] : adding real column: 'shared name' to table: 176 shared edge
@@ -200,5 +203,5 @@ createLapMatrix
 diffuse
 ]]></system-out>
   </testcase>
-  <testcase name="testCreateDegMatrix" classname="org.cytoscape.tiedie.internal.logic.KernelTest" time="0.004"/>
+  <testcase name="testCreateDegMatrix" classname="org.cytoscape.tiedie.internal.logic.KernelTest" time="0.003"/>
 </testsuite>

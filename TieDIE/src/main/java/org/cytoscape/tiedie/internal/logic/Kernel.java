@@ -107,7 +107,7 @@ public class Kernel {
         for (CyNode root : nodeList) {
             List<CyNode> neighbors = currentnetwork.getNeighborList(root, CyEdge.Type.OUTGOING);
             for (CyNode neighbor : neighbors) {
-                List<CyEdge> edges = currentnetwork.getConnectingEdgeList(root, neighbor, CyEdge.Type.DIRECTED);
+                List<CyEdge> edges = currentnetwork.getConnectingEdgeList(root, neighbor, CyEdge.Type.UNDIRECTED);
                 if (edges.size() > 0) {
                     row = edgeTable.getRow(edges.get(0).getSUID());
                     try {

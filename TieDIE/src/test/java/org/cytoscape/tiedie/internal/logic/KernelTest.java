@@ -1,6 +1,7 @@
 package org.cytoscape.tiedie.internal.logic;
 
 import Jama.Matrix;
+import org.cytoscape.model.CyEdge;
 
 import org.cytoscape.model.CyNetwork;
 import org.cytoscape.model.CyNode;
@@ -46,7 +47,8 @@ public class KernelTest {
         testNetwork.getRow(node1).set(CyNetwork.NAME, "Node1");
         testNetwork.getRow(node1).set(CyNetwork.NAME, "Node2");
         // Add an edge
-        testNetwork.addEdge(node1, node2, true);
+        CyEdge e = testNetwork.addEdge(node1, node2, true);
+        testNetwork.getDefaultEdgeTable().getRow(e.getSUID()).set(CyEdge.INTERACTION, "-a>");;
     }
     
     @After
@@ -72,7 +74,7 @@ public class KernelTest {
     public void testGetadjacencyMatrixOfNetwork() {
         System.out.println("getadjacencyMatrixOfNetwork");
         Kernel instance = new Kernel(testNetwork);
-        double[][] expResult = {{0,1},{1,0}};
+        double[][] expResult = {{0,0},{1,0}};
         double[][] result = instance.getadjacencyMatrixOfNetwork();
         assertArrayEquals(expResult, result);
     }
@@ -98,7 +100,7 @@ public class KernelTest {
     public void testCreateAdjMatrix() {
         System.out.println("createAdjMatrix");
         Kernel instance = new Kernel(testNetwork);
-        double[][] expResult = {{0,1},{1,0}};
+        double[][] expResult = {{0,0},{1,0}};
         double[][] result = instance.createAdjMatrix();
         assertArrayEquals(expResult, result);
     }
@@ -122,9 +124,12 @@ public class KernelTest {
     public void testCreateLapMatrix() {
         System.out.println("createLapMatrix");
         Kernel instance = new Kernel(testNetwork);
-        double[][] resMatrix = {{1,-1},{-1,1}};
+        instance.createAdjMatrix();
+        instance.createDegMatrix();
+        double[][] resMatrix = {{1,0},{-1,1}};
         Matrix expResult = new Matrix(resMatrix);
         Matrix result = instance.createLapMatrix();
+        assertArrayEquals(resMatrix, result.getArray());
     }
 
     /**
