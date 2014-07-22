@@ -1,9 +1,9 @@
 -------------------------------------------------------------------------------
 Test set: org.cytoscape.tiedie.internal.logic.KernelTest
 -------------------------------------------------------------------------------
-Tests run: 8, Failures: 4, Errors: 2, Skipped: 0, Time elapsed: 0.718 sec <<< FAILURE! - in org.cytoscape.tiedie.internal.logic.KernelTest
-testGetadjacencyMatrixOfNetwork(org.cytoscape.tiedie.internal.logic.KernelTest)  Time elapsed: 0.2 sec  <<< FAILURE!
-org.junit.internal.ArrayComparisonFailure: arrays first differed at element [1][0]; expected:<1.0> but was:<0.0>
+Tests run: 8, Failures: 4, Errors: 2, Skipped: 0, Time elapsed: 0.711 sec <<< FAILURE! - in org.cytoscape.tiedie.internal.logic.KernelTest
+testGetadjacencyMatrixOfNetwork(org.cytoscape.tiedie.internal.logic.KernelTest)  Time elapsed: 0.186 sec  <<< FAILURE!
+org.junit.internal.ArrayComparisonFailure: arrays first differed at element [0][1]; expected:<0.0> but was:<1.0>
 	at org.junit.internal.ComparisonCriteria.arrayEquals(ComparisonCriteria.java:50)
 	at org.junit.internal.ComparisonCriteria.arrayEquals(ComparisonCriteria.java:41)
 	at org.junit.Assert.internalArrayEquals(Assert.java:473)
@@ -11,8 +11,8 @@ org.junit.internal.ArrayComparisonFailure: arrays first differed at element [1][
 	at org.junit.Assert.assertArrayEquals(Assert.java:280)
 	at org.cytoscape.tiedie.internal.logic.KernelTest.testGetadjacencyMatrixOfNetwork(KernelTest.java:79)
 
-testCreateAdjMatrix(org.cytoscape.tiedie.internal.logic.KernelTest)  Time elapsed: 0.004 sec  <<< FAILURE!
-org.junit.internal.ArrayComparisonFailure: arrays first differed at element [1][0]; expected:<1.0> but was:<0.0>
+testCreateAdjMatrix(org.cytoscape.tiedie.internal.logic.KernelTest)  Time elapsed: 0.003 sec  <<< FAILURE!
+org.junit.internal.ArrayComparisonFailure: arrays first differed at element [0][1]; expected:<0.0> but was:<1.0>
 	at org.junit.internal.ComparisonCriteria.arrayEquals(ComparisonCriteria.java:50)
 	at org.junit.internal.ComparisonCriteria.arrayEquals(ComparisonCriteria.java:41)
 	at org.junit.Assert.internalArrayEquals(Assert.java:473)
@@ -20,17 +20,17 @@ org.junit.internal.ArrayComparisonFailure: arrays first differed at element [1][
 	at org.junit.Assert.assertArrayEquals(Assert.java:280)
 	at org.cytoscape.tiedie.internal.logic.KernelTest.testCreateAdjMatrix(KernelTest.java:105)
 
-testGetdiffusionKernelOfNetwork(org.cytoscape.tiedie.internal.logic.KernelTest)  Time elapsed: 0.461 sec  <<< FAILURE!
+testGetdiffusionKernelOfNetwork(org.cytoscape.tiedie.internal.logic.KernelTest)  Time elapsed: 0.464 sec  <<< FAILURE!
 java.lang.AssertionError: The test case is a prototype.
 	at org.junit.Assert.fail(Assert.java:88)
 	at org.cytoscape.tiedie.internal.logic.KernelTest.testGetdiffusionKernelOfNetwork(KernelTest.java:93)
 
-testCreateRequiredExponential(org.cytoscape.tiedie.internal.logic.KernelTest)  Time elapsed: 0.003 sec  <<< ERROR!
+testCreateRequiredExponential(org.cytoscape.tiedie.internal.logic.KernelTest)  Time elapsed: 0.004 sec  <<< ERROR!
 java.lang.NullPointerException: null
 	at org.cytoscape.tiedie.internal.logic.KernelTest.testCreateRequiredExponential(KernelTest.java:143)
 
 testCreateLapMatrix(org.cytoscape.tiedie.internal.logic.KernelTest)  Time elapsed: 0.003 sec  <<< FAILURE!
-org.junit.internal.ArrayComparisonFailure: arrays first differed at element [1][0]; expected:<-1.0> but was:<0.0>
+org.junit.internal.ArrayComparisonFailure: arrays first differed at element [0][1]; expected:<0.0> but was:<-1.0>
 	at org.junit.internal.ComparisonCriteria.arrayEquals(ComparisonCriteria.java:50)
 	at org.junit.internal.ComparisonCriteria.arrayEquals(ComparisonCriteria.java:41)
 	at org.junit.Assert.internalArrayEquals(Assert.java:473)
@@ -38,7 +38,7 @@ org.junit.internal.ArrayComparisonFailure: arrays first differed at element [1][
 	at org.junit.Assert.assertArrayEquals(Assert.java:280)
 	at org.cytoscape.tiedie.internal.logic.KernelTest.testCreateLapMatrix(KernelTest.java:132)
 
-testDiffuse(org.cytoscape.tiedie.internal.logic.KernelTest)  Time elapsed: 0.005 sec  <<< ERROR!
+testDiffuse(org.cytoscape.tiedie.internal.logic.KernelTest)  Time elapsed: 0.006 sec  <<< ERROR!
 java.lang.NullPointerException: null
 	at org.cytoscape.tiedie.internal.logic.KernelTest.testDiffuse(KernelTest.java:158)
 
