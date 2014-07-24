@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="org.cytoscape.tiedie.internal.logic.KernelTest" time="1.442" tests="8" errors="0" skipped="0" failures="0">
+<testsuite name="org.cytoscape.tiedie.internal.logic.KernelTest" time="1.689" tests="8" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="C:\Program Files (x86)\Java\jdk1.7.0_45\jre\bin"/>
@@ -60,12 +60,12 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="pentium_pro+mmx pentium_pro pentium+mmx pentium i486 i386 i86"/>
   </properties>
-  <testcase name="testGetadjacencyMatrixOfNetwork" classname="org.cytoscape.tiedie.internal.logic.KernelTest" time="0.205"/>
-  <testcase name="testCreateAdjMatrix" classname="org.cytoscape.tiedie.internal.logic.KernelTest" time="0.003"/>
+  <testcase name="testGetadjacencyMatrixOfNetwork" classname="org.cytoscape.tiedie.internal.logic.KernelTest" time="0.201"/>
+  <testcase name="testCreateAdjMatrix" classname="org.cytoscape.tiedie.internal.logic.KernelTest" time="0.004"/>
   <testcase name="testGetTime" classname="org.cytoscape.tiedie.internal.logic.KernelTest" time="0.005"/>
-  <testcase name="testGetdiffusionKernelOfNetwork" classname="org.cytoscape.tiedie.internal.logic.KernelTest" time="0.724"/>
-  <testcase name="testCreateRequiredExponential" classname="org.cytoscape.tiedie.internal.logic.KernelTest" time="0.019"/>
-  <testcase name="testCreateLapMatrix" classname="org.cytoscape.tiedie.internal.logic.KernelTest" time="0.007"/>
-  <testcase name="testDiffuse" classname="org.cytoscape.tiedie.internal.logic.KernelTest" time="0.007"/>
-  <testcase name="testCreateDegMatrix" classname="org.cytoscape.tiedie.internal.logic.KernelTest" time="0.472"/>
+  <testcase name="testGetdiffusionKernelOfNetwork" classname="org.cytoscape.tiedie.internal.logic.KernelTest" time="1.45"/>
+  <testcase name="testCreateRequiredExponential" classname="org.cytoscape.tiedie.internal.logic.KernelTest" time="0.009"/>
+  <testcase name="testCreateLapMatrix" classname="org.cytoscape.tiedie.internal.logic.KernelTest" time="0.006"/>
+  <testcase name="testDiffuse" classname="org.cytoscape.tiedie.internal.logic.KernelTest" time="0.011"/>
+  <testcase name="testCreateDegMatrix" classname="org.cytoscape.tiedie.internal.logic.KernelTest" time="0.003"/>
 </testsuite>

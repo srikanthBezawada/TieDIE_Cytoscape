@@ -30,4 +30,10 @@ public class MapUtil
         }
         return result;
     }
+        
+    public static <K, V> int count(Map<K, ? extends Collection<V>> map) {
+        int count = 0;
+        for (Collection<V> coll : map.values()) count += coll.size();
+        return count;
+    }
 }

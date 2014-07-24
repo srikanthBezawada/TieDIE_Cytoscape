@@ -27,6 +27,7 @@ public class HeatVector {
     private Matrix heatVectorOfScores;
     private int numOfColumns;
     private Set<CyNode> nodeHeatSet; 
+    private int nodeCount;
     
     //HeatValue and Score are the same
    
@@ -35,6 +36,7 @@ public class HeatVector {
         this.heatVectorOfScores = new Matrix(1, numOfColumns);
         // Matrix(int m, int n) 
         //  Construct an m-by-n matrix of zeros.
+        this.nodeCount = 0;
     }
 
     public HeatVector(Matrix rowVector) {
@@ -51,7 +53,10 @@ public class HeatVector {
     public Matrix getheatVectorOfScores() {
         return heatVectorOfScores;
     }
-      
+    
+    public int getnodeCount(){
+        return nodeCount;
+    }
     // Getter methods end here
    
     /*
@@ -74,6 +79,7 @@ public class HeatVector {
                 heatscore = row.get(columnName, Double.class);
                 heatVectorOfScores.set(0, counter, heatscore); // set() method of Jama library
                 nodeHeatSet.add(root);  // put all the nodes corresponding to that column in nodeHeatSet
+                nodeCount++;
             }
 
             counter++;
