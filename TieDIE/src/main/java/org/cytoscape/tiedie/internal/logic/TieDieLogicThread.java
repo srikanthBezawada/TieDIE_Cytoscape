@@ -13,6 +13,8 @@ import org.cytoscape.model.CyNetworkManager;
 import org.cytoscape.model.CyNode;
 import org.cytoscape.model.CyRow;
 import org.cytoscape.model.CyTable;
+import org.cytoscape.model.subnetwork.CyRootNetwork;
+import org.cytoscape.model.subnetwork.CySubNetwork;
 import org.cytoscape.view.model.CyNetworkView;
 
 import org.cytoscape.tiedie.internal.CyActivator;
@@ -100,55 +102,41 @@ public class TieDieLogicThread extends Thread {
     
     public void createExtractedSubnetwork(){
         int subnodeCount;
-        CyNetwork TieDIEsubNetwork;
-        CyNetworkFactory networkFactory;
-        List<CyNode> newnodeList;
-        double [][] adjacencyMatrixOfNewNetwork;
-        
-        networkFactory = CyActivator.networkFactory;  // To get a reference of CyNetworkFactory at CyActivator class of the App
-        TieDIEsubNetwork = networkFactory.createNetwork(); //Network factory creates new network in control panel
-        
-        TieDIEsubNetwork.getRow(TieDIEsubNetwork).set(CyNetwork.NAME, "TieDIE subnetwork");    // Set name for network
-        
-        
-        newnodeList = new ArrayList<CyNode>(totalnodecount);
-        for (int i = 0; i < nodeList.size(); i++) {
-            newnodeList.add(TieDIEsubNetwork.addNode()); // Add all the nodes
-        }
-        // Set name for new nodes
-        for (int i = 0; i < nodeList.size(); i++) {
-            TieDIEsubNetwork.getRow(newnodeList.get(i)).set(CyNetwork.NAME, nodeTable.getRow(nodeList.get(i).getSUID()).get(CyNetwork.NAME, String.class));
-        }
-             //add edges
-        for (int i = 0; i < totalnodecount; i++) {
-            for (int j = i + 1; j < totalnodecount; j++) {
-                double maxi = Math.max(adjacencyMatrixOfNetwork[i][j], adjacencyMatrixOfNetwork[j][i]);
-                if (maxi > 0.0) {
-                    CyEdge root = TieDIEsubNetwork.addEdge(newnodeList.get(i), newnodeList.get(j), true);
-                    CyRow row = TieDIEsubNetwork.getDefaultEdgeTable().getRow(root.getSUID());
-                    row.set(CyEdge.INTERACTION, "" + maxi);
-                }
+        CyRootNetwork root = ((CySubNetwork)currentnetwork).getRootNetwork();
+        List<CyNode> nodes = currentnetwork.getNodeList();
+        List<CyEdge> edges = currentnetwork.getEdgeList();
+        for(CyNode currentnode : nodes){
+            if(upstreamheatVector.getnodeHeatSet().contains(currentnode)||upstreamheatVector.getnodeHeatSet().contains(currentnode)||filtered_linkersNodeScoreMap.containsKey(currentnode)){
+                continue;
             }
+            nodes.remove(currentnode);
+            // Remove the nodes you want removed from the list
+            // Adjust your edges
         }
-          
-        adjacencyMatrixOfNewNetwork = new double[totalnodecount][totalnodecount];
-        for (int i = 0; i < totalnodecount; i++) {
-            for (int j = 0; j < totalnodecount; j++) {
-                adjacencyMatrixOfNewNetwork[i][j] = adjacencyMatrixOfNetwork[i][j];
-            }
-        }
- 
+        /*
+        CyRootNetwork root = ((CySubNetwork)network).getRootNetwork();
+        List<CyNode> nodes = network.getNodeList();
+        List<CyEdge> edges = network.getEdgeList();
+        // adjust nodes, edges
+        CyNetwork newNetwork = root.addSubNetwork(nodes, edges);
+        */
+        
         subnodeCount = (upstreamheatVector.getnodeCount()) + (upstreamheatVector.getnodeCount())+ (MapUtil.count(filtered_linkersNodeScoreMap));
-        // Add the network to Cytoscape
+        if(subnodeCount == nodes.size()){
+            System.out.println("calculations are correct");
+        }
+        
+        CyNetwork TieDIEsubNetwork = root.addSubNetwork(nodes, edges);
+        
         CyNetworkManager networkManager = CyActivator.networkManager;
         networkManager.addNetwork(TieDIEsubNetwork);
-     
-        //Add view to cyto
-        //CyNetworkView myView = CyActivator.networkViewFactory.createNetworkView(SpanningTree);
-        //CyActivator.networkViewManager.addNetworkView(myView);
+        /*
+        Add view to cyto
+        CyNetworkView myView = CyActivator.networkViewFactory.createNetworkView(TieDIEsubNetwork);
+        CyActivator.networkViewManager.addNetworkView(myView);
+        */
         
-        
-        
+       
         
     }
     

@@ -115,7 +115,7 @@ public class Kernel {
                         
                             Conventions :
                             "a = post-transcriptional, t = transcriptional; '>' = activating, '|' = inactivating"
-                        */
+                        
                         natureOfInteraction = row.get(CyEdge.INTERACTION, String.class);
                        
                         if("-a>".equals(natureOfInteraction) || "-t>".equals(natureOfInteraction)){
@@ -128,7 +128,8 @@ public class Kernel {
                         {
                             adjacencyMatrixOfNetwork[k][nodeList.indexOf(neighbor)] = 0;
                         }
-                         
+                        */
+                        adjacencyMatrixOfNetwork[k][nodeList.indexOf(neighbor)] = 1;
                     } catch (Exception ex) {
                     }
                 }
