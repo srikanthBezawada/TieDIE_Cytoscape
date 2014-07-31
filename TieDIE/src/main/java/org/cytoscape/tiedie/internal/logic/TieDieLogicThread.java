@@ -121,7 +121,7 @@ public class TieDieLogicThread extends Thread {
         CyNetwork newNetwork = root.addSubNetwork(nodes, edges);
         */
         
-        subnodeCount = (upstreamheatVector.getnodeCount()) + (upstreamheatVector.getnodeCount())+ (MapUtil.count(filtered_linkersNodeScoreMap));
+        subnodeCount = (upstreamheatVector.getnodeCount()) + (downstreamheatVector.getnodeCount())+ (MapUtil.count(filtered_linkersNodeScoreMap));
         if(subnodeCount == nodes.size()){
             System.out.println("calculations are correct");
         }
