@@ -106,7 +106,7 @@ public class TieDieLogicThread extends Thread {
         List<CyNode> nodes = currentnetwork.getNodeList();
         List<CyEdge> edges = currentnetwork.getEdgeList();
         for(CyNode currentnode : nodes){
-            if(upstreamheatVector.getnodeHeatSet().contains(currentnode)||upstreamheatVector.getnodeHeatSet().contains(currentnode)||filtered_linkersNodeScoreMap.containsKey(currentnode)){
+            if(upstreamheatVector.getnodeHeatSet().contains(currentnode)||downstreamheatVector.getnodeHeatSet().contains(currentnode)||filtered_linkersNodeScoreMap.containsKey(currentnode)){
                 continue;
             }
             nodes.remove(currentnode);
