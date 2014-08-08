@@ -1,11 +1,13 @@
-package org.cytoscape.tiedie.internal.logic;
+package org.cytoscape.tiedie.internal.tests;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import org.cytoscape.model.CyEdge;
 import org.cytoscape.model.CyNetwork;
 import org.cytoscape.model.CyNode;
+import org.cytoscape.tiedie.internal.logic.MapUtil;
 
 /*
    @author SrikanthB
@@ -19,14 +21,16 @@ import org.cytoscape.model.CyNode;
 */
 
 public class Permuter {
-    Map nodeDegreeMap, nodeDegreeMapSorted;
+    Map nodeDegreeMap, nodeDegreeMapSorted, permutedMap;
     CyNetwork currentnetwork;
     List<CyNode> nodeList;
-    private static final int BLOCK_SIZE = 10;
+    int totalnodecount;
+    private static int BLOCK_SIZE = 10;
     
     Permuter(CyNetwork network){
         this.currentnetwork = network;
         this.nodeList = currentnetwork.getNodeList();
+        this.totalnodecount = nodeList.size();
         nodeDegreeMap = new HashMap<CyNode, Integer>();
         for(CyNode currentNode: nodeList){
             List<CyNode> myNeighbourList = currentnetwork.getNeighborList(currentNode, CyEdge.Type.ANY);
@@ -34,18 +38,35 @@ public class Permuter {
             nodeDegreeMap.put(currentNode, currentNodeDegree);
             nodeDegreeMapSorted = MapUtil.sortByValue(nodeDegreeMap);
         }
-       
+        
     }
-
-
-    public Map permuteBlock(){
-        return null;
     
     
-    }
-
     public void permuteOne(){
-    
+        int numOfBlocks;
+        int i=0;
+        
+        if(totalnodecount%BLOCK_SIZE == 0){
+            numOfBlocks = totalnodecount/BLOCK_SIZE;
+        }
+        else{
+            numOfBlocks = (totalnodecount/BLOCK_SIZE)+1 ;
+        }
+        Block[] blockArray = new Block[numOfBlocks];
+  
+        Iterator<Map.Entry<CyNode, Integer>> iterator = nodeDegreeMapSorted.entrySet().iterator() ;
+        while(iterator.hasNext()){
+            Map.Entry<CyNode, Integer> entry = iterator.next();
+            blockArray[i].add(entry.getKey());
+            if(blockArray[i].getSize() == BLOCK_SIZE){
+                blockArray[i].permuteBlock();
+                
+                
+                
+                i++;
+            }
+            
+        }
     
     }
     
@@ -54,5 +75,5 @@ public class Permuter {
     
     
     }
-    
+       
 }

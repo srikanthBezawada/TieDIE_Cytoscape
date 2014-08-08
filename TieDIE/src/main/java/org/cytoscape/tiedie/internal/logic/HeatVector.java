@@ -5,6 +5,7 @@ import Jama.Matrix;
 import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.List;
+import java.util.Map;
 
 import org.cytoscape.model.CyNode;
 import org.cytoscape.model.CyRow;
@@ -27,6 +28,7 @@ public class HeatVector {
     private Matrix heatVectorOfScores;
     private int numOfColumns;
     private Set<CyNode> nodeHeatSet; 
+    private Map<CyNode, Double> nodeScoreMap;
     private int nodeCount;
     
     //HeatValue and Score are the same
@@ -79,6 +81,7 @@ public class HeatVector {
                 heatscore = row.get(columnName, Double.class);
                 heatVectorOfScores.set(0, counter, heatscore); // set() method of Jama library
                 nodeHeatSet.add(root);  // put all the nodes corresponding to that column in nodeHeatSet
+                nodeScoreMap.put(root, heatscore);
                 nodeCount++;
             }
 
