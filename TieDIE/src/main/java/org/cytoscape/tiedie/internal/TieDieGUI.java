@@ -83,9 +83,9 @@ public class TieDieGUI extends javax.swing.JPanel implements CytoPanelComponent 
         helpButton = new javax.swing.JButton();
         exitButton = new javax.swing.JButton();
         otherPanel1 = new javax.swing.JPanel();
-        headingLabel = new javax.swing.JLabel();
         statusLabel = new javax.swing.JLabel();
         otherPanel2 = new javax.swing.JPanel();
+        headingLabel = new javax.swing.JLabel();
 
         startButton.setText("START executing TieDIE algorithm");
         startButton.addActionListener(new java.awt.event.ActionListener() {
@@ -108,43 +108,17 @@ public class TieDieGUI extends javax.swing.JPanel implements CytoPanelComponent 
             }
         });
 
-        javax.swing.GroupLayout otherPanel1Layout = new javax.swing.GroupLayout(otherPanel1);
-        otherPanel1.setLayout(otherPanel1Layout);
-        otherPanel1Layout.setHorizontalGroup(
-            otherPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 192, Short.MAX_VALUE)
-        );
-        otherPanel1Layout.setVerticalGroup(
-            otherPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 147, Short.MAX_VALUE)
-        );
-
-        headingLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        headingLabel.setForeground(new java.awt.Color(255, 0, 51));
-        headingLabel.setText("TieDIE GUI");
+        otherPanel1.setLayout(new javax.swing.BoxLayout(otherPanel1, javax.swing.BoxLayout.LINE_AXIS));
 
         statusLabel.setFont(new java.awt.Font("Tahoma", 2, 10)); // NOI18N
         statusLabel.setText("TieDIE status");
 
-        javax.swing.GroupLayout otherPanel2Layout = new javax.swing.GroupLayout(otherPanel2);
-        otherPanel2.setLayout(otherPanel2Layout);
-        otherPanel2Layout.setHorizontalGroup(
-            otherPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 195, Short.MAX_VALUE)
-        );
-        otherPanel2Layout.setVerticalGroup(
-            otherPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 67, Short.MAX_VALUE)
-        );
+        otherPanel2.setLayout(new javax.swing.BoxLayout(otherPanel2, javax.swing.BoxLayout.LINE_AXIS));
 
         javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
         mainPanel.setLayout(mainPanelLayout);
         mainPanelLayout.setHorizontalGroup(
             mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(mainPanelLayout.createSequentialGroup()
-                .addGap(86, 86, 86)
-                .addComponent(headingLabel)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(mainPanelLayout.createSequentialGroup()
                 .addGap(35, 35, 35)
                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -164,9 +138,7 @@ public class TieDieGUI extends javax.swing.JPanel implements CytoPanelComponent 
         mainPanelLayout.setVerticalGroup(
             mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(headingLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(38, 38, 38)
                 .addComponent(otherPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(otherPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -215,6 +187,10 @@ public class TieDieGUI extends javax.swing.JPanel implements CytoPanelComponent 
         otherPanel2.add(kernelButton);
         otherPanel2.add(pagerankButton);
 
+        headingLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        headingLabel.setForeground(new java.awt.Color(255, 0, 51));
+        headingLabel.setText("TieDIE GUI");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -223,11 +199,17 @@ public class TieDieGUI extends javax.swing.JPanel implements CytoPanelComponent 
                 .addContainerGap()
                 .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(90, 90, 90)
+                .addComponent(headingLabel)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(31, 31, 31)
+                .addComponent(headingLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(mainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
     }// </editor-fold>//GEN-END:initComponents

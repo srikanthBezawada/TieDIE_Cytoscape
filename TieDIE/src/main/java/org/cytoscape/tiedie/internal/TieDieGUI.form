@@ -21,12 +21,19 @@
               <Component id="mainPanel" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="90" max="-2" attributes="0"/>
+              <Component id="headingLabel" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
+          </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
+              <Component id="headingLabel" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="32767" attributes="0"/>
               <Component id="mainPanel" min="-2" max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -38,11 +45,6 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="86" max="-2" attributes="0"/>
-                  <Component id="headingLabel" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="32767" attributes="0"/>
-              </Group>
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
@@ -68,9 +70,7 @@
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="headingLabel" min="-2" pref="21" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
                   <Component id="otherPanel1" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="otherPanel2" min="-2" max="-2" attributes="0"/>
@@ -118,30 +118,8 @@
             <AuxValue name="JavaCodeGenerator_allCodePost" type="java.lang.String" value="// Customized code from here&#xa;/*&#xa;CyTable nodeTable = currentnetwork.getDefaultNodeTable();&#xa;Collection&lt;CyColumn&gt; columnCollection = nodeTable.getColumns();&#xa;&#xa;String presentColumnName;&#xa;Border border = BorderFactory.createTitledBorder(&quot;Select columns for diffusion&quot;);&#xa;otherPanel1.setBorder(border);&#xa;&#xa;List&lt;JCheckBox&gt; checkboxes = new ArrayList&lt;JCheckBox&gt;();&#xa;for(CyColumn presentColumn : columnCollection){&#xa;    presentColumnName = presentColumn.getName();&#xa;    JCheckBox check = new JCheckBox(presentColumnName);&#xa;    checkboxes.add(check);&#xa;    otherPanel1.add(check);&#xa;}&#xa;*/&#xa;&#xa;Border border1 = BorderFactory.createTitledBorder(&quot;Select columns for diffusion&quot;);&#xa;otherPanel1.setBorder(border1);&#xa;JCheckBox upstreamBox = new JCheckBox(&quot;upstreamheat&quot;,true);&#xa;JCheckBox downstreamBox = new JCheckBox(&quot;downstreamheat&quot;,true);&#xa;&#xa;otherPanel1.add(upstreamBox);&#xa;otherPanel1.add(downstreamBox);&#xa;// Customized code ends here"/>
           </AuxValues>
 
-          <Layout>
-            <DimensionLayout dim="0">
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="192" max="32767" attributes="0"/>
-              </Group>
-            </DimensionLayout>
-            <DimensionLayout dim="1">
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="147" max="32767" attributes="0"/>
-              </Group>
-            </DimensionLayout>
-          </Layout>
+          <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout"/>
         </Container>
-        <Component class="javax.swing.JLabel" name="headingLabel">
-          <Properties>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Tahoma" size="18" style="1"/>
-            </Property>
-            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="33" green="0" red="ff" type="rgb"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="TieDIE GUI"/>
-          </Properties>
-        </Component>
         <Component class="javax.swing.JLabel" name="statusLabel">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -155,20 +133,20 @@
             <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="Border border2 = BorderFactory.createTitledBorder(&quot;Select way of diffusion&quot;);&#xa;otherPanel2.setBorder(border2);&#xa;JRadioButton kernelButton = new JRadioButton(&quot;HeatKernel&quot;,true);&#xa;JRadioButton pagerankButton = new JRadioButton(&quot;PageRank&quot;, false);&#xa;&#xa;otherPanel2.add(kernelButton);&#xa;otherPanel2.add(pagerankButton);"/>
           </AuxValues>
 
-          <Layout>
-            <DimensionLayout dim="0">
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="195" max="32767" attributes="0"/>
-              </Group>
-            </DimensionLayout>
-            <DimensionLayout dim="1">
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="67" max="32767" attributes="0"/>
-              </Group>
-            </DimensionLayout>
-          </Layout>
+          <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout"/>
         </Container>
       </SubComponents>
     </Container>
+    <Component class="javax.swing.JLabel" name="headingLabel">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Tahoma" size="18" style="1"/>
+        </Property>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="33" green="0" red="ff" type="rgb"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="TieDIE GUI"/>
+      </Properties>
+    </Component>
   </SubComponents>
 </Form>

@@ -62,7 +62,7 @@ public class Permuter {
                 blockArray[i].permuteBlock();
                 
                 
-                
+                //validate(blockArray[i]);
                 i++;
             }
             
@@ -75,5 +75,16 @@ public class Permuter {
     
     
     }
-       
+    
+    /*
+    public void validate(Block b){
+        for(int i=0; i<b.getSize(); i++){
+            if(b.nodesInThisBlock.get(i)) {
+            } else {
+            }}
+    }
+    */
+   
+    
+    
 }
