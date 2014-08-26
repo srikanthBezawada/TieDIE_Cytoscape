@@ -2,6 +2,7 @@ package org.cytoscape.tiedie.internal.logic;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -52,6 +53,7 @@ public class TieDieLogicThread extends Thread {
     public TieDieLogicThread(CyNetwork currentnetwork, CyNetworkView currentnetworkview) {
         this.currentnetwork = currentnetwork;
         this.currentnetworkview = currentnetworkview;
+        nodeList = new LinkedList();
         this.nodeList = currentnetwork.getNodeList(); 
         this.totalnodecount = nodeList.size();
         this.edgeTable = currentnetwork.getDefaultEdgeTable();
