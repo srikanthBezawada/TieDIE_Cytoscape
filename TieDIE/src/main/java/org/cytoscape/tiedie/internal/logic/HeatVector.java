@@ -28,7 +28,7 @@ public class HeatVector {
     private Matrix heatVectorOfScores;
     private int numOfColumns;
     private Set<CyNode> nodeHeatSet; 
-    private Map<CyNode, Number> nodeScoreMap;
+    private Map<CyNode, Float> nodeScoreMap;
     private int nodeCount;
     
     //HeatValue and Score are the same
