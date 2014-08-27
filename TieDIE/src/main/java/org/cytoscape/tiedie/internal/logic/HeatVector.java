@@ -1,6 +1,7 @@
 package org.cytoscape.tiedie.internal.logic;
 
 import Jama.Matrix;
+import java.util.HashMap;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -75,6 +76,7 @@ public class HeatVector {
         Number heatscore = 0;
         nodeHeatSet = new LinkedHashSet<CyNode>();  
         
+        nodeScoreMap = new HashMap<CyNode, Float>();
         for (CyNode root : nodeList) { // nodeList is always accessed in a same order
             CyRow row = nodeTable.getRow(root.getSUID());
             
