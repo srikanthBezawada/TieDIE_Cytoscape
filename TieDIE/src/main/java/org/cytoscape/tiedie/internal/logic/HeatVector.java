@@ -28,7 +28,7 @@ public class HeatVector {
     private Matrix heatVectorOfScores;
     private int numOfColumns;
     private Set<CyNode> nodeHeatSet; 
-    private Map<CyNode, Double> nodeScoreMap;
+    private Map<CyNode, Number> nodeScoreMap;
     private int nodeCount;
     
     //HeatValue and Score are the same
@@ -72,19 +72,31 @@ public class HeatVector {
     
     public HeatVector extractHeatVector(String columnName, List<CyNode> nodeList, CyTable nodeTable) {
         int counter = 0;
-        double heatscore;
+        Number heatscore = 0;
         nodeHeatSet = new LinkedHashSet<CyNode>();  
         
         for (CyNode root : nodeList) { // nodeList is always accessed in a same order
             CyRow row = nodeTable.getRow(root.getSUID());
-            if (row.get(columnName, Double.class) != null) {
-                heatscore = row.get(columnName, Double.class);
-                heatVectorOfScores.set(0, counter, heatscore); // set() method of Jama library
-                nodeHeatSet.add(root);  // put all the nodes corresponding to that column in nodeHeatSet
-                nodeScoreMap.put(root, heatscore);
-                nodeCount++;
+            
+            if (nodeTable.getColumn(columnName).getType() == Float.class) {
+                heatscore = row.get(columnName, Float.class);
             }
-
+            else if (nodeTable.getColumn(columnName).getType() == Double.class) {
+                heatscore = row.get(columnName, Double.class);
+            }
+            else if (nodeTable.getColumn(columnName).getType() == Integer.class) {
+                heatscore = row.get(columnName, Integer.class);
+            } 
+            else if (nodeTable.getColumn(columnName).getType() == Long.class) {
+                heatscore = row.get(columnName, Long.class);
+            } 
+            // Make sure that Column Type is Double, Integer or Long, Otherwise it will throw exception below.
+            
+            heatVectorOfScores.set(0, counter,(Float)heatscore.floatValue()); // set() method of Jama library
+            nodeHeatSet.add(root);  // put all the nodes corresponding to that column in nodeHeatSet
+            nodeScoreMap.put(root,(Float)heatscore.floatValue());
+            nodeCount++;
+            
             counter++;
         }
 
