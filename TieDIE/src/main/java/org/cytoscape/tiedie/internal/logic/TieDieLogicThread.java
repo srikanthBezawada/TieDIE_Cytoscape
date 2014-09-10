@@ -6,8 +6,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import org.cytoscape.model.CyEdge;
 
+import org.cytoscape.model.CyEdge;
 import org.cytoscape.model.CyNetwork;
 import org.cytoscape.model.CyNetworkFactory;
 import org.cytoscape.model.CyNetworkManager;
@@ -54,7 +54,7 @@ public class TieDieLogicThread extends Thread {
         this.currentnetwork = currentnetwork;
         this.currentnetworkview = currentnetworkview;
         nodeList = new LinkedList();
-        this.nodeList = currentnetwork.getNodeList(); 
+        this.nodeList = this.currentnetwork.getNodeList(); 
         this.totalnodecount = nodeList.size();
         this.edgeTable = currentnetwork.getDefaultEdgeTable();
         this.nodeTable = currentnetwork.getDefaultNodeTable();

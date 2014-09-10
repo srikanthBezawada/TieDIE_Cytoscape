@@ -14,8 +14,6 @@ import org.cytoscape.view.model.CyNetworkViewFactory;
 import org.cytoscape.view.model.CyNetworkViewManager;
 
 
-
-
 /**
  * @author SrikanthB
  * 
