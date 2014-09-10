@@ -72,7 +72,7 @@ public class HeatVector {
     
     public HeatVector extractHeatVector(String columnName, List<CyNode> nodeList, CyTable nodeTable) {
         int counter = 0;
-        Number heatscore = 0;
+        Number heatscore = null;
         nodeHeatSet = new LinkedHashSet<CyNode>();  
         
         nodeScoreMap = new HashMap<CyNode, Double>();
@@ -87,7 +87,23 @@ public class HeatVector {
             } 
             else if (nodeTable.getColumn(columnName).getType() == Long.class) {
                 heatscore = row.get(columnName, Long.class);
-            } 
+            }
+            else if (nodeTable.getColumn(columnName).getType() == String.class){
+                try{
+                    heatscore = Double.parseDouble(row.get(columnName, String.class));
+                    
+                }
+                catch(NumberFormatException e){
+                    System.out.println("Column with name "+columnName+" has unsupported format. Should contain only numbers");
+                }
+                catch(NullPointerException e){
+                     System.out.println("String is null");
+                }
+                
+            }
+            if(heatscore == null)
+            continue;
+            
             heatVectorOfScores.set(0, counter, heatscore.doubleValue()); // set() method of Jama library
             nodeHeatSet.add(root);  // put all the nodes corresponding to that column in nodeHeatSet
             nodeScoreMap.put(root, heatscore.doubleValue());

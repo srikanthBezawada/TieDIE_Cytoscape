@@ -171,6 +171,7 @@
 	  <groupId>org.jblas</groupId>
 	  <artifactId>jblas</artifactId>
 	  <version>1.2.3</version>
+	  <type>jar</type>
 	 </dependency>
 	
          <dependency>
