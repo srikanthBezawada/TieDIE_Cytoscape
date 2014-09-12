@@ -69,7 +69,7 @@
                                                 <Export-Package>${bundle.namespace},com.google.gson.*</Export-Package>
 						<Private-Package>${bundle.namespace}.internal.*</Private-Package>
 						<Bundle-Activator>${bundle.namespace}.internal.CyActivator</Bundle-Activator>
-                                                <Embed-Dependency>jama;inline=true</Embed-Dependency>
+                                                <Embed-Dependency>jama;jblas;inline=true</Embed-Dependency>
         <Import-Package>*;resolution:=optional</Import-Package>
 											</instructions>
 				</configuration>
