@@ -143,18 +143,47 @@ public class TieDieLogicThread extends Thread {
     }
     
     
-    public Map getDiffusedMap(String columnName,DiffusedHeatVector diffusedVector ){
+    public Map getDiffusedMap(String columnName, DiffusedHeatVector diffusedVector ){
         Map sameSetScoreDiffused = new HashMap<CyNode, Double>();
         int count = 0;
-        double diffusedScore;
+        Number diffusedScore = null;
         
         for (CyNode root : nodeList) { // nodeList is always accessed in a same order
-            CyRow row = nodeTable.getRow(root.getSUID());
+            /*CyRow row = nodeTable.getRow(root.getSUID());
             if (row.get(columnName, Double.class) != null) {
                 diffusedScore = diffusedVector.getVectorOfScores().get(0, count);
                 sameSetScoreDiffused.put(root, diffusedScore);
+            }*/
+            
+            CyRow row = nodeTable.getRow(root.getSUID());
+            if (nodeTable.getColumn(columnName).getType() == Double.class) {
+                diffusedScore = row.get(columnName, Double.class);
             }
-
+            else if (nodeTable.getColumn(columnName).getType() == Integer.class) {
+                diffusedScore = row.get(columnName, Integer.class);
+            } 
+            else if (nodeTable.getColumn(columnName).getType() == Long.class) {
+                diffusedScore = row.get(columnName, Long.class);
+            }
+            else if (nodeTable.getColumn(columnName).getType() == String.class){
+                try{
+                    diffusedScore = Double.parseDouble(row.get(columnName, String.class));
+                    
+                }
+                catch(NumberFormatException e){
+                    System.out.println("Column with name "+columnName+" has unsupported format. Should contain only numbers");
+                }
+                catch(NullPointerException e){
+                     System.out.println("String is null");
+                }
+                
+            }
+            if(diffusedScore == null)
+            continue;
+            
+            diffusedScore = diffusedVector.getVectorOfScores().get(0, count);
+            sameSetScoreDiffused.put(root, diffusedScore);
+    
             count++;
         }
         return sameSetScoreDiffused;
