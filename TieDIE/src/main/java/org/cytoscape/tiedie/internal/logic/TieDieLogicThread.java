@@ -108,7 +108,8 @@ public class TieDieLogicThread extends Thread {
         CyRootNetwork root = ((CySubNetwork)currentnetwork).getRootNetwork();
         List<CyNode> oldnodes = currentnetwork.getNodeList();
         List<CyNode> nodes = currentnetwork.getNodeList();
-        List<CyEdge> edges = currentnetwork.getEdgeList();
+        List<CyEdge> oldedges = currentnetwork.getEdgeList();
+        List<CyEdge> edges = new ArrayList<CyEdge>();
         
         for(CyNode currentnode : oldnodes){
             if(upstreamheatVector.getnodeHeatSet().contains(currentnode)||downstreamheatVector.getnodeHeatSet().contains(currentnode)||filtered_linkersNodeScoreMap.containsKey(currentnode)){
@@ -117,6 +118,14 @@ public class TieDieLogicThread extends Thread {
             nodes.remove(currentnode);
             // Remove the nodes you want removed from the list
             // Adjust your edges
+        }
+        
+        for(CyEdge currentEdge : oldedges ){
+            CyNode node1 = currentEdge.getSource();
+            CyNode node2 = currentEdge.getTarget();
+            if(nodes.contains(node1) && nodes.contains(node2)){
+                edges.add(currentEdge);
+            }
         }
         /*
         CyRootNetwork root = ((CySubNetwork)network).getRootNetwork();
@@ -135,7 +144,8 @@ public class TieDieLogicThread extends Thread {
         
         CyNetwork TieDIEsubNetwork = root.addSubNetwork(nodes, edges);
         TieDIEsubNetwork.getRow(TieDIEsubNetwork).set(CyNetwork.NAME, "TieDIE subnetwork");
-        
+        CyNetworkManager networkManager = CyActivator.networkManager;
+        networkManager.addNetwork(TieDIEsubNetwork);
         //CyNetworkView tiedieView = CyActivator.networkViewFactory.createNetworkView(TieDIEsubNetwork);
         //CyActivator.networkViewManager.addNetworkView(tiedieView);
         
