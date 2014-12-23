@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
-Bnd-LastModified: 1410940536867
-Build-Jdk: 1.7.0_65
-Built-By: Srikanth
+Bnd-LastModified: 1419358552069
+Build-Jdk: 1.7.0_05
+Built-By: Sony
 Bundle-Activator: org.cytoscape.tiedie.internal.CyActivator
 Bundle-ManifestVersion: 2
 Bundle-Name: TieDIE
