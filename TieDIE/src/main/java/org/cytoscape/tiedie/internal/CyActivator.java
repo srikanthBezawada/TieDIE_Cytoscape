@@ -1,6 +1,7 @@
 package org.cytoscape.tiedie.internal;
 
 import java.util.Properties;
+import org.cytoscape.app.CyAppAdapter;
 
 import org.osgi.framework.BundleContext;
 
@@ -22,7 +23,7 @@ import org.cytoscape.view.model.CyNetworkViewManager;
 
 
 public class CyActivator extends AbstractCyActivator {
-
+    private static CyAppAdapter appAdapter;       
     public CyApplicationManager cyApplicationManager;
     public CySwingApplication cyDesktopService;
     public CyServiceRegistrar cyServiceRegistrar;
@@ -42,6 +43,7 @@ public class CyActivator extends AbstractCyActivator {
     @Override
     public void start(BundleContext context) throws Exception {
         String version = new String(" 1.0");
+        this.appAdapter = getService(context, CyAppAdapter.class);
         System.out.println("TieDIE app. is loading");
         this.networkViewManager = getService(context, CyNetworkViewManager.class);
         this.networkViewFactory = getService(context, CyNetworkViewFactory.class);
@@ -69,6 +71,10 @@ public class CyActivator extends AbstractCyActivator {
     
     public TieDieMenuAction getmenuaction() {
         return menuaction;
+    }
+    
+    public static CyAppAdapter getCyAppAdapter(){
+        return appAdapter;
     }
   
 }

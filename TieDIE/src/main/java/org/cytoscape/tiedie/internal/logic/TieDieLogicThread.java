@@ -9,16 +9,16 @@ import java.util.Set;
 
 import org.cytoscape.model.CyEdge;
 import org.cytoscape.model.CyNetwork;
-import org.cytoscape.model.CyNetworkFactory;
 import org.cytoscape.model.CyNetworkManager;
 import org.cytoscape.model.CyNode;
-import org.cytoscape.model.CyRow;
 import org.cytoscape.model.CyTable;
 import org.cytoscape.model.subnetwork.CyRootNetwork;
 import org.cytoscape.model.subnetwork.CySubNetwork;
 import org.cytoscape.view.model.CyNetworkView;
 
 import org.cytoscape.tiedie.internal.CyActivator;
+import static org.cytoscape.tiedie.internal.visuals.UpdateSubNetView.updateView;
+
 
 
 
@@ -82,8 +82,8 @@ public class TieDieLogicThread extends Thread {
         downstreamheatVectorDiffused = downstreamheatVectorDiffused.extractDiffusedHeatVector(downstreamheatVector, heatDiffusionKernel);
         
         // Extracting the maps with only inital sets and their diffused values below
-        upnodeScoreMapDiffused = getDiffusedMap("upstreamheat", upstreamheatVectorDiffused);
-        downnodeScoreMapDiffused = getDiffusedMap("downstreamheat", downstreamheatVectorDiffused);
+        upnodeScoreMapDiffused = getDiffusedMap(upstreamheatVectorDiffused);
+        downnodeScoreMapDiffused = getDiffusedMap(downstreamheatVectorDiffused);
         
         extractSubnetwork();
         
@@ -94,114 +94,69 @@ public class TieDieLogicThread extends Thread {
     
     public void extractSubnetwork(){
         sizeFactor = 1;
-        linker_cutoff = TieDieUtil.findLinkerCutoff(nodeList,upstreamheatVector.getnodeHeatSet(), downstreamheatVector.getnodeHeatSet(), upnodeScoreMapDiffused, downnodeScoreMapDiffused, sizeFactor);
+        linker_cutoff = TieDieUtil.findLinkerCutoff(upstreamheatVector.getnodeHeatSet(), downstreamheatVector.getnodeHeatSet(), upnodeScoreMapDiffused, downnodeScoreMapDiffused, sizeFactor);
+        System.out.println("linker_cutoff"+linker_cutoff);
         // nodeList is the extra parameter to existing tiedie  https://github.com/epaull/TieDIE/blob/master/lib/tiedie_util.py#L336
         
-        linkers_nodeScoreMap = TieDieUtil.findLinkersMap(nodeList, upstreamheatVector.getnodeHeatSet(), downstreamheatVector.getnodeHeatSet(), upnodeScoreMapDiffused, downnodeScoreMapDiffused);
+        linkers_nodeScoreMap = TieDieUtil.findLinkersMap(upnodeScoreMapDiffused, downnodeScoreMapDiffused);
         // calling "z" function here according to literature
         filtered_linkersNodeScoreMap = TieDieUtil.findFilteredLinkersMap(linkers_nodeScoreMap, linker_cutoff);
         createExtractedSubnetwork();
     }
-    
     public void createExtractedSubnetwork(){
-        int subnodeCount;
-        CyRootNetwork root = ((CySubNetwork)currentnetwork).getRootNetwork();
-        List<CyNode> oldnodes = currentnetwork.getNodeList();
+        Set<CyNode> linkerNodes = filtered_linkersNodeScoreMap.keySet();
         List<CyNode> nodes = currentnetwork.getNodeList();
-        List<CyEdge> oldedges = currentnetwork.getEdgeList();
-        List<CyEdge> edges = new ArrayList<CyEdge>();
+        List<CyNode> newnodes = new ArrayList<CyNode>();
+        List<CyEdge> edges = currentnetwork.getEdgeList();
+        List<CyEdge> newedges = new ArrayList<CyEdge>();
         
-        for(CyNode currentnode : oldnodes){
-            if(upstreamheatVector.getnodeHeatSet().contains(currentnode)||downstreamheatVector.getnodeHeatSet().contains(currentnode)||filtered_linkersNodeScoreMap.containsKey(currentnode)){
-                continue;
+        for(Object currentnode : upstreamheatVector.getnodeHeatSet()){
+            newnodes.add((CyNode) currentnode);
+        }
+        for(Object currentnode : downstreamheatVector.getnodeHeatSet()){
+            newnodes.add((CyNode) currentnode);
+        }
+        for(Object currentnode : linkerNodes){
+            newnodes.add((CyNode) currentnode);
+        }
+        
+        for(CyEdge currentedge : edges){
+            CyNode node1 = currentedge.getSource();
+            CyNode node2 = currentedge.getTarget();
+            if(newnodes.contains(node1) && newnodes.contains(node2)){
+                newedges.add(currentedge);
             }
-            nodes.remove(currentnode);
-            // Remove the nodes you want removed from the list
-            // Adjust your edges
         }
-        
-        for(CyEdge currentEdge : oldedges ){
-            CyNode node1 = currentEdge.getSource();
-            CyNode node2 = currentEdge.getTarget();
-            if(nodes.contains(node1) && nodes.contains(node2)){
-                edges.add(currentEdge);
-            }
-        }
-        /*
-        CyRootNetwork root = ((CySubNetwork)network).getRootNetwork();
-        List<CyNode> nodes = network.getNodeList();
-        List<CyEdge> edges = network.getEdgeList();
-        // adjust nodes, edges
-        CyNetwork newNetwork = root.addSubNetwork(nodes, edges);
-        */
-        
-        subnodeCount = (upstreamheatVector.getnodeCount()) + (downstreamheatVector.getnodeCount())+ (MapUtil.count(filtered_linkersNodeScoreMap));
-        if(subnodeCount == nodes.size()){
-            System.out.println("nodes.size()"+nodes.size());
-            int x =  subnodeCount;
-            System.out.println("calculations are correct, subnodecount"+ x);
-        }
-        
-        CyNetwork TieDIEsubNetwork = root.addSubNetwork(nodes, edges);
+        System.out.println("nodes size"+newnodes.size());
+        System.out.println("edges size"+newedges.size());
+        //Set<CyNode> s = new HashSet<CyNode>(newnodes);
+        //System.out.println("nodesetsize"+s.size());
+                
+        CyRootNetwork root = ((CySubNetwork)currentnetwork).getRootNetwork();
+        CyNetwork TieDIEsubNetwork = root.addSubNetwork(newnodes, newedges);
         TieDIEsubNetwork.getRow(TieDIEsubNetwork).set(CyNetwork.NAME, "TieDIE subnetwork");
         CyNetworkManager networkManager = CyActivator.networkManager;
         networkManager.addNetwork(TieDIEsubNetwork);
-        //CyNetworkView tiedieView = CyActivator.networkViewFactory.createNetworkView(TieDIEsubNetwork);
-        //CyActivator.networkViewManager.addNetworkView(tiedieView);
-        
-        //CyNetworkView myView = CyActivator.networkViewFactory.createNetworkView(TieDIEsubNetwork);
-        //CyActivator.networkViewManager.addNetworkView(myView);
-     
-       
-        
+        CyNetworkView tiedieView = CyActivator.networkViewFactory.createNetworkView(TieDIEsubNetwork);
+        CyActivator.networkViewManager.addNetworkView(tiedieView);
+        updateView(tiedieView, "grid");
     }
     
+   
+
     
-    public Map getDiffusedMap(String columnName, DiffusedHeatVector diffusedVector ){
-        Map sameSetScoreDiffused = new HashMap<CyNode, Double>();
-        int count = 0;
-        Number diffusedScore = null;
-        
-        for (CyNode root : nodeList) { // nodeList is always accessed in a same order
-            /*CyRow row = nodeTable.getRow(root.getSUID());
-            if (row.get(columnName, Double.class) != null) {
-                diffusedScore = diffusedVector.getVectorOfScores().get(0, count);
-                sameSetScoreDiffused.put(root, diffusedScore);
-            }*/
-            
-            CyRow row = nodeTable.getRow(root.getSUID());
-            if (nodeTable.getColumn(columnName).getType() == Double.class) {
-                diffusedScore = row.get(columnName, Double.class);
-            }
-            else if (nodeTable.getColumn(columnName).getType() == Integer.class) {
-                diffusedScore = row.get(columnName, Integer.class);
-            } 
-            else if (nodeTable.getColumn(columnName).getType() == Long.class) {
-                diffusedScore = row.get(columnName, Long.class);
-            }
-            else if (nodeTable.getColumn(columnName).getType() == String.class){
-                try{
-                    diffusedScore = Double.parseDouble(row.get(columnName, String.class));
-                    
-                }
-                catch(NumberFormatException e){
-                    System.out.println("Column with name "+columnName+" has unsupported format. Should contain only numbers");
-                }
-                catch(NullPointerException e){
-                     System.out.println("String is null");
-                }
-                
-            }
-            if(diffusedScore == null)
-            continue;
-            
-            diffusedScore = diffusedVector.getVectorOfScores().get(0, count);
-            sameSetScoreDiffused.put(root, diffusedScore);
     
-            count++;
+    public Map getDiffusedMap(DiffusedHeatVector diffusedVector){
+        Map diffScoreMap = new HashMap<CyNode, Double>();
+        int count=0;
+        double diffScr;
+        for(CyNode root: nodeList){
+            diffScr = diffusedVector.getVectorOfScores().get(0, count);
+            diffScoreMap.put(root, diffScr);
+            count++; 
         }
-        return sameSetScoreDiffused;
-        // This map contains only <nodes, heatscore> corresponding to that columnName only
-    } 
+        return diffScoreMap;
+    }
+    
     
 }
