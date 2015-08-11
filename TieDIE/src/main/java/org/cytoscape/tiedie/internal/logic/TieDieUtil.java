@@ -76,10 +76,10 @@ public class TieDieUtil {
            downScoreMapDiffusedSorted = MapUtil.sortByValue(downScoreMapDiffused);
            
            linkers_nodeScoreMap = findLinkersMap(upScoreMapDiffused, downScoreMapDiffused);
-           filtered_linkersNodeScoreMap = findFilteredLinkersMap(linkers_nodeScoreMap, 1);
+           filtered_linkersNodeScoreMap = findFilteredLinkersMap(linkers_nodeScoreMap, 1);// cutoff = 1
            
            linkers_nodeScoreMapSorted = MapUtil.sortByValue(linkers_nodeScoreMap);
-           filtered_linkersNodeScoreMapSorted = MapUtil.sortByValue(linkers_nodeScoreMapSorted);
+           filtered_linkersNodeScoreMapSorted = MapUtil.sortByValue(filtered_linkersNodeScoreMap);
            
            Iterator<Map.Entry<CyNode, Double>> iterator = linkers_nodeScoreMapSorted.entrySet().iterator() ;
            while(iterator.hasNext()){
@@ -146,7 +146,7 @@ public class TieDieUtil {
                return upnodeScoreMapDiffused;
            }
            Set<CyNode> diffUpset = upnodeScoreMapDiffused.keySet();
-           Set<CyNode> diffDownset = upnodeScoreMapDiffused.keySet();
+           //Set<CyNode> diffDownset = upnodeScoreMapDiffused.keySet();
            
            for(CyNode node : diffUpset){
                if(downnodeScoreMapDiffused.containsKey(node)){

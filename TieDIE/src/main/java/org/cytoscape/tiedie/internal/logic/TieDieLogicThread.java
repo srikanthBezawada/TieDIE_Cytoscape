@@ -1,7 +1,9 @@
 package org.cytoscape.tiedie.internal.logic;
 
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -18,6 +20,8 @@ import org.cytoscape.view.model.CyNetworkView;
 
 import org.cytoscape.tiedie.internal.CyActivator;
 import static org.cytoscape.tiedie.internal.visuals.UpdateSubNetView.updateView;
+import org.cytoscape.view.presentation.property.BasicVisualLexicon;
+import org.cytoscape.view.presentation.property.NodeShapeVisualProperty;
 
 
 
@@ -54,7 +58,7 @@ public class TieDieLogicThread extends Thread {
     public TieDieLogicThread(CyNetwork currentnetwork, CyNetworkView currentnetworkview) {
         this.currentnetwork = currentnetwork;
         this.currentnetworkview = currentnetworkview;
-        nodeList = new LinkedList();
+        //nodeList = new LinkedList();
         this.nodeList = this.currentnetwork.getNodeList(); 
         this.totalnodecount = nodeList.size();
         this.edgeTable = currentnetwork.getDefaultEdgeTable();
@@ -81,7 +85,7 @@ public class TieDieLogicThread extends Thread {
         upstreamheatVectorDiffused =  upstreamheatVectorDiffused.extractDiffusedHeatVector(upstreamheatVector, heatDiffusionKernel);
         downstreamheatVectorDiffused = downstreamheatVectorDiffused.extractDiffusedHeatVector(downstreamheatVector, heatDiffusionKernel);
         
-        // Extracting the maps with only inital sets and their diffused values below
+        // Extracting the maps of node vs diffused heat
         upnodeScoreMapDiffused = getDiffusedMap(upstreamheatVectorDiffused);
         downnodeScoreMapDiffused = getDiffusedMap(downstreamheatVectorDiffused);
         
@@ -94,6 +98,25 @@ public class TieDieLogicThread extends Thread {
     
     public void extractSubnetwork(){
         sizeFactor = 1;
+        
+        for(Object o : upstreamheatVector.getnodeHeatSet()){
+            CyNode c = (CyNode)o;
+            if(downnodeScoreMapDiffused.containsKey(c)){
+                downnodeScoreMapDiffused.remove(c);
+            }
+        }
+                
+        for(Object o : downstreamheatVector.getnodeHeatSet()){
+            CyNode c = (CyNode)o;
+            if(upnodeScoreMapDiffused.containsKey(c)){
+                upnodeScoreMapDiffused.remove(c);
+            }
+        }
+        
+        
+        System.out.println("upnodeScoreMapDiffused.size()"+upnodeScoreMapDiffused.size());
+        System.out.println("downnodeScoreMapDiffused.size()"+downnodeScoreMapDiffused.size());
+        
         linker_cutoff = TieDieUtil.findLinkerCutoff(upstreamheatVector.getnodeHeatSet(), downstreamheatVector.getnodeHeatSet(), upnodeScoreMapDiffused, downnodeScoreMapDiffused, sizeFactor);
         System.out.println("linker_cutoff"+linker_cutoff);
         // nodeList is the extra parameter to existing tiedie  https://github.com/epaull/TieDIE/blob/master/lib/tiedie_util.py#L336
@@ -129,8 +152,9 @@ public class TieDieLogicThread extends Thread {
         }
         System.out.println("nodes size"+newnodes.size());
         System.out.println("edges size"+newedges.size());
-        //Set<CyNode> s = new HashSet<CyNode>(newnodes);
-        //System.out.println("nodesetsize"+s.size());
+        // SOME LINKERS ARE SHOWN FROM SOURCE, TARGET.. verify the findLinker code
+        Set<CyNode> s = new HashSet<CyNode>(newnodes);
+        System.out.println("nodesetsize"+s.size());
                 
         CyRootNetwork root = ((CySubNetwork)currentnetwork).getRootNetwork();
         CyNetwork TieDIEsubNetwork = root.addSubNetwork(newnodes, newedges);
@@ -140,6 +164,38 @@ public class TieDieLogicThread extends Thread {
         CyNetworkView tiedieView = CyActivator.networkViewFactory.createNetworkView(TieDIEsubNetwork);
         CyActivator.networkViewManager.addNetworkView(tiedieView);
         updateView(tiedieView, "grid");
+        CyActivator.getCyEventHelper().flushPayloadEvents();
+        
+        for(Object currentnode : linkerNodes){
+            tiedieView.getNodeView((CyNode)currentnode).setVisualProperty(BasicVisualLexicon.NODE_BORDER_PAINT, Color.GREEN);
+            tiedieView.getNodeView((CyNode)currentnode).setVisualProperty(BasicVisualLexicon.NODE_BORDER_WIDTH, 10.0);
+            currentnetworkview.getNodeView((CyNode)currentnode).setVisualProperty(BasicVisualLexicon.NODE_SHAPE, NodeShapeVisualProperty.OCTAGON);
+            currentnetworkview.getNodeView((CyNode)currentnode).setVisualProperty(BasicVisualLexicon.NODE_BORDER_PAINT, Color.GREEN);
+            currentnetworkview.getNodeView((CyNode)currentnode).setVisualProperty(BasicVisualLexicon.NODE_BORDER_WIDTH, 10.0);
+        }
+        
+        for(Object currentnode : upstreamheatVector.getnodeHeatSet()){
+            tiedieView.getNodeView((CyNode)currentnode).setVisualProperty(BasicVisualLexicon.NODE_BORDER_PAINT, Color.RED);
+            tiedieView.getNodeView((CyNode)currentnode).setVisualProperty(BasicVisualLexicon.NODE_BORDER_WIDTH, 5.5);
+            currentnetworkview.getNodeView((CyNode)currentnode).setVisualProperty(BasicVisualLexicon.NODE_BORDER_PAINT, Color.RED);
+            currentnetworkview.getNodeView((CyNode)currentnode).setVisualProperty(BasicVisualLexicon.NODE_BORDER_WIDTH, 10.0);
+            currentnetworkview.getNodeView((CyNode)currentnode).setVisualProperty(BasicVisualLexicon.NODE_SHAPE, NodeShapeVisualProperty.OCTAGON);
+        }
+        for(Object currentnode : downstreamheatVector.getnodeHeatSet()){
+            tiedieView.getNodeView((CyNode)currentnode).setVisualProperty(BasicVisualLexicon.NODE_BORDER_PAINT, Color.RED);
+            tiedieView.getNodeView((CyNode)currentnode).setVisualProperty(BasicVisualLexicon.NODE_BORDER_WIDTH, 16.0);
+            currentnetworkview.getNodeView((CyNode)currentnode).setVisualProperty(BasicVisualLexicon.NODE_FILL_COLOR, Color.RED);
+            currentnetworkview.getNodeView((CyNode)currentnode).setVisualProperty(BasicVisualLexicon.NODE_SHAPE, NodeShapeVisualProperty.OCTAGON);
+        }
+        
+        
+        for(Object currentedge : newedges){
+            tiedieView.getEdgeView((CyEdge)currentedge).setVisualProperty(BasicVisualLexicon.EDGE_STROKE_UNSELECTED_PAINT, Color.GREEN);
+            currentnetworkview.getEdgeView((CyEdge)currentedge).setVisualProperty(BasicVisualLexicon.EDGE_STROKE_UNSELECTED_PAINT, Color.GREEN);
+            currentnetworkview.getEdgeView((CyEdge)currentedge).setVisualProperty(BasicVisualLexicon.EDGE_WIDTH, 6.5);
+        }
+        
+        
     }
     
    
