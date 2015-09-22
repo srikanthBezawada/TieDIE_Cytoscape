@@ -2,6 +2,7 @@ package org.cytoscape.tiedie.internal.logic;
 
 import Jama.Matrix;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -29,7 +30,7 @@ public class HeatVector {
     private Matrix heatVectorOfScores;
     private int numOfColumns;
     private Set<CyNode> nodeHeatSet; 
-    private Map<CyNode, Double> nodeScoreMap;
+    public Map<CyNode, Double> nodeScoreMap;
     private int nodeCount;
     
     //HeatValue and Score are the same
@@ -75,7 +76,7 @@ public class HeatVector {
         Number heatscore = null;
         nodeHeatSet = new LinkedHashSet<CyNode>();  
         
-        nodeScoreMap = new HashMap<CyNode, Double>();
+        nodeScoreMap = new LinkedHashMap<CyNode, Double>();
         for (CyNode root : nodeList) { // nodeList is always accessed in a same order
             CyRow row = nodeTable.getRow(root.getSUID());
             
@@ -101,8 +102,12 @@ public class HeatVector {
                 }
                 
             }
-            if(heatscore == null)
-            continue;
+            if(heatscore == null){
+                nodeScoreMap.put(root, 0.0);
+                counter++; // !
+                continue;
+            }
+            
             
             heatVectorOfScores.set(0, counter, heatscore.doubleValue()); // set() method of Jama library
             nodeHeatSet.add(root);  // put all the nodes corresponding to that column in nodeHeatSet
