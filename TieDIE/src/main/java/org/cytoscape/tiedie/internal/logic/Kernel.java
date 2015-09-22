@@ -2,11 +2,13 @@
 package org.cytoscape.tiedie.internal.logic;
 
 import Jama.Matrix;
+import java.util.HashSet;
 
 import org.jblas.DoubleMatrix; // jblas library has been used for matrix exponentiation
 import org.jblas.MatrixFunctions;
 
 import java.util.List;
+import java.util.Set;
 
 import org.cytoscape.model.CyEdge;
 import org.cytoscape.model.CyNetwork;
@@ -60,6 +62,16 @@ public class Kernel {
     
     public double[][] getadjacencyMatrixOfNetwork(){
         return createAdjMatrix();
+    }
+    
+    public double[][] getdegreeMatrixOfNetwork(){
+        return createDegMatrix();
+    }
+    
+    public double[][] getlapMatrixOfNetwork(){
+        createAdjMatrix();
+        createDegMatrix();
+        return createLapMatrix().getArray();
     }
     
     public double[][] getdiffusionKernelOfNetwork(){
@@ -148,8 +160,16 @@ public class Kernel {
 
         int k = 0;
         for (CyNode root : nodeList) {
-            List<CyNode> myNeighbourList = currentnetwork.getNeighborList(root, CyEdge.Type.ANY);
-            int myNodeDegree = myNeighbourList.size();
+            List<CyNode> myOutNeighbourList = currentnetwork.getNeighborList(root, CyEdge.Type.OUTGOING);
+            List<CyNode> myInNeighbourList = currentnetwork.getNeighborList(root, CyEdge.Type.INCOMING);
+            Set<CyNode> myNeighbourSet =  new HashSet<CyNode>();
+            for(CyNode a:myOutNeighbourList){ // update code for self loops
+                myNeighbourSet.add(a);
+            }
+            for(CyNode a:myInNeighbourList){
+                myNeighbourSet.add(a);
+            }
+            int myNodeDegree = myNeighbourSet.size();
             degreeMatrixOfNetwork[k][k] = myNodeDegree;
             k++;
         }
