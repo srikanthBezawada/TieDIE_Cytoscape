@@ -4,10 +4,13 @@ import java.awt.Component;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.Icon;
 import javax.swing.BorderFactory;
 import javax.swing.border.Border;
 import javax.swing.JCheckBox;
+import javax.swing.JOptionPane;
 import javax.swing.JRadioButton;
 
 import org.cytoscape.application.CyApplicationManager;
@@ -18,6 +21,7 @@ import org.cytoscape.model.CyColumn;
 import org.cytoscape.model.CyNetwork;
 import org.cytoscape.model.CyTable;
 import org.cytoscape.tiedie.internal.logic.TieDieLogicThread;
+import org.cytoscape.tiedie.internal.visuals.NodeAttributeListener;
 import org.cytoscape.view.model.CyNetworkView;
 
 
@@ -49,7 +53,16 @@ public class TieDieGUI extends javax.swing.JPanel implements CytoPanelComponent 
         this.currentnetworkview = cyApplicationManager.getCurrentNetworkView();
         cyDesktopService = tiediecore.getCyDesktopService();
         initComponents();
-       
+        if(cyApplicationManager.getCurrentNetworkView() != null )
+            jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(
+                    NodeAttributeListener.getNodeAttributes(
+                            cyApplicationManager.getCurrentNetworkView().getModel()).toArray()));
+        jComboBox1.setSelectedItem("None");
+        if(cyApplicationManager.getCurrentNetworkView() != null )
+            jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(
+                    NodeAttributeListener.getNodeAttributes(
+                            cyApplicationManager.getCurrentNetworkView().getModel()).toArray()));
+        jComboBox2.setSelectedItem("None");
     }
     
     public Icon getIcon() {
@@ -82,10 +95,16 @@ public class TieDieGUI extends javax.swing.JPanel implements CytoPanelComponent 
         startButton = new javax.swing.JButton();
         helpButton = new javax.swing.JButton();
         exitButton = new javax.swing.JButton();
-        otherPanel1 = new javax.swing.JPanel();
         statusLabel = new javax.swing.JLabel();
-        otherPanel2 = new javax.swing.JPanel();
+        jComboBox1 = new javax.swing.JComboBox();
+        jComboBox2 = new javax.swing.JComboBox();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         headingLabel = new javax.swing.JLabel();
+
+        setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        mainPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         startButton.setText("START executing TieDIE algorithm");
         startButton.addActionListener(new java.awt.event.ActionListener() {
@@ -108,84 +127,67 @@ public class TieDieGUI extends javax.swing.JPanel implements CytoPanelComponent 
             }
         });
 
-        otherPanel1.setLayout(new javax.swing.BoxLayout(otherPanel1, javax.swing.BoxLayout.LINE_AXIS));
-
         statusLabel.setFont(new java.awt.Font("Tahoma", 2, 10)); // NOI18N
         statusLabel.setText("TieDIE status");
 
-        otherPanel2.setLayout(new javax.swing.BoxLayout(otherPanel2, javax.swing.BoxLayout.LINE_AXIS));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "None" }));
+
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "None" }));
+
+        jLabel1.setText("Upstream");
+
+        jLabel2.setText("Downstream");
 
         javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
         mainPanel.setLayout(mainPanelLayout);
         mainPanelLayout.setHorizontalGroup(
             mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(mainPanelLayout.createSequentialGroup()
-                .addGap(35, 35, 35)
+                .addGap(31, 31, 31)
                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(statusLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(mainPanelLayout.createSequentialGroup()
+                        .addComponent(helpButton, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(exitButton))
+                    .addComponent(statusLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanelLayout.createSequentialGroup()
+                        .addGap(0, 2, Short.MAX_VALUE)
+                        .addComponent(startButton, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanelLayout.createSequentialGroup()
                         .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(startButton)
-                            .addComponent(otherPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(otherPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(mainPanelLayout.createSequentialGroup()
-                                .addComponent(helpButton, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(78, 78, 78)
-                                .addComponent(exitButton)))
-                        .addGap(0, 30, Short.MAX_VALUE)))
-                .addContainerGap())
+                                .addComponent(jLabel1)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanelLayout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jLabel2)))
+                        .addGap(18, 18, 18)
+                        .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jComboBox1, 0, 136, Short.MAX_VALUE)
+                            .addComponent(jComboBox2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addGap(27, 27, 27))
         );
         mainPanelLayout.setVerticalGroup(
             mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanelLayout.createSequentialGroup()
-                .addGap(38, 38, 38)
-                .addComponent(otherPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(otherPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26)
+                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(startButton, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(statusLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 80, Short.MAX_VALUE)
+                .addComponent(startButton, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(statusLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(helpButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(exitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(43, 43, 43))
+                .addGap(34, 34, 34))
         );
-
-        // Customized code from here
-        /*
-        CyTable nodeTable = currentnetwork.getDefaultNodeTable();
-        Collection<CyColumn> columnCollection = nodeTable.getColumns();
-
-        String presentColumnName;
-        Border border = BorderFactory.createTitledBorder("Select columns for diffusion");
-        otherPanel1.setBorder(border);
-
-        List<JCheckBox> checkboxes = new ArrayList<JCheckBox>();
-        for(CyColumn presentColumn : columnCollection){
-            presentColumnName = presentColumn.getName();
-            JCheckBox check = new JCheckBox(presentColumnName);
-            checkboxes.add(check);
-            otherPanel1.add(check);
-        }
-        */
-
-        Border border1 = BorderFactory.createTitledBorder("Select columns for diffusion");
-        otherPanel1.setBorder(border1);
-        JCheckBox upstreamBox = new JCheckBox("upstreamheat",true);
-        JCheckBox downstreamBox = new JCheckBox("downstreamheat",true);
-
-        otherPanel1.add(upstreamBox);
-        otherPanel1.add(downstreamBox);
-        // Customized code ends here
-        Border border2 = BorderFactory.createTitledBorder("Select way of diffusion");
-        otherPanel2.setBorder(border2);
-        JRadioButton kernelButton = new JRadioButton("HeatKernel",true);
-        JRadioButton pagerankButton = new JRadioButton("PageRank", false);
-
-        otherPanel2.add(kernelButton);
-        otherPanel2.add(pagerankButton);
 
         headingLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         headingLabel.setForeground(new java.awt.Color(255, 0, 51));
@@ -209,8 +211,9 @@ public class TieDieGUI extends javax.swing.JPanel implements CytoPanelComponent 
             .addGroup(layout.createSequentialGroup()
                 .addGap(31, 31, 31)
                 .addComponent(headingLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(mainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(mainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(408, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -226,11 +229,17 @@ public class TieDieGUI extends javax.swing.JPanel implements CytoPanelComponent 
     
     private void startButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startButtonActionPerformed
         statusLabel.setText("Started executing TieDIE");
-        
-        logicThread = new TieDieLogicThread(currentnetwork, currentnetworkview, null, null);
+        String nodetAttribute1 = inputNodeAttributeAndValidate(jComboBox1);
+        String nodetAttribute2 = inputNodeAttributeAndValidate(jComboBox2);
+        logicThread = new TieDieLogicThread(currentnetwork, currentnetworkview, nodetAttribute1, nodetAttribute2);
         logicThread.start();
-        
-        statusLabel.setText("SubNetwork extracted is available in the Control panel");
+        /*
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(TieDieGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }*/
+        statusLabel.setText("SubNetwork extracted -> Check Control panel");
     }//GEN-LAST:event_startButtonActionPerformed
 
 
@@ -240,7 +249,9 @@ public class TieDieGUI extends javax.swing.JPanel implements CytoPanelComponent 
     
     
     private void helpButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_helpButtonActionPerformed
-        
+        TieDieHelp help = new TieDieHelp();
+        help.setText(1);
+        help.setVisible(true);
         
       
     }//GEN-LAST:event_helpButtonActionPerformed
@@ -252,10 +263,32 @@ public class TieDieGUI extends javax.swing.JPanel implements CytoPanelComponent 
     private javax.swing.JButton exitButton;
     private javax.swing.JLabel headingLabel;
     private javax.swing.JButton helpButton;
+    private javax.swing.JComboBox jComboBox1;
+    private javax.swing.JComboBox jComboBox2;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel mainPanel;
-    private javax.swing.JPanel otherPanel1;
-    private javax.swing.JPanel otherPanel2;
     private javax.swing.JButton startButton;
     private javax.swing.JLabel statusLabel;
     // End of variables declaration//GEN-END:variables
+
+    public String inputNodeAttributeAndValidate(javax.swing.JComboBox jcb){
+        String nodeAttribute = jcb.getSelectedItem().toString();
+        if(nodeAttribute.equals("None")){
+            nodeAttribute = null;
+            return nodeAttribute;
+        } else {
+            System.out.println("using "+nodeAttribute+" as node attribute.");
+            return nodeAttribute;
+        }
+    }
+    
+    public javax.swing.JComboBox getNodeAttributeComboBox1(){
+        return jComboBox1;
+    }
+
+    public javax.swing.JComboBox getNodeAttributeComboBox2(){
+        return jComboBox2;
+    }
+    
 }
