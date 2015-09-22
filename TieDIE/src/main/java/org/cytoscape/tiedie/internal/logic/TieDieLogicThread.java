@@ -167,32 +167,35 @@ public class TieDieLogicThread extends Thread {
         CyActivator.getCyEventHelper().flushPayloadEvents();
         
         for(Object currentnode : linkerNodes){
-            tiedieView.getNodeView((CyNode)currentnode).setVisualProperty(BasicVisualLexicon.NODE_BORDER_PAINT, Color.GREEN);
-            tiedieView.getNodeView((CyNode)currentnode).setVisualProperty(BasicVisualLexicon.NODE_BORDER_WIDTH, 10.0);
+            tiedieView.getNodeView((CyNode)currentnode).setVisualProperty(BasicVisualLexicon.NODE_FILL_COLOR, Color.ORANGE);
+            //tiedieView.getNodeView((CyNode)currentnode).setVisualProperty(BasicVisualLexicon.NODE_BORDER_PAINT, Color.ORANGE);
+            //tiedieView.getNodeView((CyNode)currentnode).setVisualProperty(BasicVisualLexicon.NODE_BORDER_WIDTH, 10.0);
             currentnetworkview.getNodeView((CyNode)currentnode).setVisualProperty(BasicVisualLexicon.NODE_SHAPE, NodeShapeVisualProperty.OCTAGON);
-            currentnetworkview.getNodeView((CyNode)currentnode).setVisualProperty(BasicVisualLexicon.NODE_BORDER_PAINT, Color.GREEN);
-            currentnetworkview.getNodeView((CyNode)currentnode).setVisualProperty(BasicVisualLexicon.NODE_BORDER_WIDTH, 10.0);
+            currentnetworkview.getNodeView((CyNode)currentnode).setVisualProperty(BasicVisualLexicon.NODE_BORDER_PAINT, Color.ORANGE);
+            currentnetworkview.getNodeView((CyNode)currentnode).setVisualProperty(BasicVisualLexicon.NODE_BORDER_WIDTH, 12.0);//12
         }
         
         for(Object currentnode : upstreamheatVector.getnodeHeatSet()){
             tiedieView.getNodeView((CyNode)currentnode).setVisualProperty(BasicVisualLexicon.NODE_BORDER_PAINT, Color.RED);
-            tiedieView.getNodeView((CyNode)currentnode).setVisualProperty(BasicVisualLexicon.NODE_BORDER_WIDTH, 5.5);
+            tiedieView.getNodeView((CyNode)currentnode).setVisualProperty(BasicVisualLexicon.NODE_BORDER_WIDTH, 6.25);//6.25
             currentnetworkview.getNodeView((CyNode)currentnode).setVisualProperty(BasicVisualLexicon.NODE_BORDER_PAINT, Color.RED);
-            currentnetworkview.getNodeView((CyNode)currentnode).setVisualProperty(BasicVisualLexicon.NODE_BORDER_WIDTH, 10.0);
+            currentnetworkview.getNodeView((CyNode)currentnode).setVisualProperty(BasicVisualLexicon.NODE_BORDER_WIDTH, 12.0);//12
             currentnetworkview.getNodeView((CyNode)currentnode).setVisualProperty(BasicVisualLexicon.NODE_SHAPE, NodeShapeVisualProperty.OCTAGON);
         }
         for(Object currentnode : downstreamheatVector.getnodeHeatSet()){
-            tiedieView.getNodeView((CyNode)currentnode).setVisualProperty(BasicVisualLexicon.NODE_BORDER_PAINT, Color.RED);
-            tiedieView.getNodeView((CyNode)currentnode).setVisualProperty(BasicVisualLexicon.NODE_BORDER_WIDTH, 16.0);
+            tiedieView.getNodeView((CyNode)currentnode).setVisualProperty(BasicVisualLexicon.NODE_FILL_COLOR, Color.RED);
+            //tiedieView.getNodeView((CyNode)currentnode).setVisualProperty(BasicVisualLexicon.NODE_BORDER_PAINT, Color.RED);
+            //tiedieView.getNodeView((CyNode)currentnode).setVisualProperty(BasicVisualLexicon.NODE_BORDER_WIDTH, 16.0);
             currentnetworkview.getNodeView((CyNode)currentnode).setVisualProperty(BasicVisualLexicon.NODE_FILL_COLOR, Color.RED);
             currentnetworkview.getNodeView((CyNode)currentnode).setVisualProperty(BasicVisualLexicon.NODE_SHAPE, NodeShapeVisualProperty.OCTAGON);
         }
         
         
         for(Object currentedge : newedges){
-            tiedieView.getEdgeView((CyEdge)currentedge).setVisualProperty(BasicVisualLexicon.EDGE_STROKE_UNSELECTED_PAINT, Color.GREEN);
-            currentnetworkview.getEdgeView((CyEdge)currentedge).setVisualProperty(BasicVisualLexicon.EDGE_STROKE_UNSELECTED_PAINT, Color.GREEN);
-            currentnetworkview.getEdgeView((CyEdge)currentedge).setVisualProperty(BasicVisualLexicon.EDGE_WIDTH, 6.5);
+            tiedieView.getEdgeView((CyEdge)currentedge).setVisualProperty(BasicVisualLexicon.EDGE_STROKE_UNSELECTED_PAINT, Color.ORANGE);
+            tiedieView.getEdgeView((CyEdge)currentedge).setVisualProperty(BasicVisualLexicon.EDGE_WIDTH, 6.5);
+            currentnetworkview.getEdgeView((CyEdge)currentedge).setVisualProperty(BasicVisualLexicon.EDGE_STROKE_UNSELECTED_PAINT, Color.ORANGE);
+            currentnetworkview.getEdgeView((CyEdge)currentedge).setVisualProperty(BasicVisualLexicon.EDGE_WIDTH, 7.5);
         }
         
         
