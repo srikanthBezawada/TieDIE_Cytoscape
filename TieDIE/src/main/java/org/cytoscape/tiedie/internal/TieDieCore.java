@@ -3,12 +3,14 @@ package org.cytoscape.tiedie.internal;
 import java.util.Properties;
 
 import org.cytoscape.application.CyApplicationManager;
+import org.cytoscape.application.events.SetCurrentNetworkListener;
 import org.cytoscape.application.swing.CySwingApplication;
 import org.cytoscape.application.swing.CytoPanel;
 import org.cytoscape.application.swing.CytoPanelComponent;
 import org.cytoscape.application.swing.CytoPanelName;
 import org.cytoscape.model.CyNetwork;
 import org.cytoscape.service.util.CyServiceRegistrar;
+import org.cytoscape.tiedie.internal.visuals.NodeAttributeListener;
 import org.cytoscape.view.model.CyNetworkView;
 
 
@@ -27,7 +29,7 @@ public class TieDieCore {
     public CySwingApplication cyDesktopService;
     public CyServiceRegistrar cyServiceRegistrar;
     public CyActivator cyactivator;
-    public TieDieGUI tiediestartmenu;
+    public static TieDieGUI tiediestartmenu;
 
     public TieDieCore(CyActivator cyactivator) {
         this.cyactivator = cyactivator;
@@ -36,6 +38,7 @@ public class TieDieCore {
         this.cyServiceRegistrar = cyactivator.cyServiceRegistrar;
         System.out.println("Starting GUI of TieDIE in control panel");
         tiediestartmenu = createTieDieStartMenu();
+        registerServices();
         updatecurrentnetwork();
     }
 
@@ -77,5 +80,15 @@ public class TieDieCore {
 
     public CySwingApplication getCyDesktopService() {
         return this.cyDesktopService;
+    }
+    
+    public static TieDieGUI getTiDieStartMenu(){
+        return tiediestartmenu;
+    }
+    
+    void registerServices(){
+        NodeAttributeListener nodeAttributeListener = new NodeAttributeListener();
+        cyactivator.cyServiceRegistrar.registerService(nodeAttributeListener, SetCurrentNetworkListener.class, new Properties());
+        
     }
 }
