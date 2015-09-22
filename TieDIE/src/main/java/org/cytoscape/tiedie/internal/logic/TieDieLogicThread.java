@@ -87,8 +87,8 @@ public class TieDieLogicThread extends Thread {
         if(downstreamColumn == null){
             downstreamColumn = "downstreamheat";
         }
-        upstreamheatVector = upstreamheatVector.extractHeatVector("upstreamheat",nodeList,nodeTable);
-        downstreamheatVector = downstreamheatVector.extractHeatVector("downstreamheat",nodeList,nodeTable);
+        upstreamheatVector = upstreamheatVector.extractHeatVector(upstreamColumn, nodeList, nodeTable);
+        downstreamheatVector = downstreamheatVector.extractHeatVector(downstreamColumn, nodeList, nodeTable);
         // Get the diffused heat vectors which spread all over the network
         upstreamheatVectorDiffused =  upstreamheatVectorDiffused.extractDiffusedHeatVector(upstreamheatVector, heatDiffusionKernel);
         downstreamheatVectorDiffused = downstreamheatVectorDiffused.extractDiffusedHeatVector(downstreamheatVector, heatDiffusionKernel);
