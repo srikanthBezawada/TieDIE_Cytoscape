@@ -41,6 +41,7 @@ public class TieDieLogicThread extends Thread {
     
     */
     double sizeFactor, linker_cutoff;
+    String upstreamColumn, downstreamColumn;
     
     public CyNetwork currentnetwork;
     public CyNetworkView currentnetworkview;
@@ -55,7 +56,7 @@ public class TieDieLogicThread extends Thread {
     Map upnodeScoreMapDiffused, downnodeScoreMapDiffused;
     Map linkers_nodeScoreMap, filtered_linkersNodeScoreMap;
     
-    public TieDieLogicThread(CyNetwork currentnetwork, CyNetworkView currentnetworkview) {
+    public TieDieLogicThread(CyNetwork currentnetwork, CyNetworkView currentnetworkview, String upstreamColumn, String downstreamColumn) {
         this.currentnetwork = currentnetwork;
         this.currentnetworkview = currentnetworkview;
         //nodeList = new LinkedList();
@@ -63,7 +64,8 @@ public class TieDieLogicThread extends Thread {
         this.totalnodecount = nodeList.size();
         this.edgeTable = currentnetwork.getDefaultEdgeTable();
         this.nodeTable = currentnetwork.getDefaultNodeTable();
-        
+        this.upstreamColumn = upstreamColumn;
+        this.downstreamColumn = downstreamColumn;
         upstreamheatVector = new HeatVector(totalnodecount);
         downstreamheatVector = new HeatVector(totalnodecount);
         upstreamheatVectorDiffused = new DiffusedHeatVector(totalnodecount);
@@ -79,6 +81,12 @@ public class TieDieLogicThread extends Thread {
         Create upstreamheatVector, downstreamheatVector for 2-way diffusion
         "Extract them using extractHeatVector"
         */
+        if(upstreamColumn == null){
+            upstreamColumn = "upstreamheat";
+        }
+        if(downstreamColumn == null){
+            downstreamColumn = "downstreamheat";
+        }
         upstreamheatVector = upstreamheatVector.extractHeatVector("upstreamheat",nodeList,nodeTable);
         downstreamheatVector = downstreamheatVector.extractHeatVector("downstreamheat",nodeList,nodeTable);
         // Get the diffused heat vectors which spread all over the network

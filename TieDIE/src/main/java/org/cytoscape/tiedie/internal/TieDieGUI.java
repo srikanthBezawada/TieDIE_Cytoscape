@@ -227,7 +227,7 @@ public class TieDieGUI extends javax.swing.JPanel implements CytoPanelComponent 
     private void startButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startButtonActionPerformed
         statusLabel.setText("Started executing TieDIE");
         
-        logicThread = new TieDieLogicThread(currentnetwork, currentnetworkview);
+        logicThread = new TieDieLogicThread(currentnetwork, currentnetworkview, null, null);
         logicThread.start();
         
         statusLabel.setText("SubNetwork extracted is available in the Control panel");
