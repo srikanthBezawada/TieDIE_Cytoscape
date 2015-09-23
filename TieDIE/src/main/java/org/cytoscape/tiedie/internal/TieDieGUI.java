@@ -49,8 +49,8 @@ public class TieDieGUI extends javax.swing.JPanel implements CytoPanelComponent 
         this.cyactivator = cyactivator;
         this.tiediecore = tiediecore;
         cyApplicationManager = tiediecore.getCyApplicationManager();
-        this.currentnetwork = cyApplicationManager.getCurrentNetwork();
-        this.currentnetworkview = cyApplicationManager.getCurrentNetworkView();
+        //this.currentnetwork = cyApplicationManager.getCurrentNetwork();
+        //this.currentnetworkview = cyApplicationManager.getCurrentNetworkView();
         cyDesktopService = tiediecore.getCyDesktopService();
         initComponents();
         if(cyApplicationManager.getCurrentNetworkView() != null )
@@ -138,19 +138,19 @@ public class TieDieGUI extends javax.swing.JPanel implements CytoPanelComponent 
 
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "None" }));
 
-        jLabel1.setText("Up");
+        jLabel1.setText("Upstream");
 
-        jLabel2.setText("Down");
+        jLabel2.setText("Downstream");
 
         headingLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         headingLabel.setForeground(new java.awt.Color(255, 0, 51));
         headingLabel.setText("TieDIE GUI");
 
         buttonGroup1.add(jRadioButton1);
-        jRadioButton1.setText("jRadioButton1");
+        jRadioButton1.setText("Heat Kernel");
 
         buttonGroup1.add(jRadioButton2);
-        jRadioButton2.setText("jRadioButton2");
+        jRadioButton2.setText("Page Rank");
 
         javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
         mainPanel.setLayout(mainPanelLayout);
@@ -166,22 +166,23 @@ public class TieDieGUI extends javax.swing.JPanel implements CytoPanelComponent 
                     .addComponent(statusLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(mainPanelLayout.createSequentialGroup()
                         .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jRadioButton2)
-                            .addComponent(jRadioButton1)
+                            .addComponent(startButton)
                             .addGroup(mainPanelLayout.createSequentialGroup()
                                 .addComponent(helpButton, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(78, 78, 78)
+                                .addGap(79, 79, 79)
                                 .addComponent(exitButton))
-                            .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(startButton)
-                                .addGroup(mainPanelLayout.createSequentialGroup()
-                                    .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel1)
-                                        .addComponent(jLabel2))
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(jComboBox2, javax.swing.GroupLayout.Alignment.TRAILING, 0, 121, Short.MAX_VALUE)
-                                        .addComponent(jComboBox1, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                            .addGroup(mainPanelLayout.createSequentialGroup()
+                                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel1)
+                                    .addComponent(jLabel2))
+                                .addGap(14, 14, 14)
+                                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jComboBox2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jComboBox1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(mainPanelLayout.createSequentialGroup()
+                                .addComponent(jRadioButton1)
+                                .addGap(37, 37, 37)
+                                .addComponent(jRadioButton2)))
                         .addGap(0, 69, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -198,19 +199,19 @@ public class TieDieGUI extends javax.swing.JPanel implements CytoPanelComponent 
                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
-                .addGap(29, 29, 29)
+                .addGap(18, 18, 18)
+                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jRadioButton1)
+                    .addComponent(jRadioButton2))
+                .addGap(18, 18, 18)
                 .addComponent(startButton, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(statusLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(22, 22, 22)
                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(helpButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(exitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(29, 29, 29)
-                .addComponent(jRadioButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jRadioButton2)
-                .addContainerGap(450, Short.MAX_VALUE))
+                .addContainerGap(475, Short.MAX_VALUE))
         );
 
         jScrollPane1.setViewportView(mainPanel);
@@ -247,6 +248,8 @@ public class TieDieGUI extends javax.swing.JPanel implements CytoPanelComponent 
         statusLabel.setText("Started executing TieDIE");
         String nodetAttribute1 = inputNodeAttributeAndValidate(jComboBox1);
         String nodetAttribute2 = inputNodeAttributeAndValidate(jComboBox2);
+        currentnetwork = cyApplicationManager.getCurrentNetwork();
+        currentnetworkview = cyApplicationManager.getCurrentNetworkView();
         logicThread = new TieDieLogicThread(currentnetwork, currentnetworkview, nodetAttribute1, nodetAttribute2);
         logicThread.start();
         try {
