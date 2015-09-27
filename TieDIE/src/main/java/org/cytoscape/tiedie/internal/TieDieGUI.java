@@ -54,15 +54,15 @@ public class TieDieGUI extends javax.swing.JPanel implements CytoPanelComponent 
         cyDesktopService = tiediecore.getCyDesktopService();
         initComponents();
         if(cyApplicationManager.getCurrentNetworkView() != null )
-            jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(
+            upComboBox.setModel(new javax.swing.DefaultComboBoxModel(
                     NodeAttributeListener.getNodeAttributes(
                             cyApplicationManager.getCurrentNetworkView().getModel()).toArray()));
-        jComboBox1.setSelectedItem("None");
+        upComboBox.setSelectedItem("None");
         if(cyApplicationManager.getCurrentNetworkView() != null )
-            jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(
+            downComboBox.setModel(new javax.swing.DefaultComboBoxModel(
                     NodeAttributeListener.getNodeAttributes(
                             cyApplicationManager.getCurrentNetworkView().getModel()).toArray()));
-        jComboBox2.setSelectedItem("None");
+        downComboBox.setSelectedItem("None");
     }
     
     public Icon getIcon() {
@@ -98,13 +98,13 @@ public class TieDieGUI extends javax.swing.JPanel implements CytoPanelComponent 
         helpButton = new javax.swing.JButton();
         exitButton = new javax.swing.JButton();
         statusLabel = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox();
-        jComboBox2 = new javax.swing.JComboBox();
+        upComboBox = new javax.swing.JComboBox();
+        downComboBox = new javax.swing.JComboBox();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         headingLabel = new javax.swing.JLabel();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
+        kernelRbutton = new javax.swing.JRadioButton();
+        PagerankRbutton = new javax.swing.JRadioButton();
 
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -134,9 +134,9 @@ public class TieDieGUI extends javax.swing.JPanel implements CytoPanelComponent 
         statusLabel.setFont(new java.awt.Font("Tahoma", 2, 10)); // NOI18N
         statusLabel.setText("TieDIE status");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "None" }));
+        upComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "None" }));
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "None" }));
+        downComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "None" }));
 
         jLabel1.setText("Upstream");
 
@@ -146,11 +146,11 @@ public class TieDieGUI extends javax.swing.JPanel implements CytoPanelComponent 
         headingLabel.setForeground(new java.awt.Color(255, 0, 51));
         headingLabel.setText("TieDIE GUI");
 
-        buttonGroup1.add(jRadioButton1);
-        jRadioButton1.setText("Heat Kernel");
+        buttonGroup1.add(kernelRbutton);
+        kernelRbutton.setText("Heat Kernel");
 
-        buttonGroup1.add(jRadioButton2);
-        jRadioButton2.setText("Page Rank");
+        buttonGroup1.add(PagerankRbutton);
+        PagerankRbutton.setText("Page Rank");
 
         javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
         mainPanel.setLayout(mainPanelLayout);
@@ -177,12 +177,12 @@ public class TieDieGUI extends javax.swing.JPanel implements CytoPanelComponent 
                                     .addComponent(jLabel2))
                                 .addGap(14, 14, 14)
                                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jComboBox2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jComboBox1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(downComboBox, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(upComboBox, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(mainPanelLayout.createSequentialGroup()
-                                .addComponent(jRadioButton1)
+                                .addComponent(kernelRbutton)
                                 .addGap(37, 37, 37)
-                                .addComponent(jRadioButton2)))
+                                .addComponent(PagerankRbutton)))
                         .addGap(0, 69, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -193,16 +193,16 @@ public class TieDieGUI extends javax.swing.JPanel implements CytoPanelComponent 
                 .addComponent(headingLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(upComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
                 .addGap(17, 17, 17)
                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(downComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
                 .addGap(18, 18, 18)
                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jRadioButton1)
-                    .addComponent(jRadioButton2))
+                    .addComponent(kernelRbutton)
+                    .addComponent(PagerankRbutton))
                 .addGap(18, 18, 18)
                 .addComponent(startButton, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -245,15 +245,67 @@ public class TieDieGUI extends javax.swing.JPanel implements CytoPanelComponent 
     
     
     private void startButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startButtonActionPerformed
-        statusLabel.setText("Started executing TieDIE");
-        String nodetAttribute1 = inputNodeAttributeAndValidate(jComboBox1);
-        String nodetAttribute2 = inputNodeAttributeAndValidate(jComboBox2);
         currentnetwork = cyApplicationManager.getCurrentNetwork();
         currentnetworkview = cyApplicationManager.getCurrentNetworkView();
-        logicThread = new TieDieLogicThread(currentnetwork, currentnetworkview, nodetAttribute1, nodetAttribute2, jRadioButton1.isSelected());
+        //  start input validations
+        String upComboSelected = inputNodeAttributeAndValidate(upComboBox);
+        String downComboSelected = inputNodeAttributeAndValidate(downComboBox);
+        
+        if(upComboSelected == null && downComboSelected == null){
+            JOptionPane.showMessageDialog(null, "Select the columns/heats to be considered for UPSTREAM & DOWNSTREAM after importing TABLE files", "Import TABLE files along with network file", JOptionPane.WARNING_MESSAGE);
+            statusLabel.setText("TieDIE status");
+            return;
+        }
+        
+        if(upComboSelected == null){
+            JOptionPane.showMessageDialog(null, "Select the columns/heats to be considered for UPSTREAM", "Import TABLE files along with network file", JOptionPane.WARNING_MESSAGE);
+            statusLabel.setText("TieDIE status");
+            return;
+        }
+        
+        if(downComboSelected == null){
+            JOptionPane.showMessageDialog(null, "Select the columns/heats to be considered for DOWNSTREAM", "Import TABLE files along with network file", JOptionPane.WARNING_MESSAGE);
+            statusLabel.setText("TieDIE status");
+            return;
+        }
+        /*
+        CyTable nTable = currentnetwork.getDefaultNodeTable();
+        if(nTable.getColumn(upComboSelected).getType() == Number.class && nTable.getColumn(downComboSelected).getType() == Number.class){
+        } else{
+             if((nTable.getColumn(upComboSelected).getType() != Number.class) || (nTable.getColumn(downComboSelected).getType() != Number.class)){
+                JOptionPane.showMessageDialog(null, "Select the appropriate columns/heats to be considered for UPSTREAM & DOWNSTREAM", "Import TABLE files along with network file", JOptionPane.WARNING_MESSAGE);
+                statusLabel.setText("TieDIE status");
+                return;  
+            }
+            
+            if((nTable.getColumn(upComboSelected).getType() != Number.class) && (nTable.getColumn(downComboSelected).getType() == Number.class)){
+                JOptionPane.showMessageDialog(null, "Select the appropriate columns/heats to be considered for UPSTREAM", "Import TABLE files along with network file", JOptionPane.WARNING_MESSAGE);
+                statusLabel.setText("TieDIE status");
+                return;
+            }
+            
+            if((nTable.getColumn(upComboSelected).getType() == Number.class) && (nTable.getColumn(upComboSelected).getType() != Number.class)){
+                JOptionPane.showMessageDialog(null, "Select the appropriate columns/heats to be considered for UPSTREAM", "Import TABLE files along with network file", JOptionPane.WARNING_MESSAGE);
+                statusLabel.setText("TieDIE status");
+                return;
+            }
+        }
+        */    
+        
+        if(kernelRbutton.isSelected() || PagerankRbutton.isSelected()){
+        } else{
+            JOptionPane.showMessageDialog(null, "Select either HeatKernel (or) PageRank based diffusion", "Select the WAY of diffusion", JOptionPane.WARNING_MESSAGE);
+            statusLabel.setText("TieDIE status");
+            return;
+        }
+        //  end input validations
+        
+        statusLabel.setText("Started executing TieDIE");
+        
+        logicThread = new TieDieLogicThread(currentnetwork, currentnetworkview, upComboSelected, downComboSelected, kernelRbutton.isSelected());
         logicThread.start();
         try {
-            Thread.sleep(2000);
+            Thread.sleep(2500);
         } catch (InterruptedException ex) {
             Logger.getLogger(TieDieGUI.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -278,20 +330,20 @@ public class TieDieGUI extends javax.swing.JPanel implements CytoPanelComponent 
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JRadioButton PagerankRbutton;
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JComboBox downComboBox;
     private javax.swing.JButton exitButton;
     private javax.swing.JLabel headingLabel;
     private javax.swing.JButton helpButton;
-    private javax.swing.JComboBox jComboBox1;
-    private javax.swing.JComboBox jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JRadioButton kernelRbutton;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JButton startButton;
     private javax.swing.JLabel statusLabel;
+    private javax.swing.JComboBox upComboBox;
     // End of variables declaration//GEN-END:variables
 
     public String inputNodeAttributeAndValidate(javax.swing.JComboBox jcb){
@@ -306,11 +358,11 @@ public class TieDieGUI extends javax.swing.JPanel implements CytoPanelComponent 
     }
     
     public javax.swing.JComboBox getNodeAttributeComboBox1(){
-        return jComboBox1;
+        return upComboBox;
     }
 
     public javax.swing.JComboBox getNodeAttributeComboBox2(){
-        return jComboBox2;
+        return downComboBox;
     }
     
 }
