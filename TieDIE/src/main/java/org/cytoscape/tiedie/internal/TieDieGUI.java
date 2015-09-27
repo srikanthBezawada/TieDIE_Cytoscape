@@ -250,7 +250,7 @@ public class TieDieGUI extends javax.swing.JPanel implements CytoPanelComponent 
         String nodetAttribute2 = inputNodeAttributeAndValidate(jComboBox2);
         currentnetwork = cyApplicationManager.getCurrentNetwork();
         currentnetworkview = cyApplicationManager.getCurrentNetworkView();
-        logicThread = new TieDieLogicThread(currentnetwork, currentnetworkview, nodetAttribute1, nodetAttribute2);
+        logicThread = new TieDieLogicThread(currentnetwork, currentnetworkview, nodetAttribute1, nodetAttribute2, jRadioButton1.isSelected());
         logicThread.start();
         try {
             Thread.sleep(2000);
