@@ -70,6 +70,9 @@
 						<Private-Package>${bundle.namespace}.internal.*</Private-Package>
 						<Bundle-Activator>${bundle.namespace}.internal.CyActivator</Bundle-Activator>
                                                 <Embed-Dependency>jama;jblas;inline=true</Embed-Dependency>
+                                                <Embed-Dependency>*;scope=!provided|test;groupId=!org.cytoscape</Embed-Dependency>
+                                                <Embed-Transitive>true</Embed-Transitive>
+                                                
         <Import-Package>*;resolution:=optional</Import-Package>
 											</instructions>
 				</configuration>
@@ -193,7 +196,11 @@
             <artifactId>event-api</artifactId>
             <version>3.0.0</version>
         </dependency>
-        
+	 <dependency>
+	  <groupId>gov.sandia.foundry</groupId>
+	  <artifactId>gov-sandia-cognition-common-core</artifactId>
+	  <version>3.4.1</version>
+	 </dependency>
 	</dependencies>
         
        
