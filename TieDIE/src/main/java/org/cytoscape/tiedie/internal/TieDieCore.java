@@ -29,7 +29,7 @@ public class TieDieCore {
     public CySwingApplication cyDesktopService;
     public CyServiceRegistrar cyServiceRegistrar;
     public CyActivator cyactivator;
-    public static TieDieGUI tiediestartmenu;
+    private static TieDieGUI tiediestartmenu;
 
     public TieDieCore(CyActivator cyactivator) {
         this.cyactivator = cyactivator;
