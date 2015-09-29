@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -48,6 +47,7 @@ public class TieDieLogicThread extends Thread {
     public int totalnodecount;
     List<CyNode> nodeList;
     CyTable nodeTable, edgeTable;
+    boolean isKernel;
     
     private double[][] adjacencyMatrixOfNetwork;
     Kernel heatDiffusionKernel;
@@ -56,7 +56,7 @@ public class TieDieLogicThread extends Thread {
     Map upnodeScoreMapDiffused, downnodeScoreMapDiffused;
     Map linkers_nodeScoreMap, filtered_linkersNodeScoreMap;
     
-    public TieDieLogicThread(CyNetwork currentnetwork, CyNetworkView currentnetworkview, String upstreamColumn, String downstreamColumn) {
+    public TieDieLogicThread(CyNetwork currentnetwork, CyNetworkView currentnetworkview, String upstreamColumn, String downstreamColumn, boolean isKernel) {
         this.currentnetwork = currentnetwork;
         this.currentnetworkview = currentnetworkview;
         //nodeList = new LinkedList();
@@ -66,6 +66,7 @@ public class TieDieLogicThread extends Thread {
         this.nodeTable = currentnetwork.getDefaultNodeTable();
         this.upstreamColumn = upstreamColumn;
         this.downstreamColumn = downstreamColumn;
+        this.isKernel = isKernel;
         upstreamheatVector = new HeatVector(totalnodecount);
         downstreamheatVector = new HeatVector(totalnodecount);
         upstreamheatVectorDiffused = new DiffusedHeatVector(totalnodecount);
@@ -74,24 +75,47 @@ public class TieDieLogicThread extends Thread {
 
     @Override
     public void run(){
-      
+        System.out.println("Start---");
         heatDiffusionKernel = new Kernel(currentnetwork);
+        if(isKernel){
+            /*
+            Create upstreamheatVector, downstreamheatVector for 2-way diffusion
+            "Extract them using extractHeatVector"
+            */
+            if(upstreamColumn == null){ // change this, no need
+                upstreamColumn = "upstreamheat";
+            }
+            if(downstreamColumn == null){
+                downstreamColumn = "downstreamheat";
+            }
+            upstreamheatVector = upstreamheatVector.extractHeatVector(upstreamColumn, nodeList, nodeTable);
+            downstreamheatVector = downstreamheatVector.extractHeatVector(downstreamColumn, nodeList, nodeTable);
+            // Get the diffused heat vectors which spread all over the network
+            upstreamheatVectorDiffused =  upstreamheatVectorDiffused.extractDiffusedHeatVector(upstreamheatVector, heatDiffusionKernel);
+            downstreamheatVectorDiffused = downstreamheatVectorDiffused.extractDiffusedHeatVector(downstreamheatVector, heatDiffusionKernel);
         
-        /*
-        Create upstreamheatVector, downstreamheatVector for 2-way diffusion
-        "Extract them using extractHeatVector"
-        */
-        if(upstreamColumn == null){
-            upstreamColumn = "upstreamheat";
+        } else{//pagerank
+            /*
+            Create upstreamheatVector, downstreamheatVector for 2-way diffusion
+            "Extract them using extractHeatVector"
+            */
+            if(upstreamColumn == null){
+                upstreamColumn = "upstreamheat";
+            }
+            if(downstreamColumn == null){
+                downstreamColumn = "downstreamheat";
+            }
+            upstreamheatVector = upstreamheatVector.extractHeatVector(upstreamColumn, nodeList, nodeTable);
+            downstreamheatVector = downstreamheatVector.extractHeatVector(downstreamColumn, nodeList, nodeTable);
+            // Get the diffused heat vectors which spread all over the network
+            double[][] directedAdj = heatDiffusionKernel.getadjacencyMatrixOfNetwork();
+            upstreamheatVectorDiffused =  upstreamheatVectorDiffused.extractDiffusedHeatVector(upstreamheatVector, directedAdj);
+            downstreamheatVectorDiffused = downstreamheatVectorDiffused.extractDiffusedHeatVector(downstreamheatVector, directedAdj);
+        
         }
-        if(downstreamColumn == null){
-            downstreamColumn = "downstreamheat";
-        }
-        upstreamheatVector = upstreamheatVector.extractHeatVector(upstreamColumn, nodeList, nodeTable);
-        downstreamheatVector = downstreamheatVector.extractHeatVector(downstreamColumn, nodeList, nodeTable);
-        // Get the diffused heat vectors which spread all over the network
-        upstreamheatVectorDiffused =  upstreamheatVectorDiffused.extractDiffusedHeatVector(upstreamheatVector, heatDiffusionKernel);
-        downstreamheatVectorDiffused = downstreamheatVectorDiffused.extractDiffusedHeatVector(downstreamheatVector, heatDiffusionKernel);
+        
+        
+        
         
         // Extracting the maps of node vs diffused heat
         upnodeScoreMapDiffused = getDiffusedMap(upstreamheatVectorDiffused);
@@ -105,7 +129,12 @@ public class TieDieLogicThread extends Thread {
     } 
     
     public void extractSubnetwork(){
-        sizeFactor = 1;
+        if(isKernel){
+            sizeFactor = 1;
+        }else{
+            sizeFactor = 2.5;//  2.47 no   2.5 yes
+        }
+        System.out.println("sizefactor"+sizeFactor);
         
         for(Object o : upstreamheatVector.getnodeHeatSet()){
             CyNode c = (CyNode)o;
@@ -134,6 +163,8 @@ public class TieDieLogicThread extends Thread {
         filtered_linkersNodeScoreMap = TieDieUtil.findFilteredLinkersMap(linkers_nodeScoreMap, linker_cutoff);
         createExtractedSubnetwork();
     }
+    
+    
     public void createExtractedSubnetwork(){
         Set<CyNode> linkerNodes = filtered_linkersNodeScoreMap.keySet();
         List<CyNode> nodes = currentnetwork.getNodeList();
@@ -206,7 +237,7 @@ public class TieDieLogicThread extends Thread {
             currentnetworkview.getEdgeView((CyEdge)currentedge).setVisualProperty(BasicVisualLexicon.EDGE_WIDTH, 7.5);
         }
         
-        
+        System.out.println("End---");
     }
     
    
