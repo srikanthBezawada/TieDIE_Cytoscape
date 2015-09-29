@@ -144,7 +144,7 @@ public class TieDieGUI extends javax.swing.JPanel implements CytoPanelComponent 
 
         headingLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         headingLabel.setForeground(new java.awt.Color(255, 0, 51));
-        headingLabel.setText("TieDIE GUI");
+        headingLabel.setText("   TieDIE ");
 
         buttonGroup1.add(kernelRbutton);
         kernelRbutton.setText("Heat Kernel");
