@@ -28,6 +28,7 @@ public class HeatVector {
     */    
     
     private Matrix heatVectorOfScores;
+    public double[] heatArray;
     private int numOfColumns;
     private Set<CyNode> nodeHeatSet; 
     public Map<CyNode, Double> nodeScoreMap;
@@ -38,10 +39,12 @@ public class HeatVector {
     public HeatVector(int numOfColumns) {
         this.numOfColumns = numOfColumns;
         this.heatVectorOfScores = new Matrix(1, numOfColumns);
+        heatArray = new double[numOfColumns];
         // Matrix(int m, int n) 
         //  Construct an m-by-n matrix of zeros.
     }
 
+    // update heatArray here in the below method
     public HeatVector(Matrix rowVector) {
         this.heatVectorOfScores = rowVector;
         this.numOfColumns = rowVector.getColumnDimension();
@@ -104,11 +107,12 @@ public class HeatVector {
             }
             if(heatscore == null){
                 nodeScoreMap.put(root, 0.0);
+                heatArray[counter] = 0;
                 counter++; // !
                 continue;
             }
             
-            
+            heatArray[counter] = heatscore.doubleValue();
             heatVectorOfScores.set(0, counter, heatscore.doubleValue()); // set() method of Jama library
             nodeHeatSet.add(root);  // put all the nodes corresponding to that column in nodeHeatSet
             nodeScoreMap.put(root, heatscore.doubleValue());
