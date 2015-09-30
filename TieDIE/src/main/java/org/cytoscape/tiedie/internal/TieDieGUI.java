@@ -305,11 +305,15 @@ public class TieDieGUI extends javax.swing.JPanel implements CytoPanelComponent 
         //  end input validations
         
         statusLabel.setText("Started executing TieDIE");
-        
-        logicThread = new TieDieLogicThread(currentnetwork, currentnetworkview, upComboSelected, downComboSelected, kernelRbutton.isSelected());
+        boolean isKernel = kernelRbutton.isSelected();
+        logicThread = new TieDieLogicThread(currentnetwork, currentnetworkview, upComboSelected, downComboSelected, isKernel);
         logicThread.start();
         try {
-            Thread.sleep(2500);
+            if(isKernel){
+                Thread.sleep(2500);
+            }else{
+                Thread.sleep(3000);
+            }   
         } catch (InterruptedException ex) {
             Logger.getLogger(TieDieGUI.class.getName()).log(Level.SEVERE, null, ex);
         }
