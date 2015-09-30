@@ -41,7 +41,7 @@ public class DiffusedHeatVector {
         Vector input = (Vector)VectorFactory.getDefault().copyValues(heatArray);
         gov.sandia.cognition.math.matrix.Matrix dirAdjMat;  //Matrix(directedAdj)
         dirAdjMat = MatrixFactory.getDefault().copyArray(directedAdj);
-        Vector output = EigenvectorPowerIteration.estimateEigenvector(input, dirAdjMat, EigenvectorPowerIteration.DEFAULT_STOPPING_THRESHOLD , EigenvectorPowerIteration.DEFAULT_MAXIMUM_ITERATIONS);
+        Vector output = estimateEigenvector(input, dirAdjMat, 0.85, EigenvectorPowerIteration.DEFAULT_STOPPING_THRESHOLD , EigenvectorPowerIteration.DEFAULT_MAXIMUM_ITERATIONS);
         Matrix m = new Matrix(1, heatArray.length);
         int counter=0;
         //System.out.println("output ->"+output.isUnitVector());
@@ -54,5 +54,34 @@ public class DiffusedHeatVector {
         return new DiffusedHeatVector(m);
     }
     
+    public static Vector estimateEigenvector(
+        final Vector initial,
+        final gov.sandia.cognition.math.matrix.Matrix A,
+        final double alpha,
+        final double stoppingThreshold,
+        final int maxIterations )
+    {
+        Vector v = initial.unitVector();
+
+        double normChange;
+        int iteration = 0;
+        boolean keepGoing = true;
+        while (keepGoing)
+        {
+            final Vector vPrevious = v;
+            v = A.times( v );
+            v.scaleEquals(alpha);
+            v.plusEquals(initial.scale(1.0 - alpha));
+            normChange = v.minus( vPrevious ).norm2();
+            iteration++;
+
+            if ((normChange <= stoppingThreshold) || (iteration >= maxIterations))
+            {
+                keepGoing = false;
+            }
+        }
+
+        return v;
     
+    }
 }
