@@ -111,6 +111,8 @@ public class TieDieGUI extends javax.swing.JPanel implements CytoPanelComponent 
         mainPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         startButton.setText("START executing TieDIE algorithm");
+        startButton.setToolTipText("Make sure you imported the table files and selected the corresponding columns");
+        startButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         startButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 startButtonActionPerformed(evt);
@@ -165,8 +167,7 @@ public class TieDieGUI extends javax.swing.JPanel implements CytoPanelComponent 
                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(statusLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(mainPanelLayout.createSequentialGroup()
-                        .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(startButton)
+                        .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(mainPanelLayout.createSequentialGroup()
                                 .addComponent(helpButton, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(79, 79, 79)
@@ -182,8 +183,9 @@ public class TieDieGUI extends javax.swing.JPanel implements CytoPanelComponent 
                             .addGroup(mainPanelLayout.createSequentialGroup()
                                 .addComponent(kernelRbutton)
                                 .addGap(37, 37, 37)
-                                .addComponent(PagerankRbutton)))
-                        .addGap(0, 69, Short.MAX_VALUE)))
+                                .addComponent(PagerankRbutton))
+                            .addComponent(startButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 136, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         mainPanelLayout.setVerticalGroup(
@@ -222,7 +224,7 @@ public class TieDieGUI extends javax.swing.JPanel implements CytoPanelComponent 
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 283, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 380, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
