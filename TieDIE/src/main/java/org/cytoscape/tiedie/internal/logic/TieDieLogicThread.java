@@ -132,7 +132,7 @@ public class TieDieLogicThread extends Thread {
         if(isKernel){
             sizeFactor = 1;
         }else{
-            sizeFactor = 2.5;//  2.47 no   2.5 yes
+            sizeFactor = 2.6;//  2.47 no   2.5 yes// 2.55 no 2.6 yes
         }
         System.out.println("sizefactor"+sizeFactor);
         
