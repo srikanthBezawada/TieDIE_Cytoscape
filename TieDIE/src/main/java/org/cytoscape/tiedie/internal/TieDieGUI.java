@@ -119,6 +119,7 @@ public class TieDieGUI extends javax.swing.JPanel implements CytoPanelComponent 
             }
         });
 
+        helpButton.setForeground(new java.awt.Color(0, 200, 0));
         helpButton.setText("Help");
         helpButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -126,6 +127,7 @@ public class TieDieGUI extends javax.swing.JPanel implements CytoPanelComponent 
             }
         });
 
+        exitButton.setForeground(new java.awt.Color(200, 0, 0));
         exitButton.setText("Exit");
         exitButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -224,7 +226,7 @@ public class TieDieGUI extends javax.swing.JPanel implements CytoPanelComponent 
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 380, Short.MAX_VALUE)
+                .addComponent(jScrollPane1)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
