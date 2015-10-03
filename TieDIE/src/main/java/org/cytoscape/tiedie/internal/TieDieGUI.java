@@ -129,7 +129,7 @@ public class TieDieGUI extends javax.swing.JPanel implements CytoPanelComponent 
         headingLabel.setForeground(new java.awt.Color(255, 0, 51));
         headingLabel.setText("   TieDIE ");
 
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Select columns used for diffusion"));
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Select columns to be used for diffusion"));
 
         jLabel1.setText("Upstream");
 
