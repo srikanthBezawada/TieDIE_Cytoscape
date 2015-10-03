@@ -56,7 +56,7 @@ public class TieDieLogicThread extends Thread {
     Map upnodeScoreMapDiffused, downnodeScoreMapDiffused;
     Map linkers_nodeScoreMap, filtered_linkersNodeScoreMap;
     
-    public TieDieLogicThread(CyNetwork currentnetwork, CyNetworkView currentnetworkview, String upstreamColumn, String downstreamColumn, boolean isKernel) {
+    public TieDieLogicThread(CyNetwork currentnetwork, CyNetworkView currentnetworkview, String upstreamColumn, String downstreamColumn, double sizeFactor, boolean isKernel) {
         this.currentnetwork = currentnetwork;
         this.currentnetworkview = currentnetworkview;
         //nodeList = new LinkedList();
@@ -66,6 +66,7 @@ public class TieDieLogicThread extends Thread {
         this.nodeTable = currentnetwork.getDefaultNodeTable();
         this.upstreamColumn = upstreamColumn;
         this.downstreamColumn = downstreamColumn;
+        this.sizeFactor = sizeFactor;
         this.isKernel = isKernel;
         upstreamheatVector = new HeatVector(totalnodecount);
         downstreamheatVector = new HeatVector(totalnodecount);
@@ -129,11 +130,6 @@ public class TieDieLogicThread extends Thread {
     } 
     
     public void extractSubnetwork(){
-        if(isKernel){
-            sizeFactor = 1;
-        }else{
-            sizeFactor = 2.6;//  2.47 no   2.5 yes// 2.55 no 2.6 yes
-        }
         System.out.println("sizefactor"+sizeFactor);
         
         for(Object o : upstreamheatVector.getnodeHeatSet()){
