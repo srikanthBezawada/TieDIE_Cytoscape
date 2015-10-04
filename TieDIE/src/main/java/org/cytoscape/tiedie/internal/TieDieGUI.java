@@ -450,7 +450,15 @@ public class TieDieGUI extends javax.swing.JPanel implements CytoPanelComponent 
     
     public double textFieldValidate(javax.swing.JTextField jtf){
         String sizeString = jtf.getText();
-        double size = Double.parseDouble(sizeString);
+        double size=0.0;
+        try{
+            size = Double.parseDouble(sizeString);
+        } catch(NumberFormatException e){
+            System.out.println("Number format exception");
+        } catch(NullPointerException e){
+            System.out.println("String is null");
+        }
+        
         if(size == 0.0)
             size = 1.0;
         return size;
