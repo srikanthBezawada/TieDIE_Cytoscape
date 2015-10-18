@@ -194,9 +194,9 @@ public class TieDieLogicThread extends Thread {
         CyRootNetwork root = ((CySubNetwork)currentnetwork).getRootNetwork();
         CyNetwork TieDIEsubNetwork = root.addSubNetwork(newnodes, newedges);
         if(isKernel){
-            TieDIEsubNetwork.getRow(TieDIEsubNetwork).set(CyNetwork.NAME, "TieDIE Heat diffusion subnetwork");
+            TieDIEsubNetwork.getRow(TieDIEsubNetwork).set(CyNetwork.NAME, "TieDIE Heat diffusion subnetwork (s = "+sizeFactor+")");
         } else{
-            TieDIEsubNetwork.getRow(TieDIEsubNetwork).set(CyNetwork.NAME, "TieDIE Pagerank simulation subnetwork");
+            TieDIEsubNetwork.getRow(TieDIEsubNetwork).set(CyNetwork.NAME, "TieDIE Pagerank simulation subnetwork (s = "+sizeFactor+")");
         }
         CyNetworkManager networkManager = CyActivator.networkManager;
         networkManager.addNetwork(TieDIEsubNetwork);
