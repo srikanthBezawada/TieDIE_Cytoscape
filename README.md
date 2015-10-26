@@ -4,7 +4,7 @@ TieDIE_Cytoscape
 
 
 ## For users interested in TieDIE app. for Cytoscape
-*Stay tuned*
+Download tiedie app and tutorials from here [tiedie](http://apps.cytoscape.org/apps/tiedie) 
 
 
 
