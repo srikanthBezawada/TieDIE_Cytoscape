@@ -63,29 +63,22 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="1" attributes="0">
+                          <Component id="jPanel5" alignment="1" min="-2" max="-2" attributes="0"/>
                           <Component id="statusLabel" alignment="1" min="-2" pref="257" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="103" alignment="0" groupAlignment="1" attributes="0">
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Group type="102" attributes="0">
-                                          <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                              <Component id="jPanel4" alignment="1" max="32767" attributes="0"/>
-                                              <Component id="jPanel3" alignment="1" max="32767" attributes="0"/>
-                                          </Group>
-                                      </Group>
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <EmptySpace min="-2" pref="118" max="-2" attributes="0"/>
-                                          <Component id="headingLabel" min="-2" max="-2" attributes="0"/>
-                                      </Group>
+                              <Group type="102" attributes="0">
+                                  <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="jPanel4" alignment="1" max="32767" attributes="0"/>
+                                      <Component id="jPanel3" alignment="1" max="32767" attributes="0"/>
                                   </Group>
-                                  <Component id="startButton" alignment="1" min="-2" pref="257" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
-                                  <Component id="jPanel5" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="118" max="-2" attributes="0"/>
+                                  <Component id="headingLabel" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
+                          <Component id="startButton" alignment="1" min="-2" pref="257" max="-2" attributes="0"/>
                           <Component id="jPanel6" alignment="1" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="201" max="32767" attributes="0"/>
@@ -291,7 +284,7 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="helpButton" min="-2" pref="70" max="-2" attributes="0"/>
-                          <EmptySpace pref="86" max="32767" attributes="0"/>
+                          <EmptySpace pref="93" max="32767" attributes="0"/>
                           <Component id="exitButton" min="-2" pref="70" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
