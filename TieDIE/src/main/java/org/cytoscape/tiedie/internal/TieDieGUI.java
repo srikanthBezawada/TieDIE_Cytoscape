@@ -406,7 +406,7 @@ public class TieDieGUI extends javax.swing.JPanel implements CytoPanelComponent 
         } catch (InterruptedException ex) {
             Logger.getLogger(TieDieGUI.class.getName()).log(Level.SEVERE, null, ex);
         }
-        statusLabel.setText("TieDIE status: SubNetwork -> Control panel");
+        statusLabel.setText("<html> TieDIE status: SubNetwork -> Control panel<br>You might want to recompute with different inputs <html>");
         buttonGroup1.clearSelection();
     }//GEN-LAST:event_startButtonActionPerformed
 
