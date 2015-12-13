@@ -393,7 +393,7 @@ public class TieDieGUI extends javax.swing.JPanel implements CytoPanelComponent 
         }
         //  end input validations
         
-        statusLabel.setText("Started executing TieDIE");
+        statusLabel.setText("TieDIE status: Started executing TieDIE");
         boolean isKernel = kernelRbutton.isSelected();
         logicThread = new TieDieLogicThread(currentnetwork, currentnetworkview, upComboSelected, downComboSelected, textFieldValidate(subNetSizeField),isKernel);
         logicThread.start();
@@ -406,7 +406,7 @@ public class TieDieGUI extends javax.swing.JPanel implements CytoPanelComponent 
         } catch (InterruptedException ex) {
             Logger.getLogger(TieDieGUI.class.getName()).log(Level.SEVERE, null, ex);
         }
-        statusLabel.setText("SubNetwork extracted -> Check Control panel");
+        statusLabel.setText("TieDIE status: SubNetwork -> Control panel");
     }//GEN-LAST:event_startButtonActionPerformed
 
 
