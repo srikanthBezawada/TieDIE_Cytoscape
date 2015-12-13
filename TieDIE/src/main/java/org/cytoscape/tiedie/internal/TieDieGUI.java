@@ -458,9 +458,10 @@ public class TieDieGUI extends javax.swing.JPanel implements CytoPanelComponent 
         } catch(NullPointerException e){
             System.out.println("String is null");
         }
-        
+        /*
         if(size == 0.0)
             size = 1.0;
+        */
         return size;
     }
     
