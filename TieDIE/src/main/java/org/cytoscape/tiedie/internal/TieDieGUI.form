@@ -106,7 +106,7 @@
           <SubComponents>
             <Component class="javax.swing.JButton" name="startButton">
               <Properties>
-                <Property name="text" type="java.lang.String" value="START executing TieDIE algorithm"/>
+                <Property name="text" type="java.lang.String" value="RUN TieDIE algorithm on selected network "/>
                 <Property name="toolTipText" type="java.lang.String" value="Make sure you imported the table files and selected the corresponding columns"/>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">

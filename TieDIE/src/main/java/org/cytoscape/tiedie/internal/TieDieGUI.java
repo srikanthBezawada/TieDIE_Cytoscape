@@ -117,7 +117,7 @@ public class TieDieGUI extends javax.swing.JPanel implements CytoPanelComponent 
 
         mainPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        startButton.setText("START executing TieDIE algorithm");
+        startButton.setText("RUN TieDIE algorithm on selected network ");
         startButton.setToolTipText("Make sure you imported the table files and selected the corresponding columns");
         startButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         startButton.addActionListener(new java.awt.event.ActionListener() {
