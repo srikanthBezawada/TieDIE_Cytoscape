@@ -18,6 +18,7 @@ import org.cytoscape.model.subnetwork.CySubNetwork;
 import org.cytoscape.view.model.CyNetworkView;
 
 import org.cytoscape.tiedie.internal.CyActivator;
+import org.cytoscape.tiedie.internal.TieDieGUI;
 import static org.cytoscape.tiedie.internal.visuals.UpdateSubNetView.updateView;
 import org.cytoscape.view.presentation.property.BasicVisualLexicon;
 import org.cytoscape.view.presentation.property.NodeShapeVisualProperty;
@@ -48,7 +49,8 @@ public class TieDieLogicThread extends Thread {
     List<CyNode> nodeList;
     CyTable nodeTable, edgeTable;
     boolean isKernel;
-    
+    TieDieGUI menu;
+            
     private double[][] adjacencyMatrixOfNetwork;
     Kernel heatDiffusionKernel;
     HeatVector upstreamheatVector, downstreamheatVector;
@@ -56,7 +58,8 @@ public class TieDieLogicThread extends Thread {
     Map upnodeScoreMapDiffused, downnodeScoreMapDiffused;
     Map linkers_nodeScoreMap, filtered_linkersNodeScoreMap;
     
-    public TieDieLogicThread(CyNetwork currentnetwork, CyNetworkView currentnetworkview, String upstreamColumn, String downstreamColumn, double sizeFactor, boolean isKernel) {
+    public TieDieLogicThread(TieDieGUI menu, CyNetwork currentnetwork, CyNetworkView currentnetworkview, String upstreamColumn, String downstreamColumn, double sizeFactor, boolean isKernel) {
+        this.menu = menu;
         this.currentnetwork = currentnetwork;
         this.currentnetworkview = currentnetworkview;
         //nodeList = new LinkedList();
@@ -77,6 +80,7 @@ public class TieDieLogicThread extends Thread {
     @Override
     public void run(){
         System.out.println("Start---");
+        menu.startComputation();
         heatDiffusionKernel = new Kernel(currentnetwork);
         if(isKernel){
             /*
@@ -236,7 +240,7 @@ public class TieDieLogicThread extends Thread {
             currentnetworkview.getEdgeView((CyEdge)currentedge).setVisualProperty(BasicVisualLexicon.EDGE_STROKE_UNSELECTED_PAINT, Color.ORANGE);
             currentnetworkview.getEdgeView((CyEdge)currentedge).setVisualProperty(BasicVisualLexicon.EDGE_WIDTH, 7.5);
         }
-        
+        menu.endComputation();
         System.out.println("End---");
     }
     
