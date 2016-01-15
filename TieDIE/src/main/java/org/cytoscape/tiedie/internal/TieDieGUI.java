@@ -347,7 +347,7 @@ public class TieDieGUI extends javax.swing.JPanel implements CytoPanelComponent 
     
     private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed
         tiediecore.closecore();
-        tiediecore.closeTieDieStartMenu();
+        tiediecore.closeTieDieStartMenu(this);
     }//GEN-LAST:event_exitButtonActionPerformed
 
     

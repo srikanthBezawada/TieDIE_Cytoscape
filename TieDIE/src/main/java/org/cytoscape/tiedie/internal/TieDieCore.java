@@ -29,7 +29,7 @@ public class TieDieCore {
     public CySwingApplication cyDesktopService;
     public CyServiceRegistrar cyServiceRegistrar;
     public CyActivator cyactivator;
-    private static TieDieGUI tiediestartmenu;
+    private static TieDieGUI startmenu;
 
     public TieDieCore(CyActivator cyactivator) {
         this.cyactivator = cyactivator;
@@ -37,7 +37,7 @@ public class TieDieCore {
         this.cyDesktopService = cyactivator.cyDesktopService;
         this.cyServiceRegistrar = cyactivator.cyServiceRegistrar;
         System.out.println("Starting GUI of TieDIE in control panel");
-        tiediestartmenu = createTieDieStartMenu();
+        startmenu = createTieDieStartMenu();
         registerServices();
         updatecurrentnetwork();
     }
@@ -61,7 +61,7 @@ public class TieDieCore {
     }
 
     public TieDieGUI createTieDieStartMenu() {
-        TieDieGUI startmenu = new TieDieGUI(cyactivator, this);
+        startmenu = new TieDieGUI(cyactivator, this);
         cyServiceRegistrar.registerService(startmenu, CytoPanelComponent.class, new Properties());
         CytoPanel cytopanelwest = cyDesktopService.getCytoPanel(CytoPanelName.WEST);
         int index = cytopanelwest.indexOfComponent(startmenu);
@@ -69,8 +69,8 @@ public class TieDieCore {
         return startmenu;
     }
 
-    public void closeTieDieStartMenu() {
-        cyServiceRegistrar.unregisterService(tiediestartmenu, CytoPanelComponent.class);
+    public void closeTieDieStartMenu(TieDieGUI menu) {
+        cyServiceRegistrar.unregisterService(menu, CytoPanelComponent.class);
     }
 
    
@@ -83,7 +83,7 @@ public class TieDieCore {
     }
     
     public static TieDieGUI getTiDieStartMenu(){
-        return tiediestartmenu;
+        return startmenu;
     }
     
     void registerServices(){
