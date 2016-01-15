@@ -1,5 +1,6 @@
 package org.cytoscape.tiedie.internal;
 
+import java.util.Map;
 import java.util.Properties;
 
 import org.cytoscape.application.CyApplicationManager;
@@ -8,8 +9,10 @@ import org.cytoscape.application.swing.CySwingApplication;
 import org.cytoscape.application.swing.CytoPanel;
 import org.cytoscape.application.swing.CytoPanelComponent;
 import org.cytoscape.application.swing.CytoPanelName;
+import org.cytoscape.application.swing.CytoPanelState;
 import org.cytoscape.model.CyNetwork;
 import org.cytoscape.service.util.CyServiceRegistrar;
+import org.cytoscape.tiedie.internal.results.ResultsUI;
 import org.cytoscape.tiedie.internal.visuals.NodeAttributeListener;
 import org.cytoscape.view.model.CyNetworkView;
 
@@ -72,8 +75,22 @@ public class TieDieCore {
     public void closeTieDieStartMenu(TieDieGUI menu) {
         cyServiceRegistrar.unregisterService(menu, CytoPanelComponent.class);
     }
-
-   
+    
+    public ResultsUI createResultsPanel(Map flMap, CyNetwork orig, CyNetwork sub){
+        ResultsUI resultsPanel = new ResultsUI(this);
+        cyServiceRegistrar.registerService(resultsPanel, CytoPanelComponent.class, new Properties());
+        CytoPanel panelEast = cyDesktopService.getCytoPanel(CytoPanelName.EAST);
+        panelEast.setState(CytoPanelState.DOCK);
+        panelEast.setSelectedIndex(panelEast.indexOfComponent(resultsPanel));
+        resultsPanel.setEnabled(flMap, orig, sub);
+        return resultsPanel;
+    
+    }
+    
+    public void closeCurrentResultPanel(ResultsUI resultPanel) {
+        cyServiceRegistrar.unregisterService(resultPanel, CytoPanelComponent.class);
+    }
+    
     public CyApplicationManager getCyApplicationManager() {
         return this.cyApplicationManager;
     }

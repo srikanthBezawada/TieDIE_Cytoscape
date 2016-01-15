@@ -83,4 +83,8 @@ public class CyActivator extends AbstractCyActivator {
     public static CyEventHelper getCyEventHelper(){
         return eventHelper;
     }
+    
+    public static CyNetworkViewManager getNetworkViewManager(){
+        return networkViewManager;
+    }
 }

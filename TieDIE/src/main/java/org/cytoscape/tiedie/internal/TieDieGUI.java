@@ -35,7 +35,7 @@ import org.cytoscape.view.model.CyNetworkView;
 
 public class TieDieGUI extends javax.swing.JPanel implements CytoPanelComponent {
     
-    private TieDieCore tiediecore;
+    public TieDieCore tiediecore;
     public TieDieLogicThread logicThread;
     CyApplicationManager cyApplicationManager;
     CySwingApplication cyDesktopService;

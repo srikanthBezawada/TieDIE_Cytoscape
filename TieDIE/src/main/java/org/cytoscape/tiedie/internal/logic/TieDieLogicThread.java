@@ -19,6 +19,7 @@ import org.cytoscape.view.model.CyNetworkView;
 
 import org.cytoscape.tiedie.internal.CyActivator;
 import org.cytoscape.tiedie.internal.TieDieGUI;
+import org.cytoscape.tiedie.internal.results.ResultsUI;
 import static org.cytoscape.tiedie.internal.visuals.UpdateSubNetView.updateView;
 import org.cytoscape.view.presentation.property.BasicVisualLexicon;
 import org.cytoscape.view.presentation.property.NodeShapeVisualProperty;
@@ -241,6 +242,7 @@ public class TieDieLogicThread extends Thread {
             currentnetworkview.getEdgeView((CyEdge)currentedge).setVisualProperty(BasicVisualLexicon.EDGE_WIDTH, 7.5);
         }
         menu.endComputation();
+        ResultsUI resultsPanel = menu.tiediecore.createResultsPanel(filtered_linkersNodeScoreMap, currentnetwork, TieDIEsubNetwork);
         System.out.println("End---");
     }
     
