@@ -19,6 +19,8 @@ import org.cytoscape.view.model.CyNetworkView;
 
 import org.cytoscape.tiedie.internal.CyActivator;
 import org.cytoscape.tiedie.internal.TieDieGUI;
+import org.cytoscape.tiedie.internal.logic.diffusers.Kernel;
+import org.cytoscape.tiedie.internal.logic.diffusers.PageRank;
 import org.cytoscape.tiedie.internal.results.ResultsUI;
 import static org.cytoscape.tiedie.internal.visuals.UpdateSubNetView.updateView;
 import org.cytoscape.view.presentation.property.BasicVisualLexicon;
@@ -37,10 +39,7 @@ import org.cytoscape.view.presentation.property.NodeShapeVisualProperty;
 
 public class TieDieLogicThread extends Thread {
     
-    /*
-        About instance variables :
     
-    */
     double sizeFactor, linker_cutoff;
     String upstreamColumn, downstreamColumn;
     
@@ -48,11 +47,10 @@ public class TieDieLogicThread extends Thread {
     public CyNetworkView currentnetworkview;
     public int totalnodecount;
     List<CyNode> nodeList;
-    CyTable nodeTable, edgeTable;
+    CyTable nodeTable;
     boolean isKernel;
     TieDieGUI menu;
             
-    private double[][] adjacencyMatrixOfNetwork;
     Kernel heatDiffusionKernel;
     HeatVector upstreamheatVector, downstreamheatVector;
     DiffusedHeatVector upstreamheatVectorDiffused, downstreamheatVectorDiffused;
@@ -63,10 +61,8 @@ public class TieDieLogicThread extends Thread {
         this.menu = menu;
         this.currentnetwork = currentnetwork;
         this.currentnetworkview = currentnetworkview;
-        //nodeList = new LinkedList();
         this.nodeList = this.currentnetwork.getNodeList(); 
         this.totalnodecount = nodeList.size();
-        this.edgeTable = currentnetwork.getDefaultEdgeTable();
         this.nodeTable = currentnetwork.getDefaultNodeTable();
         this.upstreamColumn = upstreamColumn;
         this.downstreamColumn = downstreamColumn;
@@ -82,7 +78,6 @@ public class TieDieLogicThread extends Thread {
     public void run(){
         System.out.println("Start---");
         menu.startComputation();
-        heatDiffusionKernel = new Kernel(currentnetwork);
         if(isKernel){
             /*
             Create upstreamheatVector, downstreamheatVector for 2-way diffusion
@@ -97,8 +92,8 @@ public class TieDieLogicThread extends Thread {
             upstreamheatVector = upstreamheatVector.extractHeatVector(upstreamColumn, nodeList, nodeTable);
             downstreamheatVector = downstreamheatVector.extractHeatVector(downstreamColumn, nodeList, nodeTable);
             // Get the diffused heat vectors which spread all over the network
-            upstreamheatVectorDiffused =  upstreamheatVectorDiffused.extractDiffusedHeatVector(upstreamheatVector, heatDiffusionKernel);
-            downstreamheatVectorDiffused = downstreamheatVectorDiffused.extractDiffusedHeatVector(downstreamheatVector, heatDiffusionKernel);
+            upstreamheatVectorDiffused =  Kernel.diffuse(upstreamheatVector, currentnetwork);
+            downstreamheatVectorDiffused = Kernel.diffuse(downstreamheatVector, currentnetwork);
         
         } else{//pagerank
             /*
@@ -114,9 +109,8 @@ public class TieDieLogicThread extends Thread {
             upstreamheatVector = upstreamheatVector.extractHeatVector(upstreamColumn, nodeList, nodeTable);
             downstreamheatVector = downstreamheatVector.extractHeatVector(downstreamColumn, nodeList, nodeTable);
             // Get the diffused heat vectors which spread all over the network
-            double[][] directedAdj = heatDiffusionKernel.getadjacencyMatrixOfNetwork();
-            upstreamheatVectorDiffused =  upstreamheatVectorDiffused.extractDiffusedHeatVector(upstreamheatVector, directedAdj);
-            downstreamheatVectorDiffused = downstreamheatVectorDiffused.extractDiffusedHeatVector(downstreamheatVector, directedAdj);
+            upstreamheatVectorDiffused =  PageRank.diffuse(upstreamheatVector, currentnetwork);
+            downstreamheatVectorDiffused = PageRank.diffuse(downstreamheatVector, currentnetwork);
         
         }
         

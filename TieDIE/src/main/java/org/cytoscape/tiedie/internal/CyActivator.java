@@ -26,8 +26,8 @@ import org.cytoscape.event.CyEventHelper;
 public class CyActivator extends AbstractCyActivator {
     private static CyAppAdapter appAdapter;
     private static CyEventHelper eventHelper;
-    public CyApplicationManager cyApplicationManager;
-    public CySwingApplication cyDesktopService;
+    private static CyApplicationManager cyApplicationManager;
+    private static CySwingApplication cyDesktopService;
     public CyServiceRegistrar cyServiceRegistrar;
     public TieDieMenuAction menuaction;
     public static CyNetworkFactory networkFactory;

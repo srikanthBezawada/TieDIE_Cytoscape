@@ -36,8 +36,8 @@ public class TieDieCore {
 
     public TieDieCore(CyActivator cyactivator) {
         this.cyactivator = cyactivator;
-        this.cyApplicationManager = cyactivator.cyApplicationManager;
-        this.cyDesktopService = cyactivator.cyDesktopService;
+        this.cyApplicationManager = cyactivator.getcyApplicationManager();
+        this.cyDesktopService = cyactivator.getcytoscapeDesktopService();
         this.cyServiceRegistrar = cyactivator.cyServiceRegistrar;
         System.out.println("Starting GUI of TieDIE in control panel");
         startmenu = createTieDieStartMenu();
@@ -46,14 +46,12 @@ public class TieDieCore {
     }
 
     public void updatecurrentnetwork() {
-            //get the network view object
         if (view == null) {
             view = null;
             network = null;
         }
         else {
-            view = cyApplicationManager.getCurrentNetworkView();
-            //get the network object; this contains the graph  
+            view = cyApplicationManager.getCurrentNetworkView();  
             network = view.getModel();
         }
     }

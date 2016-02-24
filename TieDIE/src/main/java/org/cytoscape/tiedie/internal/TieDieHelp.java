@@ -79,7 +79,7 @@ public class TieDieHelp extends javax.swing.JFrame {
                 + "Click on run TieDIE algorithm \n"
                 + "----\n"
                 + "Find the new subnetwork created programmatically \n"
-                + "and the corresponding changes in the input network \n\n" ;
+                + "and the corresponding changes in the original network \n\n" ;
         
                 
 

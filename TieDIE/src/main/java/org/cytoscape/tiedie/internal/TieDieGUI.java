@@ -1,25 +1,16 @@
 package org.cytoscape.tiedie.internal;
 
 import java.awt.Component;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.Icon;
-import javax.swing.BorderFactory;
-import javax.swing.border.Border;
-import javax.swing.JCheckBox;
 import javax.swing.JOptionPane;
-import javax.swing.JRadioButton;
 
 import org.cytoscape.application.CyApplicationManager;
 import org.cytoscape.application.swing.CySwingApplication;
 import org.cytoscape.application.swing.CytoPanelComponent;
 import org.cytoscape.application.swing.CytoPanelName;
-import org.cytoscape.model.CyColumn;
 import org.cytoscape.model.CyNetwork;
-import org.cytoscape.model.CyTable;
 import org.cytoscape.tiedie.internal.logic.TieDieLogicThread;
 import org.cytoscape.tiedie.internal.visuals.NodeAttributeListener;
 import org.cytoscape.view.model.CyNetworkView;
@@ -39,8 +30,6 @@ public class TieDieGUI extends javax.swing.JPanel implements CytoPanelComponent 
     public TieDieLogicThread logicThread;
     CyApplicationManager cyApplicationManager;
     CySwingApplication cyDesktopService;
-    CyNetwork currentnetwork;
-    CyNetworkView currentnetworkview;
     public CyActivator cyactivator;
     
     
@@ -49,8 +38,6 @@ public class TieDieGUI extends javax.swing.JPanel implements CytoPanelComponent 
         this.cyactivator = cyactivator;
         this.tiediecore = tiediecore;
         cyApplicationManager = tiediecore.getCyApplicationManager();
-        //this.currentnetwork = cyApplicationManager.getCurrentNetwork();
-        //this.currentnetworkview = cyApplicationManager.getCurrentNetworkView();
         cyDesktopService = tiediecore.getCyDesktopService();
         initComponents();
         if(cyApplicationManager.getCurrentNetworkView() != null )
@@ -354,8 +341,8 @@ public class TieDieGUI extends javax.swing.JPanel implements CytoPanelComponent 
     
     
     private void startButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startButtonActionPerformed
-        currentnetwork = cyApplicationManager.getCurrentNetwork();
-        currentnetworkview = cyApplicationManager.getCurrentNetworkView();
+        CyNetwork currentnetwork = cyApplicationManager.getCurrentNetwork();
+        CyNetworkView currentnetworkview = cyApplicationManager.getCurrentNetworkView();
         //  start input validations
         String upComboSelected = inputNodeAttributeAndValidate(upComboBox);
         String downComboSelected = inputNodeAttributeAndValidate(downComboBox);

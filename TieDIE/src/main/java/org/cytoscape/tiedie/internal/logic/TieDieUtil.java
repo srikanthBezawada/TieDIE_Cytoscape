@@ -3,12 +3,9 @@ package org.cytoscape.tiedie.internal.logic;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
-import java.util.TreeSet;
 
 import org.cytoscape.model.CyNode;
 
