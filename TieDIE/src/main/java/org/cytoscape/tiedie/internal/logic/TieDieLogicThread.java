@@ -12,6 +12,7 @@ import org.cytoscape.model.CyEdge;
 import org.cytoscape.model.CyNetwork;
 import org.cytoscape.model.CyNetworkManager;
 import org.cytoscape.model.CyNode;
+import org.cytoscape.model.CyRow;
 import org.cytoscape.model.CyTable;
 import org.cytoscape.model.subnetwork.CyRootNetwork;
 import org.cytoscape.model.subnetwork.CySubNetwork;
@@ -118,8 +119,8 @@ public class TieDieLogicThread extends Thread {
         
         
         // Extracting the maps of node vs diffused heat
-        upnodeScoreMapDiffused = getDiffusedMap(upstreamheatVectorDiffused);
-        downnodeScoreMapDiffused = getDiffusedMap(downstreamheatVectorDiffused);
+        upnodeScoreMapDiffused = getDiffusedMap(upstreamheatVectorDiffused, "upstreamDiffused");
+        downnodeScoreMapDiffused = getDiffusedMap(downstreamheatVectorDiffused, "downstreamDiffused");
         
         extractSubnetwork();
         
@@ -248,13 +249,17 @@ public class TieDieLogicThread extends Thread {
 
     
     
-    public Map getDiffusedMap(DiffusedHeatVector diffusedVector){
+    public Map getDiffusedMap(DiffusedHeatVector diffusedVector, String columnName){
         Map diffScoreMap = new HashMap<CyNode, Double>();
         int count=0;
         double diffScr;
+        CyRow row;
+        nodeTable.createColumn(columnName, Double.class, true);
         for(CyNode root: nodeList){
             diffScr = diffusedVector.getVectorOfScores().get(0, count);
             diffScoreMap.put(root, diffScr);
+            row = nodeTable.getRow(root.getSUID());
+            row.set(columnName, diffScr);
             count++; 
         }
         return diffScoreMap;
