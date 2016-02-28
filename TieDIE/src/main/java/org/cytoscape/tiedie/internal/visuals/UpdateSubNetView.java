@@ -11,7 +11,7 @@ import org.cytoscape.work.TaskIterator;
 
 
 public class UpdateSubNetView {
-    public static void updateView(CyNetworkView view, String layoutAlgorName){
+    public static void updateView(CyNetworkView origNetView, CyNetworkView view, String layoutAlgorName){
         CyAppAdapter appAdapter = CyActivator.getCyAppAdapter();
         final CyLayoutAlgorithmManager alMan = appAdapter.getCyLayoutAlgorithmManager();
         CyLayoutAlgorithm algor = null;
@@ -29,6 +29,6 @@ public class UpdateSubNetView {
         SynchronousTaskManager<?> synTaskMan = appAdapter.getCyServiceRegistrar().getService(SynchronousTaskManager.class);           
         synTaskMan.execute(itr); 
         view.updateView(); // update view layout part
-        appAdapter.getVisualMappingManager().getVisualStyle(view).apply(view); // update view style part
+        appAdapter.getVisualMappingManager().getVisualStyle(origNetView).apply(view); // update view style part
     }
 }

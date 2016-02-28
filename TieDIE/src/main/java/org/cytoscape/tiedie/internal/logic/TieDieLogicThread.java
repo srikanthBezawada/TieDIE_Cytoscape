@@ -201,7 +201,7 @@ public class TieDieLogicThread extends Thread {
         networkManager.addNetwork(TieDIEsubNetwork);
         CyNetworkView tiedieView = CyActivator.networkViewFactory.createNetworkView(TieDIEsubNetwork);
         CyActivator.networkViewManager.addNetworkView(tiedieView);
-        updateView(tiedieView, "grid");
+        updateView(currentnetworkview, tiedieView, "grid");
         CyActivator.getCyEventHelper().flushPayloadEvents();
         
         for(Object currentnode : linkerNodes){
