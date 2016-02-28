@@ -229,11 +229,15 @@ public class TieDieLogicThread extends Thread {
         }
         
         
-        for(Object currentedge : newedges){
-            tiedieView.getEdgeView((CyEdge)currentedge).setVisualProperty(BasicVisualLexicon.EDGE_STROKE_UNSELECTED_PAINT, Color.ORANGE);
-            tiedieView.getEdgeView((CyEdge)currentedge).setVisualProperty(BasicVisualLexicon.EDGE_WIDTH, 6.5);
-            currentnetworkview.getEdgeView((CyEdge)currentedge).setVisualProperty(BasicVisualLexicon.EDGE_STROKE_UNSELECTED_PAINT, Color.ORANGE);
-            currentnetworkview.getEdgeView((CyEdge)currentedge).setVisualProperty(BasicVisualLexicon.EDGE_WIDTH, 7.5);
+        for(CyEdge currentedge : newedges){
+            tiedieView.getEdgeView(currentedge).setVisualProperty(BasicVisualLexicon.EDGE_STROKE_UNSELECTED_PAINT, Color.ORANGE);
+            tiedieView.getEdgeView(currentedge).setVisualProperty(BasicVisualLexicon.EDGE_WIDTH, 6.5);
+            currentnetworkview.getEdgeView(currentedge).setVisualProperty(BasicVisualLexicon.EDGE_STROKE_UNSELECTED_PAINT, Color.ORANGE);
+            currentnetworkview.getEdgeView(currentedge).setVisualProperty(BasicVisualLexicon.EDGE_WIDTH, 7.5);
+        }
+        for(CyNode node : newnodes){
+            tiedieView.getNodeView(node).setVisualProperty(BasicVisualLexicon.NODE_LABEL_COLOR, Color.black);
+            tiedieView.getNodeView(node).setVisualProperty(BasicVisualLexicon.NODE_LABEL_FONT_SIZE, 15);
         }
         menu.endComputation();
         ResultsUI resultsPanel = menu.tiediecore.createResultsPanel(filtered_linkersNodeScoreMap, currentnetwork, TieDIEsubNetwork);
