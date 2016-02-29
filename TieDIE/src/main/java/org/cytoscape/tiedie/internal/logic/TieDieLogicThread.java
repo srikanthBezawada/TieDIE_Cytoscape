@@ -58,7 +58,7 @@ public class TieDieLogicThread extends Thread {
     HeatVector upstreamheatVector, downstreamheatVector;
     DiffusedHeatVector upstreamheatVectorDiffused, downstreamheatVectorDiffused;
     Map upnodeScoreMapDiffused, downnodeScoreMapDiffused;
-    Map linkers_nodeScoreMap, filtered_linkersNodeScoreMap;
+    Map<CyNode, Double> linkers_nodeScoreMap, filtered_linkersNodeScoreMap;
     
     public TieDieLogicThread(TieDieGUI menu, CyNetwork currentnetwork, CyNetworkView currentnetworkview, String upstreamColumn, String downstreamColumn, double sizeFactor, boolean isKernel) {
         this.menu = menu;
@@ -157,13 +157,11 @@ public class TieDieLogicThread extends Thread {
         // nodeList is the extra parameter to existing tiedie  https://github.com/epaull/TieDIE/blob/master/lib/tiedie_util.py#L336
         
         linkers_nodeScoreMap = TieDieUtil.findLinkersMap(upnodeScoreMapDiffused, downnodeScoreMapDiffused);
-        Iterator entries = linkers_nodeScoreMap.entrySet().iterator();
         nodeTable.createColumn("linkerScore", Double.class, true);
         CyRow row;
-        while (entries.hasNext()) {
-            Entry thisEntry = (Entry) entries.next();
-            CyNode node = (CyNode)thisEntry.getKey();
-            Double value = (Double)thisEntry.getValue();
+        for (Map.Entry<CyNode, Double> entry : linkers_nodeScoreMap.entrySet()){
+            CyNode node = entry.getKey();
+            Double value = entry.getValue();
             row = nodeTable.getRow(node.getSUID());
             row.set("linkerScore", value);
         }
@@ -174,8 +172,15 @@ public class TieDieLogicThread extends Thread {
     
     
     public void createExtractedSubnetwork(){
-        Set<CyNode> linkerNodes = filtered_linkersNodeScoreMap.keySet();
-        List<CyNode> nodes = currentnetwork.getNodeList();
+        Map<CyNode, Double> finalLinkerMap = new HashMap<CyNode, Double>(filtered_linkersNodeScoreMap);
+        Iterator entries = filtered_linkersNodeScoreMap.keySet().iterator();
+        while (entries.hasNext()) {
+          CyNode currentnode = (CyNode) entries.next();
+          if(upstreamheatVector.getnodeHeatSet().contains(currentnode) || downstreamheatVector.getnodeHeatSet().contains(currentnode)){
+              finalLinkerMap.keySet().remove(currentnode); // connecting = all_linkers.difference(all_inputs 
+          }
+        }
+        Set<CyNode> linkerNodes = finalLinkerMap.keySet();
         List<CyNode> newnodes = new ArrayList<CyNode>();
         List<CyEdge> edges = currentnetwork.getEdgeList();
         List<CyEdge> newedges = new ArrayList<CyEdge>();
@@ -186,9 +191,8 @@ public class TieDieLogicThread extends Thread {
         for(Object currentnode : downstreamheatVector.getnodeHeatSet()){
             newnodes.add((CyNode) currentnode);
         }
-        for(Object currentnode : linkerNodes){
-            if(newnodes.contains(currentnode) == false) // connecting = all_linkers.difference(all_inputs 
-            newnodes.add((CyNode) currentnode);
+        for(CyNode currentnode : linkerNodes){
+            newnodes.add(currentnode);
         }
         
         for(CyEdge currentedge : edges){
@@ -254,7 +258,7 @@ public class TieDieLogicThread extends Thread {
             tiedieView.getNodeView(node).setVisualProperty(BasicVisualLexicon.NODE_LABEL_FONT_SIZE, 15);
         }
         menu.endComputation();
-        ResultsUI resultsPanel = menu.tiediecore.createResultsPanel(filtered_linkersNodeScoreMap, currentnetwork, TieDIEsubNetwork);
+        ResultsUI resultsPanel = menu.tiediecore.createResultsPanel(MapUtil.sortByValue(finalLinkerMap), currentnetwork, TieDIEsubNetwork);
         System.out.println("End---");
     }
     

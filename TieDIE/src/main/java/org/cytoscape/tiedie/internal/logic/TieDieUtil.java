@@ -159,7 +159,7 @@ public class TieDieUtil {
        }
        
        public static Map findFilteredLinkersMap(Map linkers_nodeScoreMap, double cutoff){// see why not linker_
-           Map filtered_linkersNodeScoreMap = new HashMap<CyNode, Double>();
+           Map<CyNode, Double> filtered_linkersNodeScoreMap = new HashMap<CyNode, Double>();
            Iterator<Map.Entry<CyNode, Double>> iterator = linkers_nodeScoreMap.entrySet().iterator() ;
         
            while(iterator.hasNext()){
