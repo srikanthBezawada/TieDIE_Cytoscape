@@ -4,8 +4,10 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 
 import org.cytoscape.model.CyEdge;
@@ -155,6 +157,16 @@ public class TieDieLogicThread extends Thread {
         // nodeList is the extra parameter to existing tiedie  https://github.com/epaull/TieDIE/blob/master/lib/tiedie_util.py#L336
         
         linkers_nodeScoreMap = TieDieUtil.findLinkersMap(upnodeScoreMapDiffused, downnodeScoreMapDiffused);
+        Iterator entries = linkers_nodeScoreMap.entrySet().iterator();
+        nodeTable.createColumn("linkerScore", Double.class, true);
+        CyRow row;
+        while (entries.hasNext()) {
+            Entry thisEntry = (Entry) entries.next();
+            CyNode node = (CyNode)thisEntry.getKey();
+            Double value = (Double)thisEntry.getValue();
+            row = nodeTable.getRow(node.getSUID());
+            row.set("linkerScore", value);
+        }
         // calling "z" function here according to literature
         filtered_linkersNodeScoreMap = TieDieUtil.findFilteredLinkersMap(linkers_nodeScoreMap, linker_cutoff);
         createExtractedSubnetwork();

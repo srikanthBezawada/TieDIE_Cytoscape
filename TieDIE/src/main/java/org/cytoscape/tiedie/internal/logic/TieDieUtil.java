@@ -135,7 +135,7 @@ public class TieDieUtil {
        */
        
        public static Map findLinkersMap(Map upnodeScoreMapDiffused, Map downnodeScoreMapDiffused){
-           Map linkers_nodeScoreMap;
+           Map<CyNode, Double> linkers_nodeScoreMap;
            double min_heat,x,y;
            
            linkers_nodeScoreMap = new HashMap<CyNode,Double>();
