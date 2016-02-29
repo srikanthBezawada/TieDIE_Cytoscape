@@ -133,7 +133,7 @@ public class TieDieLogicThread extends Thread {
     
     public void extractSubnetwork(){
         System.out.println("sizefactor"+sizeFactor);
-        
+        /*
         for(Object o : upstreamheatVector.getnodeHeatSet()){
             CyNode c = (CyNode)o;
             if(downnodeScoreMapDiffused.containsKey(c)){
@@ -147,7 +147,7 @@ public class TieDieLogicThread extends Thread {
                 upnodeScoreMapDiffused.remove(c);
             }
         }
-        
+        */
         
         System.out.println("upnodeScoreMapDiffused.size()"+upnodeScoreMapDiffused.size());
         System.out.println("downnodeScoreMapDiffused.size()"+downnodeScoreMapDiffused.size());
@@ -187,6 +187,7 @@ public class TieDieLogicThread extends Thread {
             newnodes.add((CyNode) currentnode);
         }
         for(Object currentnode : linkerNodes){
+            if(newnodes.contains(currentnode) == false) // connecting = all_linkers.difference(all_inputs 
             newnodes.add((CyNode) currentnode);
         }
         
